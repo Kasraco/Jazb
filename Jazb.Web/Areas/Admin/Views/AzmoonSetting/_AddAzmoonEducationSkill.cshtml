@@ -1,0 +1,15 @@
+﻿@model Jazb.Model.AdminModel.ManageAzmoon.AzmoonEducationViewModel
+
+
+@using (Ajax.BeginForm(MVC.Admin.AzmoonSetting.ActionNames.AddAzmoonEducationSkill, MVC.Admin.AzmoonSetting.Name, null, new AjaxOptions { UpdateTargetId = "AzmoonEducationListList", InsertionMode = InsertionMode.Replace, HttpMethod = "POST", OnBegin = "showLoading", OnComplete = "hideLoading" }, new { @class = "form-inline", id = "add-AzmoonEducationSkil-form" }))
+{
+    @Html.HiddenFor(x => x.AzmoonId)
+    @Html.LabelFor(x => x.EducationId, new { @class = "control-label span2" })
+    @Html.DropDownListFor(model => model.EducationId, ViewBag.PossibleEducationSkills as IEnumerable<SelectListItem>, "--- انتخاب ---", new { @class = "selectpicker  span8" })
+
+
+    <button type="submit" class="btn">ذخیره</button>
+}
+
+
+

@@ -1,0 +1,41 @@
+﻿@using (Ajax.BeginForm(MVC.Admin.Valentear.ActionNames.GetDataTableByAzmoon, MVC.Admin.Valentear.Name, new { AzmoonId = ViewBag.PossibleAzmoon }, new AjaxOptions { HttpMethod = "POST", InsertionMode = InsertionMode.Replace, UpdateTargetId = "user-table", OnBegin = "showLoading", OnSuccess = "loadAjaxComponents", OnComplete = "hideLoading" }))
+{
+    <input type="text"  name="term" placeholder="جست و جو" class="search-query" data-autocomplete="@Url.Action(MVC.Admin.Valentear.ActionNames.AutoCompleteSearch, MVC.Admin.Valentear.Name)" data-filter="Melicode" data-min-length="1">
+    <input type="submit" name="btn-submit" value="جست و جو" class="btn btn-info" />
+    <button data-slide-toggle-id="#search-types" class="btn">پیشرفته</button>
+    <div id="search-types" style="display: none; margin-top: 10px;">
+        <label class="radio inline">
+            <input type="radio" name="searchBy" value="Melicode" checked>
+            کد ملی
+        </label>        
+        <label class="radio inline">
+            <input type="radio" name="searchBy" value="FirstName">
+            نام
+        </label>
+        <label class="radio inline">
+            <input type="radio" name="searchBy" value="LastName">
+            نام خانوادگی
+        </label>
+
+        <label class="radio inline">
+            <input type="radio" name="searchBy" value="FatherName">
+            نام پدر
+        </label>
+
+        <label class="radio inline">
+            <input type="radio" name="searchBy" value="BirthCertificateNo">
+            شماره شناسنامه
+        </label>
+
+          <label class="radio inline">
+            <input type="radio" name="searchBy" value="Job">
+           رشته
+        </label>
+        
+         <label class="radio inline">
+            <input type="radio" name="searchBy" value="Accept">
+            وضعیت
+        </label>
+
+    </div>
+}

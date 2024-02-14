@@ -1,0 +1,382 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<StiSerializer version="1.0" application="StiReport">
+  <Dictionary Ref="1" type="Dictionary" isKey="true">
+    <BusinessObjects isList="true" count="0" />
+    <Databases isList="true" count="1">
+      <JazbBehvarz Ref="2" type="Stimulsoft.Report.Dictionary.StiSqlDatabase" isKey="true">
+        <Alias>JazbBehvarz</Alias>
+        <ConnectionString>Data Source=.;Initial Catalog=JazbAjums_db;Integrated Security=True</ConnectionString>
+        <Name>JazbBehvarz</Name>
+        <PromptUserNameAndPassword>False</PromptUserNameAndPassword>
+      </JazbBehvarz>
+    </Databases>
+    <DataSources isList="true" count="1">
+      <reportLable Ref="3" type="Stimulsoft.Report.Dictionary.StiSqlSource" isKey="true">
+        <Alias>reportLable</Alias>
+        <Columns isList="true" count="11">
+          <value>ChairCode,System.Int64</value>
+          <value>FirstName,System.String</value>
+          <value>LastName,System.String</value>
+          <value>FatherName,System.String</value>
+          <value>QoutasText,System.String</value>
+          <value>DevotionText,System.String</value>
+          <value>Melicode,System.String</value>
+          <value>JobTitle,System.String</value>
+          <value>LocationTitle,System.String</value>
+          <value>GenderTitle,System.String</value>
+          <value>PictureValenteer,System.String</value>
+        </Columns>
+        <CommandTimeout>30</CommandTimeout>
+        <Dictionary isRef="1" />
+        <Name>reportLable</Name>
+        <NameInSource>JazbBehvarz</NameInSource>
+        <Parameters isList="true" count="0" />
+        <SqlCommand>select * from reportLable</SqlCommand>
+      </reportLable>
+    </DataSources>
+    <Relations isList="true" count="0" />
+    <Report isRef="0" />
+    <Variables isList="true" count="0" />
+  </Dictionary>
+  <EngineVersion>EngineV2</EngineVersion>
+  <GlobalizationStrings isList="true" count="0" />
+  <MetaTags isList="true" count="0" />
+  <Pages isList="true" count="1">
+    <Page1 Ref="4" type="Page" isKey="true">
+      <Border>None;Black;2;Solid;False;4;Black</Border>
+      <Brush>Transparent</Brush>
+      <Components isList="true" count="4">
+        <LabelsDataBand Ref="5" type="DataBand" isKey="true">
+          <Brush>Transparent</Brush>
+          <BusinessObjectGuid isNull="true" />
+          <ClientRectangle>0,0.4,53.32,10</ClientRectangle>
+          <ColumnGaps>3</ColumnGaps>
+          <Columns>3</Columns>
+          <ColumnWidth>15</ColumnWidth>
+          <Components isList="true" count="1">
+            <Label_Area Ref="6" type="Container" isKey="true">
+              <Border>All;Black;1;None;False;4;Black</Border>
+              <Brush>White</Brush>
+              <ClientRectangle>0,0,14.5,9.4</ClientRectangle>
+              <Components isList="true" count="17">
+                <Image1 Ref="7" type="Image" isKey="true">
+                  <Brush>Transparent</Brush>
+                  <ClientRectangle>0.6,0.4,3.4,3</ClientRectangle>
+                  <Conditions isList="true" count="0" />
+                  <DataColumn>reportLable.PictureValenteer</DataColumn>
+                  <Name>Image1</Name>
+                  <Page isRef="4" />
+                  <Parent isRef="6" />
+                  <Stretch>True</Stretch>
+                </Image1>
+                <Text1 Ref="8" type="Text" isKey="true">
+                  <Brush>Transparent</Brush>
+                  <ClientRectangle>4.4,0.2,9.8,1</ClientRectangle>
+                  <Conditions isList="true" count="0" />
+                  <Font>B Titr,14,Bold</Font>
+                  <HorAlignment>Center</HorAlignment>
+                  <Margins>0,0,0,0</Margins>
+                  <Name>Text1</Name>
+                  <Page isRef="4" />
+                  <Parent isRef="6" />
+                  <Text>دانشگاه علوم پزشکی وخدمات بهداشتی درمانی</Text>
+                  <TextBrush>Black</TextBrush>
+                  <VertAlignment>Center</VertAlignment>
+                </Text1>
+                <Text2 Ref="9" type="Text" isKey="true">
+                  <Brush>Transparent</Brush>
+                  <ClientRectangle>4.8,1.4,9.4,2.2</ClientRectangle>
+                  <Conditions isList="true" count="0" />
+                  <Font>B Titr,30,Bold</Font>
+                  <HorAlignment>Center</HorAlignment>
+                  <Margins>0,0,0,0</Margins>
+                  <Name>Text2</Name>
+                  <Page isRef="4" />
+                  <Parent isRef="6" />
+                  <Text>{reportLable.ChairCode}</Text>
+                  <TextBrush>Black</TextBrush>
+                  <VertAlignment>Center</VertAlignment>
+                </Text2>
+                <Text3 Ref="10" type="Text" isKey="true">
+                  <Brush>Transparent</Brush>
+                  <ClientRectangle>0.4,3.6,13.4,0.8</ClientRectangle>
+                  <Conditions isList="true" count="0" />
+                  <Font>B Titr,18,Bold</Font>
+                  <Guid>137b714efceb40dfacd2c2a772ebfbab</Guid>
+                  <HorAlignment>Center</HorAlignment>
+                  <Margins>0,0,0,0</Margins>
+                  <Name>Text3</Name>
+                  <Page isRef="4" />
+                  <Parent isRef="6" />
+                  <Text>آزمون استخدام پیمانی بهورز سال 1393</Text>
+                  <TextBrush>Black</TextBrush>
+                  <VertAlignment>Center</VertAlignment>
+                </Text3>
+                <Text4 Ref="11" type="Text" isKey="true">
+                  <Brush>Transparent</Brush>
+                  <ClientRectangle>11,4.8,3.2,0.6</ClientRectangle>
+                  <Conditions isList="true" count="0" />
+                  <Font>B Titr,12,Bold</Font>
+                  <Guid>3920f42bd22144ae917b6d29feee423a</Guid>
+                  <Margins>0,0,0,0</Margins>
+                  <Name>Text4</Name>
+                  <Page isRef="4" />
+                  <Parent isRef="6" />
+                  <Text>نام خانوادگی و نام : </Text>
+                  <TextBrush>Black</TextBrush>
+                  <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=True, Trimming=None, WordWrap=False, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+                  <VertAlignment>Center</VertAlignment>
+                </Text4>
+                <Text5 Ref="12" type="Text" isKey="true">
+                  <Brush>Transparent</Brush>
+                  <ClientRectangle>11.6,5.6,2.2,0.6</ClientRectangle>
+                  <Conditions isList="true" count="0" />
+                  <Font>B Titr,12,Bold</Font>
+                  <Guid>d24fafd865ef4b1ba8bc420b6ed2ed8c</Guid>
+                  <Margins>0,0,0,0</Margins>
+                  <Name>Text5</Name>
+                  <Page isRef="4" />
+                  <Parent isRef="6" />
+                  <Text>رشته امتحانی : </Text>
+                  <TextBrush>Black</TextBrush>
+                  <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=True, Trimming=None, WordWrap=False, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+                  <VertAlignment>Center</VertAlignment>
+                </Text5>
+                <Text6 Ref="13" type="Text" isKey="true">
+                  <Brush>Transparent</Brush>
+                  <ClientRectangle>11.6,6.4,2.2,0.6</ClientRectangle>
+                  <Conditions isList="true" count="0" />
+                  <Font>B Titr,12,Bold</Font>
+                  <Guid>4ad621da1614464ca70f8bdcc01e05c5</Guid>
+                  <Margins>0,0,0,0</Margins>
+                  <Name>Text6</Name>
+                  <Page isRef="4" />
+                  <Parent isRef="6" />
+                  <Text>زمان آزمون : </Text>
+                  <TextBrush>Black</TextBrush>
+                  <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=True, Trimming=None, WordWrap=False, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+                  <VertAlignment>Center</VertAlignment>
+                </Text6>
+                <Text8 Ref="14" type="Text" isKey="true">
+                  <Brush>Transparent</Brush>
+                  <ClientRectangle>11.6,7.4,2.6,0.6</ClientRectangle>
+                  <Conditions isList="true" count="0" />
+                  <Font>B Titr,12,Bold</Font>
+                  <Guid>5e6140b2bc3e492c91eab2ec134ba509</Guid>
+                  <Margins>0,0,0,0</Margins>
+                  <Name>Text8</Name>
+                  <Page isRef="4" />
+                  <Parent isRef="6" />
+                  <Text>حوزه امتحانی : </Text>
+                  <TextBrush>Black</TextBrush>
+                  <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=True, Trimming=None, WordWrap=False, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+                  <VertAlignment>Center</VertAlignment>
+                </Text8>
+                <Text9 Ref="15" type="Text" isKey="true">
+                  <Brush>Transparent</Brush>
+                  <ClientRectangle>0.6,8.8,13.2,0.4</ClientRectangle>
+                  <Conditions isList="true" count="0" />
+                  <Font>B Titr,7,Bold</Font>
+                  <Guid>62dc59a19ba44364b1734fac76d101f6</Guid>
+                  <HorAlignment>Center</HorAlignment>
+                  <Margins>0,0,0,0</Margins>
+                  <Name>Text9</Name>
+                  <Page isRef="4" />
+                  <Parent isRef="6" />
+                  <Text>جهت استفاده از سیستم اطلاع رسانی این برچسب را حفظ نمایید</Text>
+                  <TextBrush>Black</TextBrush>
+                  <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=True, Trimming=None, WordWrap=False, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+                  <VertAlignment>Center</VertAlignment>
+                </Text9>
+                <Text11 Ref="16" type="Text" isKey="true">
+                  <Brush>Transparent</Brush>
+                  <ClientRectangle>3.8,5.6,7.8,0.6</ClientRectangle>
+                  <Conditions isList="true" count="0" />
+                  <Font>B Zar,12</Font>
+                  <Guid>a3b7fab8e6a84d3c99ab967157acfa0f</Guid>
+                  <Margins>0,0,0,0</Margins>
+                  <Name>Text11</Name>
+                  <Page isRef="4" />
+                  <Parent isRef="6" />
+                  <Text>{reportLable.JobTitle}</Text>
+                  <TextBrush>Black</TextBrush>
+                  <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=True, Trimming=None, WordWrap=False, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+                  <VertAlignment>Center</VertAlignment>
+                </Text11>
+                <Text12 Ref="17" type="Text" isKey="true">
+                  <Brush>Transparent</Brush>
+                  <ClientRectangle>0.4,6.4,11.2,0.4</ClientRectangle>
+                  <Conditions isList="true" count="0" />
+                  <Font>B Zar,12</Font>
+                  <Guid>92ed81187d5644efb0f8025e6730a8c3</Guid>
+                  <Margins>0,0,0,0</Margins>
+                  <Name>Text12</Name>
+                  <Page isRef="4" />
+                  <Parent isRef="6" />
+                  <Text>9:30 دقیقه صبح روز جمعه مورخ 1393/11/10</Text>
+                  <TextBrush>Black</TextBrush>
+                  <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=True, Trimming=None, WordWrap=False, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+                  <VertAlignment>Center</VertAlignment>
+                </Text12>
+                <Text14 Ref="18" type="Text" isKey="true">
+                  <Brush>Transparent</Brush>
+                  <ClientRectangle>1,7.6,10.6,0.4</ClientRectangle>
+                  <Conditions isList="true" count="0" />
+                  <Font>B Zar,12</Font>
+                  <Guid>90a35ecd36324771aed92f99a5a2c9e5</Guid>
+                  <Margins>0,0,0,0</Margins>
+                  <Name>Text14</Name>
+                  <Page isRef="4" />
+                  <Parent isRef="6" />
+                  <Text>دانشگاه پرستاری مامایی</Text>
+                  <TextBrush>Black</TextBrush>
+                  <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=True, Trimming=None, WordWrap=False, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+                  <VertAlignment>Center</VertAlignment>
+                </Text14>
+                <Text10 Ref="19" type="Text" isKey="true">
+                  <Brush>Transparent</Brush>
+                  <ClientRectangle>0.6,4.8,10.4,0.6</ClientRectangle>
+                  <Conditions isList="true" count="0" />
+                  <Font>B Zar,12</Font>
+                  <Guid>3bc6fdab092d4afdbb2ce7c60b016bfc</Guid>
+                  <Margins>0,0,0,0</Margins>
+                  <Name>Text10</Name>
+                  <Page isRef="4" />
+                  <Parent isRef="6" />
+                  <Text>{reportLable.LastName}  {reportLable.FirstName}</Text>
+                  <TextBrush>Black</TextBrush>
+                  <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=True, Trimming=None, WordWrap=False, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+                  <VertAlignment>Center</VertAlignment>
+                </Text10>
+                <StartPointPrimitive1 Ref="20" type="Stimulsoft.Report.Components.StiStartPointPrimitive" isKey="true">
+                  <ClientRectangle>0.4,0.2,0,0</ClientRectangle>
+                  <Name>StartPointPrimitive1</Name>
+                  <Page isRef="4" />
+                  <Parent isRef="6" />
+                  <ReferenceToGuid>2d4dd9db38944f339e1c05b5f351bc34</ReferenceToGuid>
+                </StartPointPrimitive1>
+                <EndPointPrimitive1 Ref="21" type="Stimulsoft.Report.Components.StiEndPointPrimitive" isKey="true">
+                  <ClientRectangle>14.4,9.2,0,0</ClientRectangle>
+                  <Name>EndPointPrimitive1</Name>
+                  <Page isRef="4" />
+                  <Parent isRef="6" />
+                  <ReferenceToGuid>2d4dd9db38944f339e1c05b5f351bc34</ReferenceToGuid>
+                </EndPointPrimitive1>
+                <StartPointPrimitive2 Ref="22" type="Stimulsoft.Report.Components.StiStartPointPrimitive" isKey="true">
+                  <ClientRectangle>4.4,1.4,0,0</ClientRectangle>
+                  <Name>StartPointPrimitive2</Name>
+                  <Page isRef="4" />
+                  <Parent isRef="6" />
+                  <ReferenceToGuid>3f3cecd81a834f1fbd2a61de67977202</ReferenceToGuid>
+                </StartPointPrimitive2>
+                <EndPointPrimitive2 Ref="23" type="Stimulsoft.Report.Components.StiEndPointPrimitive" isKey="true">
+                  <ClientRectangle>14.2,3.4,0,0</ClientRectangle>
+                  <Name>EndPointPrimitive2</Name>
+                  <Page isRef="4" />
+                  <Parent isRef="6" />
+                  <ReferenceToGuid>3f3cecd81a834f1fbd2a61de67977202</ReferenceToGuid>
+                </EndPointPrimitive2>
+              </Components>
+              <Conditions isList="true" count="0" />
+              <Name>Label_Area</Name>
+              <Page isRef="4" />
+              <Parent isRef="5" />
+            </Label_Area>
+          </Components>
+          <Conditions isList="true" count="0" />
+          <DataRelationName isNull="true" />
+          <DataSourceName>reportLable</DataSourceName>
+          <Filters isList="true" count="0" />
+          <Name>LabelsDataBand</Name>
+          <Page isRef="4" />
+          <Parent isRef="4" />
+          <Sort isList="true" count="2">
+            <value>ASC</value>
+            <value>ChairCode</value>
+          </Sort>
+        </LabelsDataBand>
+        <LabelsChildBand Ref="24" type="ChildBand" isKey="true">
+          <Brush>Transparent</Brush>
+          <ClientRectangle>0,11.2,53.32,2</ClientRectangle>
+          <Components isList="true" count="0" />
+          <Conditions isList="true" count="0" />
+          <Name>LabelsChildBand</Name>
+          <Page isRef="4" />
+          <Parent isRef="4" />
+        </LabelsChildBand>
+        <RectanglePrimitive1 Ref="25" type="RectanglePrimitive" isKey="true">
+          <ClientRectangle>0.4,0.6,14,9</ClientRectangle>
+          <Color>Black</Color>
+          <Guid>2d4dd9db38944f339e1c05b5f351bc34</Guid>
+          <Name>RectanglePrimitive1</Name>
+          <Page isRef="4" />
+          <Parent isRef="4" />
+        </RectanglePrimitive1>
+        <RectanglePrimitive2 Ref="26" type="RectanglePrimitive" isKey="true">
+          <ClientRectangle>4.4,1.8,9.8,2</ClientRectangle>
+          <Color>Black</Color>
+          <Guid>3f3cecd81a834f1fbd2a61de67977202</Guid>
+          <Name>RectanglePrimitive2</Name>
+          <Page isRef="4" />
+          <Parent isRef="4" />
+        </RectanglePrimitive2>
+      </Components>
+      <Conditions isList="true" count="0" />
+      <Guid>b2f64b065b3f4e82afb592afc871b23f</Guid>
+      <Margins>0.01,0.01,0,2.6856</Margins>
+      <Name>Page1</Name>
+      <PageHeight>75.44</PageHeight>
+      <PageWidth>53.34</PageWidth>
+      <Report isRef="0" />
+      <Watermark Ref="27" type="Stimulsoft.Report.Components.StiWatermark" isKey="true">
+        <Font>Arial,100</Font>
+        <TextBrush>[50:0:0:0]</TextBrush>
+      </Watermark>
+    </Page1>
+  </Pages>
+  <PrinterSettings Ref="28" type="Stimulsoft.Report.Print.StiPrinterSettings" isKey="true" />
+  <ReferencedAssemblies isList="true" count="8">
+    <value>System.Dll</value>
+    <value>System.Drawing.Dll</value>
+    <value>System.Windows.Forms.Dll</value>
+    <value>System.Data.Dll</value>
+    <value>System.Xml.Dll</value>
+    <value>Stimulsoft.Controls.Dll</value>
+    <value>Stimulsoft.Base.Dll</value>
+    <value>Stimulsoft.Report.Dll</value>
+  </ReferencedAssemblies>
+  <ReportAlias>Report</ReportAlias>
+  <ReportChanged>1/25/2015 4:19:32 PM</ReportChanged>
+  <ReportCreated>1/25/2015 1:03:49 PM</ReportCreated>
+  <ReportFile>D:\Project\University\Jazb Behvarz\Report\Chair Lable\Report.mrt</ReportFile>
+  <ReportGuid>470705a7da5642998c9571a6c2e61b4d</ReportGuid>
+  <ReportName>Report</ReportName>
+  <ReportUnit>Centimeters</ReportUnit>
+  <ReportVersion>2010.1.700</ReportVersion>
+  <Script>using System;
+using System.Drawing;
+using System.Windows.Forms;
+using System.Data;
+using Stimulsoft.Controls;
+using Stimulsoft.Base.Drawing;
+using Stimulsoft.Report;
+using Stimulsoft.Report.Dialogs;
+using Stimulsoft.Report.Components;
+
+namespace Reports
+{
+    
+    public class Report : Stimulsoft.Report.StiReport
+    {
+        
+        public Report()
+        {
+            this.InitializeComponent();
+        }
+        #region StiReport Designer generated code - do not modify#endregion StiReport Designer generated code - do not modify
+    }
+}
+</Script>
+  <ScriptLanguage>CSharp</ScriptLanguage>
+  <Styles isList="true" count="0" />
+</StiSerializer>

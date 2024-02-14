@@ -1,0 +1,9 @@
+﻿@model string
+<div class="navbar">
+    <div class="navbar-inner">
+        <a class="brand" href="#">مدیریت اخبار آزمون @ViewBag.AzmoonName</a>
+        <ul class="nav">
+            <li>@Ajax.ButtonDialog("افزودن خبر جدید", Url.Action(MVC.Admin.articles.ActionNames.Create, MVC.Admin.articles.Name), "GET", "AzmoonId=" + Model , "dialog", new DialogOptions { Height = "700", Width = "1000", Title = "خبر جدید", IsModal = "true", ShowEffect = "size", ShowDir = "down", HideEffect = "fold", HideDir = "right" }, "btn btn-info")</li>
+        </ul>
+    </div>
+</div>

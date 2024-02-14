@@ -1,0 +1,65 @@
+﻿@model Jazb.DomainClasses.Entities.FAQ
+@{
+    ViewBag.Title = "Contact";
+}
+<script src="~/Scripts/holder.js"></script>
+
+
+<section class="contact">
+    <div class="row">
+        <div class="col-md-6">         
+            @Html.Partial(MVC.FAQs.Views._frmSendQuestion)
+        </div>
+        <div class="col-md-6">
+             @Html.Partial(MVC.FAQs.Views._viewAnswersearch)
+        </div>
+    </div>
+</section>
+
+<section class="Container">
+
+     <hr class="featurette-divider">
+
+      <div class="row featurette">
+        <div class="col-md-7">
+          <h2 class="featurette-heading">ارسال مدارک <span class="text-muted">Support@example.com</span></h2>
+          <p class="lead"> مدارک خودرا می توانید به آدرس زیر ارسال کنید.
+              <br />
+              <b>آدرس: </b>@Html.Action(MVC.MetaTag.ActionNames.GetCompanyAddress, MVC.MetaTag.Name)
+              <br />
+              <b>تلفن :</b> 06136219206
+               <br />
+                                
+
+          </p>
+        </div>
+        <div class="col-md-5">
+          <img class="featurette-image img-responsive" src="data:image/png;base64," data-src="holder.js/500x500/auto" alt="Generic placeholder image">
+        </div>
+      </div>
+
+    <hr class="featurette-divider">
+
+      <div class="row featurette">
+        <div class="col-md-5">
+          <img class="featurette-image img-responsive" src="data:image/png;base64," data-src="holder.js/500x500/auto" alt="Generic placeholder image">
+        </div>
+        <div class="col-md-7">
+          <h2 class="featurette-heading">اطلاعات تماس <span class="text-muted"></span></h2>
+          <p class="lead">جهت ارتباط با بخش روابط عمومی وارسال اطلاعات و مدارک مورد نیاز برای ثبت نام از این قسمت استفاده کنید</p>
+        </div>        
+      </div>
+
+    <hr class="featurette-divider">
+
+      <div class="row featurette">
+        <div class="col-md-7">
+          <h2 class="featurette-heading">آدرس دانشگاه <span class="text-muted"></span></h2>
+          <p class="lead">@Html.Action(MVC.MetaTag.ActionNames.GetCompanyAddress, MVC.MetaTag.Name)</p>
+        </div>
+        <div class="col-md-5">
+          <img class="featurette-image img-responsive" src="data:image/png;base64," data-src="holder.js/500x500/auto" alt="Generic placeholder image">
+        </div>
+      </div>
+
+</section>

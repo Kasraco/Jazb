@@ -1,0 +1,87 @@
+﻿@model int
+
+<style>
+    .well .btn {
+        margin-top: -20px;
+    }
+</style>
+<div class="container-fluid">
+
+    @Html.Action(MVC.Admin.AzmoonSetting.ActionNames.ShowLinks,MVC.Admin.AzmoonSetting.Name,new { AId =Model})
+
+    <div class="row-fluid">
+        <div class="span6">
+            <div class="well">
+                @Html.Action(MVC.Admin.AzmoonSetting.ActionNames.AddAzmoonDegree, MVC.Admin.AzmoonSetting.Name, new { AId = Model })
+                <div id="AzmoonDegreeList">
+                    @Html.Action(MVC.Admin.AzmoonSetting.ActionNames.GetAllAzmoonDegrees, MVC.Admin.AzmoonSetting.Name, new { AId = Model })
+
+                </div>
+            </div>
+        </div>
+
+
+        <div class="span6">
+            <div class="well">
+                @Html.Action(MVC.Admin.AzmoonSetting.ActionNames.AddAzmoonEducationSkill, MVC.Admin.AzmoonSetting.Name, new { AId = Model })
+                <div id="AzmoonEducationListList">
+                    @Html.Action(MVC.Admin.AzmoonSetting.ActionNames.GetAllAzmoonEducatedSkills, MVC.Admin.AzmoonSetting.Name, new { AId = Model })
+                </div>
+            </div>
+        </div>
+    </div>
+
+ 
+    <div class="row-fluid">
+        <div class="span6">
+            <div class="well">
+                @Html.Action(MVC.Admin.AzmoonSetting.ActionNames.AddAzmoonJob, MVC.Admin.AzmoonSetting.Name, new { AId = Model })
+                <div id="AzmoonJobList">
+                    @Html.Action(MVC.Admin.AzmoonSetting.ActionNames.GetAllAzmoonJobs, MVC.Admin.AzmoonSetting.Name, new { AId = Model })
+
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+
+    <div class="row-fluid">
+
+        <div class="span12">
+            <div class="well">
+                @Html.Action(MVC.Admin.AzmoonSetting.ActionNames.AddAzmoonPlace, MVC.Admin.AzmoonSetting.Name, new { AId = Model })
+                <div id="AzmoonPlaceList">
+                    @Html.Action(MVC.Admin.AzmoonSetting.ActionNames.GetAllAzmoonPlaces, MVC.Admin.AzmoonSetting.Name, new { AId = Model })
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+            <div class="row-fluid">
+                <div class="span6">
+                    <div class="well">
+                        @Html.Action(MVC.Admin.AzmoonSetting.ActionNames.AddDevotionType, MVC.Admin.AzmoonSetting.Name, new { AId = Model })
+                        <div id="AzmoonDevotionTypeList">
+                            @Html.Action(MVC.Admin.AzmoonSetting.ActionNames.GetAllDevotionTypes, MVC.Admin.AzmoonSetting.Name, new { AId = Model })
+
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="span6">
+                    <div class="well">
+                        @Html.Action(MVC.Admin.AzmoonSetting.ActionNames.AddAzmoonQoutaType, MVC.Admin.AzmoonSetting.Name, new { AId = Model })
+                        <div id="AzmoonQoutaTypeList">
+                            @Html.Action(MVC.Admin.AzmoonSetting.ActionNames.GetAllAzmoonQoutaTypes, MVC.Admin.AzmoonSetting.Name, new { AId = Model })
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+</div>
+@Html.Raw(TempData["Message"])

@@ -1,0 +1,96 @@
+﻿@model Jazb.DomainClasses.Entities.article
+@{
+    ViewBag.Title = Model.Title;
+}
+<style>
+    body{
+        padding-top:70px;
+    }
+</style>
+
+
+   
+
+    <div class="container" id="divpanle">
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12">
+
+
+
+                <div class="panel panel-danger">
+
+                    <div class="panel-body">
+
+                        <div class="row">
+                            <div class="col-md-3">
+
+                                <div class="list-group">
+                                    <div class="list-group-item zero-padding">
+                                       
+                                        @if (Model.Picture != null)
+                                        {
+                                            var base64 = Convert.ToBase64String(Model.Picture);
+                                            var imgSrc = String.Format("data:image/gif;base64,{0}", base64);
+                                            <img src="@imgSrc" class="img-responsive" />
+                                        }
+                                        else
+                                        {
+                                            <i class="fa fa-arrow-left"></i>
+                                        }
+
+                                       
+                                       
+                                    </div>
+                                    <a href="#" class="list-group-item">@Html.ConvertToPersianDateTime(Model.StartDate,"dd,MM,yyyy")</a>
+                                    <a href="#" class="list-group-item">
+                                        @if (@Model.ExpireDate != null)
+                                        {
+                                            @Html.ConvertToPersianDateTime(Model.ExpireDate.Value)
+                                        }
+                                        else
+                                        {
+
+                                            <div class="text-danger">تاریخ انقضاء ندارد</div>
+                                        }
+                                    </a>
+                                    <a href="#" class="list-group-item">@Model.User.UserName</a>
+                                </div>
+                            </div>
+                            <div class="col-md-9">
+
+                                <h1>@Model.Title</h1>
+                               
+                               <ul class= "list-unstyled list-inline">
+                                   <li><a href="@Model.SourceUrl" target="_blank">@Model.SourceUrl</a></li>
+                                   <li><h3>@Html.ActionLink("دریافت فایل پیوست", MVC.articles.ActionNames.DownloadAgahi, MVC.articles.Name, new { AID = Model.Id }, null)</h3></li>
+                               </ul>
+                                <div class="well">
+                                    @Model.MinBody
+                                </div>
+                                <p>
+                                    @Html.Raw(Model.Body)
+                                </p>
+                            </div>
+                            @Html.ActionLink("بازگشت", "Index", "Home", null, new { @class = "btn btn-default " })
+                        </div>
+
+
+
+
+
+
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <p>
+        @* @Html.ActionLink("Edit ", "Edit", new { id=Model.Id }, new { @class = "btn btn-info" }) |*@
+
+    </p>
+
+
+

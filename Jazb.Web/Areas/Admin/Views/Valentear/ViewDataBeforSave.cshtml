@@ -1,0 +1,561 @@
+﻿@model Jazb.Model.ValentearModel.RegisterModel
+@using Jazb.Web.Helpers
+
+<style type="text/css">
+    .styled_checkbox {
+        cursor: pointer;
+        border-radius: 5px;
+        margin: 3px;
+        padding: 0px 5px;
+    }
+
+    .styled_list {
+        padding: 3px 10px 3px 5px;
+        line-height: 25px;
+    }
+
+    .span2,
+    .control-label {
+        text-align: right;
+    }
+
+    .controls {
+        text-align: right;
+        padding: 5px;
+        border: 1px solid #e9e9e9;
+        background-color: #fff;
+    }
+</style>
+
+
+<link href="~/Scripts/chosen/chosen.css" rel="stylesheet" />
+<link href="~/Content/bootstrap-fileupload.min.css" rel="stylesheet" />
+
+<div class="container-fluid" id="div-valentear-detail">
+
+    <style>
+        .span2,
+        .control-label {
+            text-align: right;
+        }
+    </style>
+
+    <div class="well">
+        <h3 class="text-center">پیش نمایش اطلاعات
+        </h3>
+    </div>
+
+    @using (Ajax.BeginForm(MVC.Admin.Valentear.ActionNames.SaveDate, MVC.Admin.Valentear.Name, new AjaxOptions { UpdateTargetId = "main-content", InsertionMode = InsertionMode.Replace, HttpMethod = "POST", OnBegin = "showLoading", OnComplete = "hideLoading", OnSuccess = "loadAjaxComponents" }, new { @class = "form-horizontal", enctype = "multipart/form-data", id = "wizForm" }))
+    {
+    
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true, "لطفا اطلاعات را کامل و به صورت صحیح وارد کنید", new { @class = "alert alert-danger" })
+
+        @Html.HiddenFor(m => m.Valentear.Id)
+        @Html.HiddenFor(m => m.Valentear.TrackingCode)
+        @Html.HiddenFor(m => m.Valentear.FirstName)
+        @Html.HiddenFor(m => m.Valentear.LastName)
+        @Html.HiddenFor(m => m.Valentear.FatherName)
+        @Html.HiddenFor(m => m.Valentear.GenderId)
+        @Html.HiddenFor(m => m.Valentear.ReligionId)
+        @Html.HiddenFor(m => m.Valentear.FaithId)
+        @Html.HiddenFor(m => m.Valentear.BirthCertificateNo)
+        @Html.HiddenFor(m => m.Valentear.NationalID)
+        @Html.HiddenFor(m => m.Valentear.MarriageStatusId)
+        @Html.HiddenFor(m => m.Valentear.IssuancePlace_City)
+        @Html.HiddenFor(m => m.Valentear.CityPart_BirthPlace)
+        @Html.HiddenFor(m => m.Valentear.BirthDate)
+        @Html.HiddenFor(m => m.Valentear.DegreeId)
+        @Html.HiddenFor(m => m.Valentear.EducatedSkillId)
+        @Html.HiddenFor(m => m.Valentear.EducatedField)
+        @Html.HiddenFor(m => m.Valentear.JobId)
+        @Html.HiddenFor(m => m.Valentear.PlaceId)
+        @Html.HiddenFor(m => m.Valentear.LicenseDate)
+        @Html.HiddenFor(m => m.Valentear.UniversityProvinceTitle)
+        @Html.HiddenFor(m => m.Valentear.University_Name)
+        @Html.HiddenFor(m => m.Valentear.SchoolName)
+        @Html.HiddenFor(m => m.Valentear.Average)
+        @Html.HiddenFor(m => m.Valentear.FightInWarMonth)
+        @Html.HiddenFor(m => m.Valentear.FightInWarDay)
+        @Html.HiddenFor(m => m.Valentear.FightInWarYear)
+        @Html.HiddenFor(m => m.Valentear.CaptivationMonth)
+        @Html.HiddenFor(m => m.Valentear.CaptivationDay)
+        @Html.HiddenFor(m => m.Valentear.CaptivationYear)
+        @Html.HiddenFor(m => m.Valentear.WoundedPercent)
+        @Html.HiddenFor(m => m.Valentear.ConscriptStatusId)
+        @Html.HiddenFor(m => m.Valentear.Address_ProvinceName)
+        @Html.HiddenFor(m => m.Valentear.Address_CityName)
+        @Html.HiddenFor(m => m.Valentear.Address_ZoneName)
+        @Html.HiddenFor(m => m.Valentear.Address_VillageName)
+        @Html.HiddenFor(m => m.Valentear.Adress_Adress)
+        @Html.HiddenFor(m => m.Valentear.PostalCode)
+        @Html.HiddenFor(m => m.Valentear.Tel)
+        @Html.HiddenFor(m => m.Valentear.Mobile)
+        @Html.HiddenFor(m => m.Valentear.TellNeed)
+        @Html.HiddenFor(m => m.Valentear.PlanStatusId)
+        @Html.HiddenFor(m => m.Valentear.PlaceKhedmat)
+        @Html.HiddenFor(m => m.Valentear.PlanYear)
+        @Html.HiddenFor(m => m.Valentear.PlanMonth)
+        @Html.HiddenFor(m => m.Valentear.PlanDay)
+        @Html.HiddenFor(m => m.Valentear.CooperationHistoryId)
+        @Html.HiddenFor(m => m.Valentear.CooperationYear)
+        @Html.HiddenFor(m => m.Valentear.CooperationMonth)
+        @Html.HiddenFor(m => m.Valentear.CooperationDay)
+        @Html.HiddenFor(m => m.Valentear.PictureValenteer)
+        @Html.HiddenFor(m => m.Valentear.FishVariszi)
+        @Html.HiddenFor(m => m.Valentear.Pic_Tarth)
+        @Html.HiddenFor(m => m.Valentear.GenderTitle)
+        @Html.HiddenFor(m => m.Valentear.ReligionTitle)
+        @Html.HiddenFor(m => m.Valentear.FaithTitle)
+        @Html.HiddenFor(m => m.Valentear.MarriageStatusTitle)
+        @Html.HiddenFor(m => m.Valentear.DegreeTitle)
+        @Html.HiddenFor(m => m.Valentear.EducatedSkillTitle)
+        @Html.HiddenFor(m => m.Valentear.JobTitle)
+        @Html.HiddenFor(m => m.Valentear.PlaceTitle)
+        @Html.HiddenFor(m => m.Valentear.PlanStatusTitle)
+        @Html.HiddenFor(m => m.Valentear.ConscriptStatusTitle)
+        @Html.HiddenFor(m => m.Valentear.CooperationHistoryTitle)
+        @Html.HiddenFor(m => m.Valentear.DetailPlaceKhedmat)
+        @Html.HiddenFor(m => m.PostedDevotionType.DevotionTypes)
+        @Html.HiddenFor(m => m.PostedQoutaType.QoutaTypes)
+        @Html.HiddenFor(m => m.SelectedDevotionTypes)
+        @Html.HiddenFor(m => m.SelectedQoutaTypes)
+        @Html.HiddenFor(m => m.DevotionTypes)
+        @Html.HiddenFor(m => m.QoutaTypes)
+        @Html.HiddenFor(m => m.Valentear.AzmoonId)
+    
+        <div class="well">
+            <fieldset>
+                <legend>مدارک</legend>
+
+
+                <div class="control-group">
+
+                    <div class="row-fluid">
+
+                        <div class="span4">
+                            <label>
+                                <br />
+                                تصویر داوطلب:</label>
+                            <div class="fileupload fileupload-new" data-provides="fileupload">
+                                @{
+        string imageBase64Picture = Convert.ToBase64String(Model.Valentear.PictureValenteer);
+        var imagePictureSrc = string.Format("data:image/gif;base64,{0}", imageBase64Picture);
+                                }
+                                <img class="fileupload-preview thumbnail" src="@imagePictureSrc" style="width: 240px; height: 100%; min-height: 128px;" />
+                            </div>
+                        </div>
+                        <div class="span4">
+                            <label>
+                                <br />
+                                تصویر فیش واریزی:</label>
+                            <div class="fileupload fileupload-new" data-provides="fileupload">
+                               
+                                @{
+        if (Model.Valentear.FishVariszi != null)
+        {
+
+            string imageBase64Fish = Convert.ToBase64String(Model.Valentear.FishVariszi);
+            var imagePictureSrcFish = string.Format("data:image/gif;base64,{0}", imageBase64Fish);
+
+
+                            <img class="fileupload-preview thumbnail" src="@imagePictureSrcFish" style="width: 240px; height: 100%; min-height: 128px;" />
+        }
+                                }
+                            </div>
+                        </div>
+                        <div class="span4">
+                            <label>
+                                <br />
+                                تصویر طرح:</label>
+                            <div class="fileupload fileupload-new" data-provides="fileupload">
+                                @{
+        string imageBase64Tarh = Convert.ToBase64String(Model.Valentear.Pic_Tarth);
+        var imagePictureSrcTarh = string.Format("data:image/gif;base64,{0}", imageBase64Tarh);
+                                }
+                                <img class="fileupload-preview thumbnail" src="@imagePictureSrcTarh" style="width: 240px; height: 100%; min-height: 128px;" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+        </div>    
+        <div class="well">
+            <fieldset>
+                <legend>اطلاعات فردی</legend>
+                <div class="control-group">
+                    @Html.LabelFor(model => model.Valentear.FirstName, new { @class = "control-label span2" })
+                    <div class="span5">
+                        <div class="controls">@Model.Valentear.FirstName</div>
+
+                    </div>
+                    <div class="span5">
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    @Html.LabelFor(model => model.Valentear.LastName, new { @class = "control-label span2" })
+                    <div class="span5">
+                        <div class="controls">@Model.Valentear.LastName</div>
+                    </div>
+                    <div class="span5">
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    @Html.LabelFor(model => model.Valentear.FatherName, new { @class = "control-label span2" })
+                    <div class="span5">
+                        <div class="controls">@Model.Valentear.FatherName</div>
+                    </div>
+                    <div class="span5">
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    @Html.LabelFor(model => model.Valentear.GenderId, new { @class = "control-label span2" })
+                    <div class="span2">
+                        <div class="controls">@Model.Valentear.GenderTitle</div>
+
+                    </div>
+                    <div class="span3"></div>
+                    <div class="span5">
+                    </div>
+                </div>
+
+
+                <div class="control-group">
+                    @Html.LabelFor(model => model.Valentear.BirthDate, new { @class = "control-label span2" })
+                    <div class="span2">
+                        <div class="controls">@Model.Valentear.BirthDate</div>
+                    </div>
+                    <div class="span3"></div>
+                    <div class="span5">
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    @Html.Label(" محل تولد", new { @class = "control-label span2" })
+                    <div class="span5">
+                        <div class="controls">@Model.Valentear.CityPart_BirthPlace</div>
+
+                    </div>
+                </div>
+                <div class="control-group">
+                    @Html.LabelFor(model => model.Valentear.BirthCertificateNo, new { @class = "control-label span2" })
+                    <div class="span3">
+                        <div class="controls">@Model.Valentear.BirthCertificateNo</div>
+                    </div>
+                    <div class="span2"></div>
+                    <div class="span5">
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    @Html.LabelFor(model => model.Valentear.NationalID, new { @class = "control-label span2" })
+                    <div class="span3">
+                        <div class="controls">@Model.Valentear.NationalID</div>
+                    </div>
+                    <div class="span2"></div>
+                    <div class="span5">
+                    </div>
+                </div>
+                <div class="control-group">
+                    @Html.Label("شهرستان محل صدور", new { @class = "control-label span2" })
+                    <div class="span5">
+                        <div class="controls">@Model.Valentear.IssuancePlace_City</div>
+
+                    </div>
+                </div>
+
+
+                <div class="control-group">
+                    @Html.LabelFor(model => model.Valentear.ReligionId, new { @class = "control-label  span2" })
+                    <div class="span3">
+                        <div class="controls">@Model.Valentear.ReligionTitle</div>
+
+                    </div>
+
+                    @Html.LabelFor(model => model.Valentear.FaithId, new { @class = "control-label span1" })
+                    <div class="span3">
+                        <div class="controls">@Model.Valentear.FaithTitle</div>
+
+                    </div>
+
+
+
+                </div>
+                <div class="control-group">
+                    @Html.LabelFor(model => model.Valentear.MarriageStatusId, new { @class = "control-label span2" })
+                    <div class="span3">
+                        <div class="controls">@Model.Valentear.MarriageStatusTitle</div>
+
+                    </div>
+
+                    @Html.LabelFor(model => model.Valentear.ConscriptStatusId, new { @class = "control-label span2" })
+                    <div class="span3">
+                        <div class="controls">@Model.Valentear.ConscriptStatusTitle</div>
+
+                    </div>
+                </div>
+
+
+
+
+            </fieldset>
+        </div>   
+        <div class="well">
+            <fieldset>
+                <legend>اطلاعات ایثارگری</legend>
+                <table class="table table-striped table-hover table-bordered">
+
+                    <tr>
+                        <td>
+                            <b>وضعیت ایثارگری</b>
+
+                            <ol>
+                                @if (Model.Valentear.WoundedPercent != null)
+                                {
+                                    <li><b>جانباز</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <b>درصد جانبازی &nbsp; &nbsp;</b> @Model.Valentear.WoundedPercent<b>درصد</b></li>
+                                }
+
+                                @if (Model.Valentear.FightInWarMonth != null || Model.Valentear.FightInWarYear != null || Model.Valentear.FightInWarDay != null)
+                                {<li><b>رزمنده ( دارای خداقل 6 ماه حضور داوطلبانه در جبهه ) مدت حضور در جبهه </b><b>@Model.Valentear.FightInWarDay روز -  @Model.Valentear.FightInWarMonth ماه-  @Model.Valentear.FightInWarYear سال </b></li>}
+
+                                @if (Model.Valentear.CaptivationYear != null || Model.Valentear.CaptivationMonth != null || Model.Valentear.CaptivationDay != null)
+                                {<li><b>آزاده </b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;   <b>مدت اسارت:   @Model.Valentear.CaptivationDay روز -  @Model.Valentear.CaptivationMonth ماه -  @Model.Valentear.CaptivationYear سال </b></li>}
+                                @{
+                                foreach (var t in Model.SelectedDevotionTypes)
+                                {
+                                    <li><b>@t.DevotionTypeTitle</b></li>
+                                }
+                                }
+
+                            </ol>
+                        </td>
+
+                        <td>
+                            <b>سایر موارد</b>
+                            <ol>
+                                @{
+                                foreach (var t in Model.SelectedQoutaTypes)
+                                {
+                                    <li><b>@t.QoutaTypeTitle</b></li>
+                                }
+                                }
+
+
+                            </ol>
+                        </td>
+                    </tr>
+
+                </table>
+            </fieldset>
+        </div>
+        <div class="well">
+            <fieldset>
+                <legend>اطلاعات تحصیلی</legend>
+                <div class="row-fluid">
+                    <div class="span12">
+                        <div class="control-group">
+                            @Html.LabelFor(model => model.Valentear.DegreeId, new { @class = "control-label span2" })
+                            <div class="span5">
+                                <div class="controls">@Model.Valentear.DegreeTitle</div>
+                            </div>
+                            <div class="span5">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="span12">
+                        <div class="control-group">
+                            @Html.LabelFor(model => model.Valentear.EducatedSkillId, new { @class = "control-label span2" })
+                            <div class="span5">
+                                <div class="controls">@Model.Valentear.EducatedSkillTitle</div>
+                            </div>
+                            <div class="span5">
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            @Html.LabelFor(model => model.Valentear.EducatedField, new { @class = "control-label span2" })
+                            <div class="span5">
+                                <div class="controls">@Model.Valentear.EducatedField</div>
+
+                            </div>
+                            @Html.LabelFor(model => model.Valentear.Average, new { @class = "control-label span2" })
+                            <div class="span3">
+                                <div class="controls">@Model.Valentear.Average</div>
+
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            @Html.LabelFor(model => model.Valentear.UniversityProvinceTitle, new { @class = "control-label span2" })
+                            <div class="span3">
+                                <div class="controls">@Model.Valentear.UniversityProvinceTitle</div>
+
+                            </div>
+
+                            @Html.LabelFor(model => model.Valentear.University_Name, new { @class = "control-label span2" })
+                            <div class="span5">
+                                <div class="controls">@Model.Valentear.University_Name</div>
+
+                            </div>
+                        </div>
+
+                        <div class="control-group">
+                            @Html.LabelFor(model => model.Valentear.LicenseDate, new { @class = "control-label span2" })
+                            <div class="span4">
+                                <div class="controls">@Model.Valentear.LicenseDate</div>
+
+                            </div>
+
+                            @Html.LabelFor(model => model.Valentear.SchoolName, new { @class = "control-label span2" })
+                            <div class="span4">
+                                <div class="controls">@Model.Valentear.SchoolName</div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+
+            </fieldset>
+        </div>
+        <div class="well">
+            <fieldset>
+                <legend>اطلاعات رشته شغلی</legend>
+
+
+                <div class="row-fluid">
+                    <div class="span12">
+                        <div class="control-group">
+                            @Html.Label("وضعیت همکاری", new { @class = "control-label span2" })
+                            <div class="span5">
+                                <div class="controls">@Model.Valentear.CooperationHistoryTitle</div>
+
+                                @Html.ValidationMessageFor(model => model.Valentear.CooperationHistoryId, null, new { @class = "has-error help-block" })
+                            </div>
+                            @Html.Label("مدت زمان همکاری", new { @class = "control-label span2" })
+                            <div class="span3">
+
+                                <div class="controls">@string.Format("{0} سال و {1} ماه و {2} روز", Html.ConvertToPersianString(Model.Valentear.CooperationYear), Html.ConvertToPersianString(Model.Valentear.CooperationMonth), Html.ConvertToPersianString(Model.Valentear.CooperationDay))</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="span12">
+                        <div class="alert alert-warning">
+                            محل جغرافیایی انجام طرح برای مشمولین خدمت پزشکان و پیراپزشکان که در حین انجام تعهدات قانونی هستند.
+                        </div>
+                        <div class="control-group">
+                            @Html.LabelFor(model => model.Valentear.PlanStatusId, new { @class = "control-label span2" })
+                            <div class="span5">
+                                <div class="controls">@Model.Valentear.PlanStatusTitle</div>
+
+                            </div>
+                            @Html.Label("مدت زمان انجام طرح", new { @class = "control-label span2" })
+                            <div class="span3">
+                                <div class="controls">@string.Format("{0} سال و {1} ماه و {2} روز", Html.ConvertToPersianString(Model.Valentear.PlanYear.Value), Html.ConvertToPersianString(Model.Valentear.PlanMonth.Value), Html.ConvertToPersianString(Model.Valentear.PlanDay.Value))</div>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            @Html.LabelFor(model => model.Valentear.PlaceKhedmat, new { @class = "control-label span2" })
+                            <div class="span5">
+                                <div class="controls">@Model.Valentear.PlaceKhedmat</div>
+
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <div class="row-fluid">
+                                <div class="span12">
+                                    @Html.Label("رزومه یا سوابق کاری خود در بخش های مختلف درمانی ", new { @class = "control-label span12" })
+                                </div>
+                            </div>
+                            <div class="span5">
+                                <div class="controls">@Model.Valentear.DetailPlaceKhedmat</div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+        </div>
+        <div class="well">
+            <fieldset>
+                <legend>اطلاعات محل سکونت</legend>
+                <h4>نشانی کامل محل سکونت</h4>
+                <div class="row-fluid">
+                    <div class="span12">
+                        <div class="control-group">
+                            @Html.Label("استان", new { @class = "control-label span2" })
+                            <div class="span3">
+                                <div class="controls">@Model.Valentear.Address_ProvinceName</div>
+
+                            </div>
+                            @Html.Label("شهرستان", new { @class = "control-label span1" })
+                            <div class="span3">
+                                <div class="controls">@Model.Valentear.Address_CityName</div>
+
+                            </div>
+
+                            @Html.Label("بخش", new { @class = "control-label span1" })
+                            <div class="span2">
+                                <div class="controls">@Model.Valentear.Address_ZoneName</div>
+
+                            </div>
+                        </div>
+
+                        <div class="control-group">
+                            @Html.Label("کد پستی", new { @class = "control-label span2" })
+                            <div class="span3">
+                                <div class="controls">@Model.Valentear.PostalCode</div>
+
+                            </div>
+                            @Html.Label("تلفن ثابت", new { @class = "control-label span1" })
+                            <div class="span2">
+                                <div class="controls">@Model.Valentear.Tel</div>
+
+                            </div>
+
+                            @Html.Label("تلفن همراه", new { @class = "control-label span1" })
+                            <div class="span3">
+                                <div class="controls">@Model.Valentear.Mobile</div>
+
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            @Html.Label("شماره تلفن برای تماس ضروری", new { @class = "control-label span3" })
+                            <div class="span9">
+                                <div class="controls">@Model.Valentear.TellNeed</div>
+
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </fieldset>
+        </div>
+        <div class="well">
+            <fieldset>
+                <legend></legend>
+                <h4>اینجانب <strong class="text-danger"><u>@string.Format("{0} {1}", Model.Valentear.FirstName, Model.Valentear.LastName)</u></strong> متقاضی شرکت در آزمون استخدامی @ViewBag.AzmoonName @ViewBag.CompanyName 
+            متن آگهی مربوطه را با دقت و به طور کامل مطالعه و سپس تقاضای فوق را تکمیل نموده ام و مسئولیت صحت کلیه مندرجات آن را به عهده می گیرم. درصورت اثبات خلاف اظهارات اینجانب در هر مقطع زمانی
+            (قبل و بعداز اشتغال) هرگونه حقی را برای استخدام در آن درستگاه از خود صلب می نمایم.</h4>
+                <br />
+                <div class="center">
+                    @Html.ActionLink("اطلاعات بالا صحیح نیست - بازگشت", "Create", "Valentears", null, new { @class = "btn btn-warning" })
+                    <input type="button" value="موافق نیستم" title="موافق نیستم" class="btn btn-danger " />
+                    <input type="submit" value="موافقم" title="موافقم" class="btn btn-success " />
+                </div>
+            </fieldset>
+        </div>
+    
+    
+    
+    
+    
+    }
+
+</div>
+
+<script src="~/Scripts/chosen/chosen.jquery.js"></script>
+
+<script src="~/Scripts/bootstrap-fileupload/bootstrap-fileupload.min.js"></script>

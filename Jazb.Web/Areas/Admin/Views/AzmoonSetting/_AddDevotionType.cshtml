@@ -1,0 +1,18 @@
+﻿@model Jazb.Model.AdminModel.ManageAzmoon.DevotionTypeModel
+
+@using (Ajax.BeginForm(MVC.Admin.AzmoonSetting.ActionNames.AddDevotionType, MVC.Admin.AzmoonSetting.Name, null, new AjaxOptions { UpdateTargetId = "AzmoonDevotionTypeList", InsertionMode = InsertionMode.Replace, HttpMethod = "POST", OnBegin = "showLoading", OnComplete = "hideLoading" }, new { @class = "navbar-form ", id = "add-AzmoonDevotionType-form" }))
+            {
+    @Html.HiddenFor(x => x.AzmoonId)
+    @Html.LabelFor(x => x.DevotionId, new { @class = "span2" })
+    @Html.DropDownListFor(model => model.DevotionId, ViewBag.PossibleDevotionTypes as IEnumerable<SelectListItem>, "--- انتخاب ---", new { @class = "selectpicker  span7" })
+
+
+    <button type="submit" class="btn">ذخیره</button>
+}
+
+
+
+
+
+
+

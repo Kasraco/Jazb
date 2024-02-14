@@ -1,0 +1,27 @@
+﻿@model Jazb.Model.Payment.AcceptPaymentModel
+@using System.Globalization
+
+<style>
+    body {
+        padding-top: 75px;
+    }
+</style>
+<div class="row">
+    <div class="col col-md-offset-1 col-md-10" style="border:2px solid black;">
+        <br />
+
+        <div class="alert alert-warning">
+            داوطلب گرامی !
+           پرداختی صورت نگرفته ، لطفا دوباره برای پرداخت هزینه آزمون اقدام کنید
+            <br />
+            توجه داشته باشید ، درصورتی که پرداخت انجام نشود ،مبلغ وارد شده عودت داده خواهد شد
+        </div>
+        
+            <div class="center text-center">
+                @Html.ActionLink("بازگشت", MVC.Home.ActionNames.Index, MVC.Home.Name, null, new { @class = "btn btn-warning" })
+
+            </div>
+            <br />
+        
+    </div>
+</div>

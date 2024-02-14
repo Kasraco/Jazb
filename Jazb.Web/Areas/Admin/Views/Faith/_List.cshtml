@@ -1,0 +1,77 @@
+﻿@model IList<Jazb.Model.AdminModel.FaithViewModel>
+@{
+    int currentPage = ViewBag.PAGE + 1;
+    int count = ViewBag.COUNT;
+    int max = ViewBag.TotalRecords / count;
+    int firstPage = ((currentPage - 2) <= 0) ? 0 : currentPage - 3;
+    int lastPage = ((currentPage + 2) >= max) ? max : currentPage + 3;
+}
+<style>
+    form {
+        margin: 0 0 0 0;
+    }
+</style>
+
+<div id="user-table">
+
+    <table class="table  table-bordered table-hover table-striped">
+        <thead>
+            <tr>
+                <th class="text-center">ردیف</th>
+                <th class="text-center">کد</th>
+                <th class="text-center">عنوان</th>
+                <th> </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var data in Model)
+            {
+                <tr>
+                    <td>@data.Id</td>
+                    <td>@data.FaithCode</td>
+                    <td>@data.FaithTitle</td>
+                    <td>
+                        @Ajax.ActionLink("ویرایش", MVC.Admin.Faith.ActionNames.Edit, MVC.Admin.Faith.Name, new { Id = data.Id },
+                        new AjaxOptions
+                        {
+                            HttpMethod = "Get",
+                            InsertionMode = InsertionMode.Replace,
+                            UpdateTargetId = "logOnModal",
+                            LoadingElementDuration = 0,
+                            LoadingElementId = "loadingMessage",
+                            OnSuccess = "LogOnForm.onSuccess"
+                        }, new { tabindex = "-1", @class = "btn btn-info btn-mini no-margin pull-right" })
+
+                        @using (Ajax.BeginForm(MVC.Admin.Faith.ActionNames.Delete, MVC.Admin.Faith.Name, new { id = data.Id }, new AjaxOptions { UpdateTargetId = "index-result", InsertionMode = InsertionMode.Replace, HttpMethod = "DELETE", OnBegin = "showLoading", OnComplete = "hideLoading", Confirm = "آیا برای حذف مقطع تحصیلی " + data.FaithTitle + " اطمینان دارید؟" }, new { id = "delete-Degree-form", @class = "pull-right no-margin" }))
+                        {
+                            <input type="submit" value="حذف" class="btn btn-danger btn-mini no-margin" style=" margin-right:2px;" />
+                        }
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <div class="pagination pagination-centered">
+        <ul>
+            <li>@Ajax.ActionLink("ابتدا", "List", new { page = 0, term = ViewBag.TERM, count = ViewBag.COUNT, searchBy = ViewBag.SEARCHBY }, new AjaxOptions { HttpMethod = "Post", InsertionMode = InsertionMode.Replace, OnBegin = "showLoading", UpdateTargetId = "user-table", OnSuccess = "loadAjaxComponents", OnComplete = "hideLoading" }, null)</li>
+            @for (int i = firstPage; i <= lastPage; i++)
+            {
+                if (i + 1 == currentPage)
+                {
+                    <li class="active"><a href="#">@Html.ConvertToPersianString(i + 1)</a></li>
+                }
+                else
+                {
+                    <li>
+                        @Ajax.ActionLink(Html.ConvertToPersianString(i + 1).ToString(), "List", new { page = i, term = ViewBag.TERM, count = ViewBag.COUNT, searchBy = ViewBag.SEARCHBY }, new AjaxOptions { HttpMethod = "Post", InsertionMode = InsertionMode.Replace, OnBegin = "showLoading", UpdateTargetId = "user-table", OnSuccess = "loadAjaxComponents", OnComplete = "hideLoading" }, null)
+                    </li>
+                }
+            }
+            <li>@Ajax.ActionLink("انتها", "List", new { page = max, term = ViewBag.TERM, count = ViewBag.COUNT, searchBy = ViewBag.SEARCHBY }, new AjaxOptions { HttpMethod = "Post", InsertionMode = InsertionMode.Replace, OnBegin = "showLoading", UpdateTargetId = "user-table", OnSuccess = "loadAjaxComponents", OnComplete = "hideLoading" }, null)</li>
+        </ul>
+    </div>
+    @Html.Raw(ViewBag.Message)
+
+</div>
+

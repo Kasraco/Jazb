@@ -1,0 +1,41 @@
+@model Jazb.DomainClasses.Entities.FAQ
+
+
+@{
+    ViewBag.Title = "Create";
+}
+
+    
+@**@
+
+
+@section ContentPanel{
+
+
+<div class="container" id="divpanle">
+        <div class="row">
+
+            <div class="col-xs-12 col-sm-12 col-md-12">
+@using (Html.BeginForm()) {
+    @Html.ValidationSummary(true, null, new { @class = "alert alert-danger" })
+
+        <h2>FAQ</h2>
+
+		@Html.Partial("_CreateOrEdit", Model)
+
+        <div class="row">
+            <div class="col-md-4">
+                  <input type="submit" value="Save" class="btn btn-primary btn-block" />
+            </div>
+         <div class="col-md-2">
+		     @Html.ActionLink("Back To List", "Index", null, new { @class = "btn btn-warning" })
+		 </div>
+      </div>
+}
+
+  </div>
+   </div>
+        
+    </div>
+}
+

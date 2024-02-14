@@ -1,0 +1,21 @@
+﻿
+@using (Ajax.BeginForm(MVC.Admin.Valentear.ActionNames.GetDataTableByAzmoon, MVC.Admin.Valentear.Name, new {AzmoonId = ViewBag.PossibleAzmoon }, new AjaxOptions { UpdateTargetId = "user-table", InsertionMode = InsertionMode.Replace, HttpMethod = "POST", OnBegin = "showLoading", OnComplete = "hideLoading", OnSuccess = "loadAjaxComponents" }))
+{
+
+    ViewBag.SEARCHBY = "Job";
+       
+     @Html.Hidden("searchBy", ViewBag.SEARCHBY as string)
+    <div class="row-fluid">        
+        <div class="span3">
+            <span style="vertical-align: top;">رشته</span>
+            @Html.DropDownList("term", ViewBag.JobItems as IEnumerable<SelectListItem>, new { style = "width:200px" })
+        </div>  
+              <div class="span3">
+            <span style="vertical-align: top;">تعداد در هر صفحه</span>
+            @Html.DropDownList("count", ViewBag.CountList as IEnumerable<SelectListItem>, new { style = "width:60px" })
+        </div>
+        <div class="span3">
+            <input type="submit" name="btn-submit" value="برو" class="btn" />
+        </div>
+    </div>
+}

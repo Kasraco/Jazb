@@ -1,0 +1,820 @@
+﻿@model Jazb.Model.ValentearModel.RegisterModel
+@using Jazb.Web.Helpers;
+@using MvcCheckBoxList.Model;
+
+@{
+    ViewBag.Title = "Register";
+    Layout = "~/Views/Shared/_LayoutAzmoon.cshtml";
+    var HtmlClassPicture = "";
+    var DontShowClass = "";
+    var IsBehvarz = "";
+}
+
+<style type="text/css">
+        .styled_checkbox {
+            cursor: pointer;
+            border-radius: 5px;
+            margin: 3px;
+            padding: 0px 5px;
+        }
+
+        .styled_list {
+            padding: 3px 10px 3px 5px;
+            line-height: 25px;
+        }
+
+            .col-md-2,
+    .control-label
+    {
+        text-align: right;
+    }
+
+    </style>
+
+
+<link href="~/Content/Select2/select2.min.css" rel="stylesheet" />
+<link href="~/Content/bootstrap-fileupload.min.css" rel="stylesheet" />
+
+@{ 
+    if(ViewBag.IsManualPayment=="Yes")
+    {
+        HtmlClassPicture = "col col-md-4";
+        DontShowClass = "none";
+    }
+    else
+    {
+        HtmlClassPicture = "col col-md-3";
+        DontShowClass = "";
+    }
+}
+<div class="alert alert-danger">
+            <ul>
+                <li><h2>قبل از ثبت نام، مفاد آگهی استخدامی کاملا مطالعه گردد.</h2></li>
+                <li><h2>مسئولیت ثبت نام بر عهده خود فرد می باشد، لذا <strong>هیچگونه ویرایشی</strong> انجام نمی شود.</h2></li>
+            </ul>
+        </div>
+
+@using (Html.BeginForm(null, null, FormMethod.Post, new { Id = "wizForm", enctype = "multipart/form-data", @class = "form-horizontal" }))
+{
+    
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true, "لطفا اطلاعات را کامل و به صورت صحیح وارد کنید", new { @class = "alert alert-danger" })
+    @Html.HiddenFor(model => model.Valentear.AzmoonId);
+    <div class="well">
+        <fieldset>
+            <legend>مدارک</legend>
+            <div class="alert alert-warning">
+                <strong>داوطلب گرامی</strong>
+                <span class="text-perime">هر داوطلب باید یک تصویر دیجیتال آماده کرده و در وب سایت آپلود کند. در این خصوص لطفا موارد ذیل را مد نظر داشته باشید:</span>
+                <ol>
+                    <li>فایل عکس داوطلب باید با فرمت
+                                                <abbr>JPEG</abbr>
+                        باشد.</li>
+                    <li>عکس داوطلب باید 160 پیکسل عرض و 240 پیکسل ارتفاع داشته باشد.</li>
+                    <li>تصویر داوطلب باید دارای زمینه روشن باشد. تصاویر دارای زمینه تیره قابل قبول نمی باشند. </li>
+                    <li>تصویر داوطلب باید واضح و شفاف بوده و روی آن اثر مهر و یا نوشته نباشد. </li>
+                    <li>تصویر باید تنها شامل چهره داوطلب باشد. داوطلب مجاز به ارسال تصویر کپی شناسنامه یا گواهینامه رانندگی به جای تصویر خود نمی باشد. </li>
+                    <li>تصویر نباید دارای حاشیه های زائد خالی باشد.</li>
+                    <li>تصویر باید در وضعیت صحیح و بدون چرخش 90 یا 180 درجه باشد.</li>
+                </ol>
+            </div>
+
+            <div class="form-group">
+
+                <div class="row">
+                    <div class="@HtmlClassPicture">
+                        <label>
+                            <br />
+                            تصویر داوطلب:</label>
+                        <div class="fileupload fileupload-new" data-provides="fileupload">
+                            <div class="fileupload-preview thumbnail" style="width: 240px; height: 100%; min-height: 128px;"></div>
+
+                            <div>
+                                <span class="btn btn-default btn-file">
+                                    <span class="fileupload-new">انتخاب فایل</span>
+                                    <span class="fileupload-exists">تغییر</span>
+                                    <input type="file" id="personel_picture" name="personel_picture" class="file-input" data-val-required="لطفا تصویر داوطلب را وارد کنید" />
+                                    @Html.ValidationMessage("personel_picture")
+                                </span>
+                                <a href="#" class="btn btn-danger fileupload-exists" data-dismiss="fileupload">حذف</a>
+                            </div>
+
+                        </div>
+
+
+                    </div>
+                    <div class="@HtmlClassPicture">
+
+                        <label>
+                            <br />
+                            کارت پایان خدمت:
+                        </label>
+                        <div class="fileupload fileupload-new" data-provides="fileupload">
+                            <div class="fileupload-preview thumbnail" style="width: 240px; height: 100%; min-height: 128px;"></div>
+
+                            <div>
+                                <span class="btn btn-default btn-file">
+                                    <span class="fileupload-new">انتخاب فایل</span>
+                                    <span class="fileupload-exists">تغییر</span>
+                                    <input type="file" id="Pic_Conscript" name="Pic_Conscript" class="file-input" data-val-required="لطفا تصویر کارت پایان خدمت را وارد کنید" />
+                                    @Html.ValidationMessage("Pic_Conscript")
+                                </span>
+                                <a href="#" class="btn btn-danger fileupload-exists" data-dismiss="fileupload">حذف</a>
+                            </div>
+
+                        </div>
+
+                    </div>
+                    
+                    <div class="@HtmlClassPicture" style="display:@DontShowClass;">
+
+                        <label>
+                            <br />
+                            تصویر فیش واریزی  :
+                        </label>
+                        <div class="fileupload fileupload-new" data-provides="fileupload">
+                            <div class="fileupload-preview thumbnail" style="width: 240px; height: 100%; min-height: 128px;"></div>
+
+                            <div>
+                                <span class="btn btn-default btn-file">
+                                    <span class="fileupload-new">انتخاب فایل</span>
+                                    <span class="fileupload-exists">تغییر</span>
+                                    <input type="file" id="fish_variz" name="fish_variz" class="file-input" />
+
+                                </span>
+                                <a href="#" class="btn btn-danger fileupload-exists" data-dismiss="fileupload">حذف</a>
+                            </div>
+
+                        </div>
+
+                    </div>
+                    <div class="@HtmlClassPicture">
+
+                         <label>
+                            <br />
+                            تصویر طرح/مدرک تحصیلی:</label>
+                        <div class="fileupload fileupload-new" data-provides="fileupload">
+                            <div class="fileupload-preview thumbnail" style="width: 240px; height: 100%; min-height: 128px;"></div>
+
+                            <div>
+                                <span class="btn btn-default btn-file">
+                                    <span class="fileupload-new">انتخاب فایل</span>
+                                    <span class="fileupload-exists">تغییر</span>
+                                    <input type="file" id="Pic_Tarh" name="Pic_Tarh" class="file-input" data-val-required="لطفا تصویر فیش واریزی را وارد کنید" />
+                                    @Html.ValidationMessage("Pic_Tarh")
+                                </span>
+                                <a href="#" class="btn btn-danger fileupload-exists" data-dismiss="fileupload">حذف</a>
+                            </div>
+
+                        </div>
+
+                    </div>
+                    
+                </div>
+                <div class="row" style="display:@IsBehvarz;">
+                    <div class="@HtmlClassPicture">
+                        <label>
+                            <br />
+                            تصویر 5:
+                        </label>
+                        <div class="fileupload fileupload-new" data-provides="fileupload">
+                            <div class="fileupload-preview thumbnail" style="width: 240px; height: 100%; min-height: 128px;"></div>
+
+                            <div>
+                                <span class="btn btn-default btn-file">
+                                    <span class="fileupload-new">انتخاب فایل</span>
+                                    <span class="fileupload-exists">تغییر</span>
+                                    <input type="file" id="Pic5" name="Pic5" class="file-input" />
+                                </span>
+                                <a href="#" class="btn btn-danger fileupload-exists" data-dismiss="fileupload">حذف</a>
+                            </div>
+
+                        </div>
+
+
+                    </div>
+                    <div class="@HtmlClassPicture">
+                        <label>
+                            <br />
+                            تصویر 6:
+                        </label>
+                        <div class="fileupload fileupload-new" data-provides="fileupload">
+                            <div class="fileupload-preview thumbnail" style="width: 240px; height: 100%; min-height: 128px;"></div>
+
+                            <div>
+                                <span class="btn btn-default btn-file">
+                                    <span class="fileupload-new">انتخاب فایل</span>
+                                    <span class="fileupload-exists">تغییر</span>
+                                    <input type="file" id="Pic6" name="Pic6" class="file-input" />
+                                </span>
+                                <a href="#" class="btn btn-danger fileupload-exists" data-dismiss="fileupload">حذف</a>
+                            </div>
+
+                        </div>
+
+
+                    </div>
+                    <div class="@HtmlClassPicture">
+                        <label>
+                            <br />
+                            تصویر 7:
+                        </label>
+                        <div class="fileupload fileupload-new" data-provides="fileupload">
+                            <div class="fileupload-preview thumbnail" style="width: 240px; height: 100%; min-height: 128px;"></div>
+
+                            <div>
+                                <span class="btn btn-default btn-file">
+                                    <span class="fileupload-new">انتخاب فایل</span>
+                                    <span class="fileupload-exists">تغییر</span>
+                                    <input type="file" id="Pic7" name="Pic7" class="file-input" />
+                                </span>
+                                <a href="#" class="btn btn-danger fileupload-exists" data-dismiss="fileupload">حذف</a>
+                            </div>
+
+                        </div>
+
+
+                    </div>
+                    <div class="@HtmlClassPicture">
+                        <label>
+                            <br />
+                            تصویر 8:
+                        </label>
+                        <div class="fileupload fileupload-new" data-provides="fileupload">
+                            <div class="fileupload-preview thumbnail" style="width: 240px; height: 100%; min-height: 128px;"></div>
+
+                            <div>
+                                <span class="btn btn-default btn-file">
+                                    <span class="fileupload-new">انتخاب فایل</span>
+                                    <span class="fileupload-exists">تغییر</span>
+                                    <input type="file" id="Pic8" name="Pic8" class="file-input" />
+                                </span>
+                                <a href="#" class="btn btn-danger fileupload-exists" data-dismiss="fileupload">حذف</a>
+                            </div>
+
+                        </div>
+
+
+                    </div>
+                </div>
+
+            </div>
+        </fieldset>
+    </div>
+    
+    <div class="well">
+        <fieldset>
+            <legend>اطلاعات فردی</legend>
+            <div class="form-group">
+                @Html.LabelFor(model => model.Valentear.FirstName, new { @class = "control-label col-md-2" })
+                <div class="col-md-5">
+                    @Html.TextBoxFor(model => model.Valentear.FirstName, new { @class = "form-control" })
+
+                </div>
+                <div class="col-md-5">
+                    @Html.ValidationMessageFor(model => model.Valentear.FirstName, null, new { @class = "has-error " })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Valentear.LastName, new { @class = "control-label col-md-2" })
+                <div class="col-md-5">
+                    @Html.TextBoxFor(model => model.Valentear.LastName, new { @class = "form-control" })
+                </div>
+                <div class="col-md-5">
+                    @Html.ValidationMessageFor(model => model.Valentear.LastName, null, new { @class = "has-error " })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Valentear.FatherName, new { @class = "control-label col-md-2" })
+                <div class="col-md-5">
+                    @Html.TextBoxFor(model => model.Valentear.FatherName, new { @class = "form-control" })
+                </div>
+                <div class="col-md-5">
+                    @Html.ValidationMessageFor(model => model.Valentear.FatherName, null, new { @class = "has-error " })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Valentear.GenderId, new { @class = "control-label col-md-2" })
+                <div class="col-md-2">
+                      @Html.DropDownListFor(model => model.Valentear.GenderId, ViewBag.PossibleGenders as IEnumerable<SelectListItem>, "--- انتخاب ---", new { @class = "selectpicker show-menu-arrow col-md-12" , id="ValentearGenderId" })               
+                    
+                </div>
+                <div class="col-md-3"></div>
+                <div class="col-md-5">
+                    @Html.ValidationMessageFor(model => model.Valentear.GenderId, null, new { @class = "has-error " })
+                </div>
+            </div>
+
+            
+            <div class="form-group">
+                @Html.LabelFor(model => model.Valentear.BirthDate, new { @class = "control-label col-md-2" })
+                <div class="col-md-2">
+                    @Html.TextBoxFor(model => model.Valentear.BirthDate, new { @class = "form-control datepicker-fullscreen" })
+                </div>
+                <div class="col-md-3">مثال (1300/12/25)</div>
+                <div class="col-md-5">
+                    @Html.ValidationMessageFor(model => model.Valentear.BirthDate, null, new { @class = "has-error " })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.Label("محل تولد", new { @class = "control-label col-md-2" })
+                <div class="col-md-5">
+                       @Html.TextBoxFor(model => model.Valentear.CityPart_BirthPlace, new { @class = "form-control datepicker-fullscreen" })
+                </div>
+                <div class="col-md-5">
+                    @Html.ValidationMessageFor(model => model.Valentear.CityPart_BirthPlace, null, new { @class = "has-error " })
+                 
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.Valentear.BirthCertificateNo, new { @class = "control-label col-md-2" })
+                <div class="col-md-3">
+                    @Html.TextBoxFor(model => model.Valentear.BirthCertificateNo, new { @class = "form-control" })
+                </div>
+                <div class="col-md-2"></div>
+                <div class="col-md-5">
+                    @Html.ValidationMessageFor(model => model.Valentear.BirthCertificateNo, null, new { @class = "has-error " })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.Label("محل صدور شناسنامه", new { @class = "control-label col-md-2" })
+                <div class="col-md-5">
+                   @Html.TextBoxFor(model => model.Valentear.IssuancePlace_City, new { @class = "form-control" })
+                </div>
+                <div class="col-md-5">
+                    <span id="IssuancePlace_CityIdDive"></span>
+                    @Html.ValidationMessageFor(model => model.Valentear.IssuancePlace_City, null, new { @class = "has-error " })
+                    <img src="~/Content/Images/loading4.gif" alt="loading" style="width: 24px; display: none;" />
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Valentear.NationalID, new { @class = "control-label col-md-2" })
+                <div class="col-md-3">
+                    @Html.TextBoxFor(model => model.Valentear.NationalID, new { @class = "form-control" })
+                </div>
+                <div class="col-md-2"></div>
+                <div class="col-md-5">
+                    @Html.ValidationMessageFor(model => model.Valentear.NationalID, null, new { @class = "has-error " })
+                </div>
+            </div>
+
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Valentear.ReligionId, new { @class = "control-label  col-md-2" })
+                <div class="col-md-4">
+                    @Html.DropDownListFor(model => model.Valentear.ReligionId, ViewBag.PossibleReligions as IEnumerable<SelectListItem>, "--- انتخاب ---", new { @class = "selectpicker show-menu-arrow col-md-12" })                  
+                     @Html.ValidationMessageFor(model => model.Valentear.ReligionId, null, new { @class = "has-error " })
+                </div>
+
+                @Html.LabelFor(model => model.Valentear.FaithId, new { @class = "control-label col-md-2" })
+                <div class="col-md-4">
+                    @Html.DropDownListFor(model => model.Valentear.FaithId, ViewBag.PossibleFaiths as IEnumerable<SelectListItem>, "--- انتخاب ---", new { @class = "selectpicker show-menu-arrow col-md-12" })                
+                    @Html.ValidationMessageFor(model => model.Valentear.FaithId, null, new { @class = "has-error " })
+                </div>
+
+
+
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.Valentear.MarriageStatusId, new { @class = "control-label col-md-2" })
+                <div class="col-md-4">
+                    @Html.DropDownListFor(model => model.Valentear.MarriageStatusId, ViewBag.PossibleMarriageStatus as IEnumerable<SelectListItem>, "--- انتخاب ---", new { @class = "selectpicker show-menu-arrow col-md-12" })                   
+                    @Html.ValidationMessageFor(model => model.Valentear.MarriageStatusId, null, new { @class = "has-error " })
+                </div>
+
+                @Html.LabelFor(model => model.Valentear.ConscriptStatusId, new { @class = "control-label col-md-2" })
+                <div class="col-md-4">
+                    @Html.DropDownListFor(model => model.Valentear.ConscriptStatusId, ViewBag.PossibleConscriptStatus as IEnumerable<SelectListItem>, "--- انتخاب ---", new { @class = "selectpicker show-menu-arrow col-md-12" })
+               
+                    @Html.ValidationMessageFor(model => model.Valentear.ConscriptStatusId, null, new { @class = "has-error " })
+                </div>
+            </div>
+
+
+
+
+        </fieldset>
+    </div>
+        
+    
+    
+    <div class="well">
+        <fieldset>
+            <legend>اطلاعات ایثارگری</legend>
+            <div class="row">
+                <div class="col-md-12">
+                    @*<div class="row">
+                        <div class="col-md-1">@Html.Label("جانباز", new { @class = "control-label" })</div>
+                        <div class="col-md-4">
+                            @Html.LabelFor(model => model.Valentear.WoundedPercent, new { @class = "control-label col-md-5" })
+                            <div class="col-md-5">
+                                @Html.TextBoxFor(model => model.Valentear.WoundedPercent, new { @class = "form-control " })
+
+                                @Html.ValidationMessageFor(model => model.Valentear.WoundedPercent, null, new { @class = "has-error " })
+                            </div>
+                            <div class="col-md-2">درصد</div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="row">
+                                <div class="col-md-1">@Html.Label("رزمنده", new { @class = "control-label" })</div>
+                                <div class="col-md-6 control-label">(دارای حداقل 6 ماه حضور داوطلبانه در جبهه) مدت حضور در جبهه : </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-1 col-md-offset-1">
+                                    @Html.LabelFor(model => model.Valentear.FightInWarDay, new { @class = "control-label" })
+                                    @Html.TextBoxFor(model => model.Valentear.FightInWarDay, new { @class = "form-control" })
+                                </div>
+                                <div class="col-md-1">
+                                    @Html.LabelFor(model => model.Valentear.FightInWarMonth, new { @class = "control-label" })
+                                    @Html.TextBoxFor(model => model.Valentear.FightInWarMonth, new { @class = "form-control" })
+                                </div>
+                                <div class="col-md-1">
+                                    @Html.LabelFor(model => model.Valentear.FightInWarYear, new { @class = "control-label" })
+                                    @Html.TextBoxFor(model => model.Valentear.FightInWarYear, new { @class = "form-control" })
+                                </div>
+                            </div>
+                        </div>
+
+
+
+                    </div>
+
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="row">
+                                <div class="col-md-1">@Html.Label("آزاده", new { @class = "control-label" })</div>
+                                <div class="col-md-5 control-label">مدت اسارت : </div>
+                            </div>
+                            <div class="row">
+
+                                <div class="col-md-1 col-md-offset-1 ">
+                                    @Html.LabelFor(model => model.Valentear.CaptivationDay, new { @class = "control-label" })
+                                    @Html.TextBoxFor(model => model.Valentear.CaptivationDay, new { @class = "form-control" })
+                                </div>
+                                <div class="col-md-1">
+                                    @Html.LabelFor(model => model.Valentear.CaptivationMonth, new { @class = "control-label" })
+                                    @Html.TextBoxFor(model => model.Valentear.CaptivationMonth, new { @class = "form-control" })
+                                </div>
+                                <div class="col-md-1">
+                                    @Html.LabelFor(model => model.Valentear.CaptivationYear, new { @class = "control-label" })
+                                    @Html.TextBoxFor(model => model.Valentear.CaptivationYear, new { @class = "form-control" })
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>*@
+
+                    <div class="row">
+                        <div class="col-md-8">
+
+                            <div class="form-group" style="direction:ltr;float:right;">
+                                <div class="control-label">وضعیت ایثارگری</div>
+                                @{
+                                    var htmlListInfo = new HtmlListInfo(HtmlTag.vertical_columns, 1, new { @class = "styled_list" }, TextLayout.RightToLeft);
+                                }
+                                @Html.CheckBoxListFor(model => model.PostedDevotionType.DevotionTypes,
+                                                      model => model.DevotionTypes,
+                                                      entity => entity.Id,
+                                                      entity => entity.DevotionTypeTitle,
+                                                      model => model.SelectedDevotionTypes,
+                                                      htmlListInfo  )
+
+                            </div>
+
+                        </div>
+                        <div class="col-md-4">
+
+                            <div class="form-group" style="direction:ltr; float:right;">
+                                <div class="control-label">سایر موارد</div>
+
+                                @Html.CheckBoxListFor(model => model.PostedQoutaType.QoutaTypes,
+                                                      model => model.QoutaTypes,
+                                                      entity => entity.Id,
+                                                      entity => entity.QoutaTypeTitle,
+                                                      model=>model.SelectedQoutaTypes, 
+                                                      htmlListInfo)
+
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </fieldset>
+    </div>
+    <div class="well">
+        <fieldset>
+            <legend>اطلاعات تحصیلی</legend>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Valentear.DegreeId, new { @class = "control-label col-md-2" })
+                        <div class="col-md-5">
+                            @Html.DropDownListFor(model => model.Valentear.DegreeId, ViewBag.PossibleDegrees as IEnumerable<SelectListItem>, "--- انتخاب ---", new { @class = "selectpicker show-menu-arrow col-md-12" })                          
+                        </div>
+                        <div class="col-md-5">
+                            @Html.ValidationMessageFor(model => model.Valentear.DegreeId, null, new { @class = "has-error " })
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Valentear.EducatedSkillId, new { @class = "control-label col-md-2" })
+                        <div class="col-md-5">
+                            @Html.DropDownListFor(model => model.Valentear.EducatedSkillId, ViewBag.PossibleEducatedSkills as IEnumerable<SelectListItem>, "--- انتخاب ---", new { @class = "selectpicker show-menu-arrow col-md-12" })                          
+                        </div>
+                        <div class="col-md-5">
+                            @Html.ValidationMessageFor(model => model.Valentear.EducatedSkillId, null, new { @class = "has-error " })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Valentear.EducatedField, new { @class = "control-label col-md-2" })
+                        <div class="col-md-5">
+                            @Html.TextBoxFor(model => model.Valentear.EducatedField, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.Valentear.EducatedField, null, new { @class = "has-error " })
+                        </div>
+                        @Html.LabelFor(model => model.Valentear.Average, new { @class = "control-label col-md-1" })
+                        <div class="col-md-3">
+                            @Html.TextBoxFor(model => model.Valentear.Average, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.Valentear.Average, null, new { @class = "has-error " })
+                        </div>
+                    </div>
+                    <div class="form-group">                      
+
+                        @Html.LabelFor(model => model.Valentear.University_Name, new { @class = "control-label col-md-2" })
+                        <div class="col-md-4">
+                            @Html.TextBoxFor(model => model.Valentear.University_Name, new { @class = "form-control" }) 
+                             @Html.ValidationMessageFor(model => model.Valentear.University_Name, null, new { @class = "has-error " })     
+                            </div>
+                         @Html.LabelFor(model => model.Valentear.UniversityProvinceTitle, new { @class = "control-label col-md-2" })
+                         <div class="col-md-4">
+                              @Html.TextBoxFor(model => model.Valentear.UniversityProvinceTitle, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.Valentear.UniversityProvinceTitle, null, new { @class = "has-error " })
+                        </div>
+                    </div>
+
+
+
+                    <div class="form-group">                     
+                        @Html.LabelFor(model => model.Valentear.LicenseDate, new { @class = "control-label col-md-2" })                       
+                        <div class="col-md-4">
+                            @Html.TextBoxFor(model => model.Valentear.LicenseDate, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.Valentear.LicenseDate, null, new { @class = "has-error " })
+                        </div>
+
+                        @Html.Label("محل اخذ دیپلم", new { @class = "control-label col-md-2" })
+                        <div class="col-md-4">
+                            @Html.TextBoxFor(model => model.Valentear.SchoolName, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.Valentear.SchoolName, null, new { @class = "has-error " })
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+
+        </fieldset>
+    </div>
+    <div class="well">
+        <fieldset>
+            <legend>اطلاعات رشته شغلی</legend>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        @Html.Label("شغل مورد تقاضا", new { @class = "control-label col-md-2" })
+                        <div class="col-md-5">
+                             @Html.DropDownListFor(model => model.Valentear.JobId, ViewBag.PossibleJobs as IEnumerable<SelectListItem>, "--- انتخاب ---", new { @class = "selectpicker show-menu-arrow col-md-12", id="ValentearJobId" })
+                        </div>
+                        <div class="col-md-5">
+                            @Html.ValidationMessageFor(model => model.Valentear.JobId, null, new { @class = "has-error " })
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="form-group">
+                        @Html.Label("محل مورد تقاضا", new { @class = "control-label col-md-2" })
+                        <div class="col-md-5">
+                            @Html.DropDownListFor(model => model.Valentear.PlaceId, ViewBag.PossiblePlaces as IEnumerable<SelectListItem>, "--- انتخاب ---", new { @class = "selectpicker show-menu-arrow col-md-12", id="ValentearPlaceId" })
+                             
+                        </div>
+                        <div class="col-md-5">
+                            @Html.ValidationMessageFor(model => model.Valentear.PlaceId, null, new { @class = "has-error " })
+                        </div>
+                    </div>
+                </div>
+               @* <div class="col-md-12">                   
+                    <div class="form-group">
+                        @Html.Label("وضعیت همکاری", new { @class = "control-label col-md-2" })
+                        <div class="col-md-5">
+                            @Html.DropDownListFor(model => model.Valentear.CooperationHistoryId, ViewBag.PossibleCooperationHistories as IEnumerable<SelectListItem>, "--- انتخاب ---", new { @class = "selectpicker show-menu-arrow col-md-12" })
+                           
+                            @Html.ValidationMessageFor(model => model.Valentear.CooperationHistoryId, null, new { @class = "has-error " })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.Label("مدت زمان همکاری", new { @class = "control-label col-md-2" })
+                        <div class="col-md-1">
+                            @Html.TextBoxFor(model => model.Valentear.CooperationYear, new { @class = "form-control", Value="0" })
+                            <span>&nbsp; سال </span>
+                        </div>
+                        <div class="col-md-1">
+                            @Html.TextBoxFor(model => model.Valentear.CooperationMonth, new { @class = "form-control", Value="0"  })
+                            <span>&nbsp; ماه </span>
+                        </div>
+
+                        <div class="col-md-1">
+                            @Html.TextBoxFor(model => model.Valentear.CooperationDay, new { @class = "form-control" , Value="0" })
+                            <span>&nbsp; روز </span>
+                        </div>
+                    </div>
+                </div>*@
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="alert alert-warning">
+                        محل جغرافیایی انجام طرح برای مشمولین خدمت پزشکان و پیراپزشکان که در حین انجام تعهدات قانونی هستند.
+                    </div>
+                    <div class="form-group">
+                        @Html.Label("وضعیت طرح", new { @class = "control-label col-md-2" })
+                        <div class="col-md-5">
+                            @Html.DropDownListFor(model => model.Valentear.PlanStatusId, ViewBag.PossiblePlanStatus as IEnumerable<SelectListItem>, "--- انتخاب ---", new { @class = "selectpicker show-menu-arrow col-md-12" })
+                           
+                            @Html.ValidationMessageFor(model => model.Valentear.PlanStatusId, null, new { @class = "has-error " })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.Label("مدت زمان انجام طرح", new { @class = "control-label col-md-2" })
+                        <div class="col-md-1">
+                            @Html.TextBoxFor(model => model.Valentear.PlanYear, new { @class = "form-control", Value="0"  })
+                            <span>&nbsp; سال </span>
+                        </div>
+                        <div class="col-md-1">
+                            @Html.TextBoxFor(model => model.Valentear.PlanMonth, new { @class = "form-control", Value="0"  })
+                            <span>&nbsp; ماه </span>
+                        </div>
+
+                        <div class="col-md-1">
+                            @Html.TextBoxFor(model => model.Valentear.PlanDay, new { @class = "form-control" , Value="0" })
+                            <span>&nbsp; روز </span>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Valentear.PlaceKhedmat, new { @class = "control-label col-md-2" })
+                        <div class="col-md-5">
+                            @Html.TextBoxFor(model => model.Valentear.PlaceKhedmat, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.Valentear.PlaceKhedmat, null, new { @class = "has-error " })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                         <div class="row">
+                             <div class="col-md-12">
+                                 @Html.Label("رزومه یا سوابق کاری خود در بخش های مختلف درمانی ", new { @class = "control-label col-md-12" })
+                             </div>
+                         </div>
+                        <div class="col-md-12">
+                              @Html.TextAreaFor(model => model.Valentear.DetailPlaceKhedmat, new { @class = "form-control", size = "8" })
+                            @Html.ValidationMessageFor(model => model.Valentear.DetailPlaceKhedmat, null, new { @class = "has-error " })
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </fieldset>
+    </div>
+    <div class="well">
+        <fieldset>
+            <legend>اطلاعات محل سکونت</legend>
+            <h4>نشانی کامل محل سکونت</h4>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        @Html.Label("استان", new { @class = "control-label col-md-2" })
+                        <div class="col-md-3">
+                            @Html.TextBoxFor(model => model.Valentear.Address_ProvinceName, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.Valentear.Address_ProvinceName, null, new { @class = "has-error " })
+                        </div>
+                        @Html.Label("شهرستان", new { @class = "control-label col-md-1" })
+                        <div class="col-md-3">
+                            @Html.TextBoxFor(model => model.Valentear.Address_CityName, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.Valentear.Address_CityName, null, new { @class = "has-error " })
+                        </div>
+
+                        @Html.Label("بخش", new { @class = "control-label col-md-1" })
+                        <div class="col-md-2">
+                            @Html.TextBoxFor(model => model.Valentear.Address_ZoneName, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.Valentear.Address_ZoneName, null, new { @class = "has-error " })
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        @Html.Label("آدرس", new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.TextAreaFor(model => model.Valentear.Adress_Adress, new { @class = "form-control", size = "8" })
+                            @Html.ValidationMessageFor(model => model.Valentear.Adress_Adress, null, new { @class = "has-error " })
+                        </div>
+
+                    </div>
+                    <div class="form-group">
+                        @Html.Label("کد پستی", new { @class = "control-label col-md-2" })
+                        <div class="col-md-3">
+                            @Html.TextBoxFor(model => model.Valentear.PostalCode, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.Valentear.PostalCode, null, new { @class = "has-error " })
+                        </div>
+                        @Html.Label("تلفن ثابت", new { @class = "control-label col-md-1" })
+                        <div class="col-md-2">
+                            @Html.TextBoxFor(model => model.Valentear.Tel, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.Valentear.Tel, null, new { @class = "has-error " })
+                        </div>
+
+                        @Html.Label("تلفن همراه", new { @class = "control-label col-md-1" })
+                        <div class="col-md-3">
+                            @Html.TextBoxFor(model => model.Valentear.Mobile, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.Valentear.Mobile, null, new { @class = "has-error " })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.Label("شماره تلفن برای تماس ضروری", new { @class = "control-label col-md-3" })
+                        <div class="col-md-9">
+                            @Html.TextBoxFor(model => model.Valentear.TellNeed, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.Valentear.TellNeed, null, new { @class = "has-error " })
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </fieldset>
+    </div>
+    
+    
+    
+    
+    <div class="center">
+        <input type="button" value="ذخیره" title="ذخیره" id="btn_BefSave" class="btn btn-success " />
+        <input type="submit" value="ذخیره" title="ذخیره" id="btn_Save" class="btn btn-success " style="display:none;" />
+    </div>
+}
+
+
+
+
+<script src="~/Scripts/Select2/select2.min.js"></script>
+<script src="~/Scripts/bootstrap-fileupload/bootstrap-fileupload.min.js"></script>
+
+<script type="text/javascript">
+
+
+
+    jQuery(document).ready(function () {
+        $('select').select2();
+        var selectjob = 0;
+        var selectPlace = 0;
+
+        $('#ValentearJobId').change(function () {
+            var selectedJobID = this.value;
+            selectjob = 1;
+            selectPlace = 0;
+            var genderId = $('#ValentearGenderId option:selected').val();
+            var AzmoonId=@ViewBag.PossibleAzmoon;           
+            $('#ValentearPlaceId').empty(); 
+            $('#ValentearPlaceId').load('@Url.Action("GetLocationRequest")?AzmoonId=' + AzmoonId +'&Jobid=' + selectedJobID + '&GenderId=' + genderId);
+
+            $('#ValentearPlaceId').val(0);
+        });
+
+        $('#ValentearPlaceId').change(function () {
+            selectjob = 1;
+            selectPlace = $('#ValentearPlaceId').val();
+           
+        });
+
+        $('#btn_BefSave').click(function (e) {
+
+          
+            if (selectPlace != 0)
+                $("#wizForm").submit();
+        });
+    });
+
+
+
+
+
+</script>
+
+
+

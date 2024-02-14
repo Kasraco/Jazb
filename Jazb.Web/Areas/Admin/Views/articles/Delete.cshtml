@@ -1,0 +1,80 @@
+@model Jazb.Models.article
+
+@{
+    ViewBag.Title = "Delete";
+}
+@section ContentPanel{
+
+<div class="page-header">
+			  <h1>Delete
+			      <small>article</small>			  
+			  </h1>
+			</div>
+
+<div class="container" id="divpanle">
+
+    <div class="row">
+       <div class="col-xs-6 col-sm-6 col-md-6">
+
+<h3>are you sure for delete this item?</h3>
+<div class="panel panel-danger">
+   <div class="panel-heading">
+      <h3 class="panel-title">article</h3>
+   </div> 
+   <div class="panel-body">
+    <div class="form-group">
+       @Html.LabelFor(model => model.Title, new { @class = "control-label" })
+       <div class="form-control">@Model.Title</div>
+	</div>
+    <div class="form-group">
+       @Html.LabelFor(model => model.StartDate, new { @class = "control-label" })
+       <div class="form-control">@String.Format("{0:g}", Model.StartDate)</div>
+	</div>
+    <div class="form-group">
+       @Html.LabelFor(model => model.ExpireDate, new { @class = "control-label" })
+       <div class="form-control">@String.Format("{0:g}", Model.ExpireDate)</div>
+	</div>
+    <div class="form-group">
+       @Html.LabelFor(model => model.HasExpire, new { @class = "control-label" })
+       <div class="form-control">@Model.HasExpire</div>
+	</div>
+    <div class="form-group">
+       @Html.LabelFor(model => model.SourceUrl, new { @class = "control-label" })
+       <div class="form-control">@Model.SourceUrl</div>
+	</div>
+    <div class="form-group">
+       @Html.LabelFor(model => model.SourceTitle, new { @class = "control-label" })
+       <div class="form-control">@Model.SourceTitle</div>
+	</div>
+    <div class="form-group">
+       @Html.LabelFor(model => model.MinBody, new { @class = "control-label" })
+       <div class="form-control">@Model.MinBody</div>
+	</div>
+    <div class="form-group">
+       @Html.LabelFor(model => model.Body, new { @class = "control-label" })
+       <div class="form-control">@Model.Body</div>
+	</div>
+    <div class="form-group">
+       @Html.LabelFor(model => model.Picture, new { @class = "control-label" })
+       <div class="form-control">@Model.Picture</div>
+	</div>
+    <div class="form-group">
+       @Html.LabelFor(model => model.Category, new { @class = "control-label" })
+       <div class="form-control">@(Model.Category == null ? "None" : Model.Category.Name)</div>
+	</div>
+    <div class="form-group">
+       @Html.LabelFor(model => model.User, new { @class = "control-label" })
+       <div class="form-control">@(Model.User == null ? "None" : Model.User.LastName)</div>
+	</div>
+</div>
+</div>
+@using (Html.BeginForm()) {
+    <p>
+        <input type="submit" value="Delete"  class="btn btn-danger" /> |
+        @Html.ActionLink("Back To List", "Index", null, new { @class = "btn btn-default" })
+    </p>
+}
+</div>
+</div>
+</div>
+}

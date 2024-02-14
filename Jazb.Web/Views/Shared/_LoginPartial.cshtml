@@ -1,0 +1,67 @@
+﻿@using Jazb.Web.Helpers
+
+
+<div class="navbar navbar-inverse  navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a href="#" class="navbar-brand">سامانه جذب نیروی انسانی</a>
+            &nbsp; &nbsp; &nbsp;
+        </div>
+        <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+                <li class="active">@Html.ActionLink("خانه", "Index", "Home")</li>
+
+                <li>@Html.ActionLink("ثبت نام", "Index", "User", routeValues: null, htmlAttributes: new { id = "registerLink" }).If(Request.IsAuthenticated && User.IsInRole("admin"))</li>
+                <li>@Html.ActionLink("ورود", "LogOn", "User", routeValues: null, htmlAttributes: new { id = "loginLink" }).If(!Request.IsAuthenticated)</li>
+
+               
+               
+
+                @if (Request.IsAuthenticated && (User.IsInRole("admin") || User.IsInRole("moderator") || User.IsInRole("writer") || User.IsInRole("editor")))
+                {
+                    <li class="dropdown">
+                      <a href="Admin/Home/">مدیریت</a>
+                    </li>
+                }
+                
+
+                <li>@Html.ActionLink("درباره ما", "About", "Home")</li>
+                <li>@Html.ActionLink("تماس با ما", "Contact", "Home")
+
+                </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-left">
+                
+
+                @if (Request.IsAuthenticated)
+                {
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">پروفایل <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                          
+
+                            @using (Ajax.BeginForm(MVC.User.ActionNames.LogOut, MVC.User.Name, new { area = "" }, new AjaxOptions { HttpMethod = "POST", OnSuccess = "reloadPage", LoadingElementDuration = 300, LoadingElementId = "loadingMessage" }, new { id = "frmLogOut" }))
+                            {
+                                @Html.AntiForgeryToken()
+                                <li >
+                                    <button id="btnLogOut" type="submit" style="display: none;">خروج</button>
+                                    <a href="javascript:document.getElementById('btnLogOut').click()">خروج</a>
+                                </li>
+                            }
+
+                        </ul>
+                    </li>
+                       
+                }
+            </ul>
+        </div>
+        <!--/.navbar-collapse -->
+    </div>
+</div>
+
+

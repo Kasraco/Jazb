@@ -1,0 +1,27 @@
+﻿@{
+    ViewBag.Title = "FirstPage";
+    Layout = "~/Views/Shared/_LayoutPageBevarzi.cshtml";
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <h3 class="panel-title">به سیستم ثبت الکترونیکی @Html.Action(MVC.MetaTag.ActionNames.GetCompanyName, MVC.MetaTag.Name) خوش آمدید</h3>
+            </div>
+            <div class="panel-body">
+                <div class="well">
+                     
+                    <div class="page-header">
+                        <h3>جدول زمانی و نکات مهم</h3>                        
+                    </div>
+
+                    <div class="center">
+                        @Html.ActionLink("تایید و ادامه - گام بعدی",MVC.Valentear.ActionNames.Register, MVC.Valentear.Name, null, new { @class="btn btn-default"})
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

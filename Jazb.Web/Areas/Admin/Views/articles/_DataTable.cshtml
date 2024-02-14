@@ -1,0 +1,66 @@
+﻿@model IList<Jazb.Model.AdminModel.ArticleDataTableViewModel>
+@{
+    int currentPage = ViewBag.PAGE + 1;
+    int count = ViewBag.COUNT;
+    int max = ViewBag.TotalRecords / count;
+    int firstPage = ((currentPage - 2) <= 0) ? 0 : currentPage - 3;
+    int lastPage = ((currentPage + 2) >= max) ? max : currentPage + 3;
+}
+
+@Html.Action(MVC.Admin.articles.ActionNames.NavBar, MVC.Admin.articles.Name,new { aid = ViewBag.AzmoonId })
+<div id="article-table">
+
+    <table class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th class="text-center" style="width:50px;">تصویر</th>
+                <th class="text-center" style="width:50px;">تاریخ</th>
+                <th class="text-center">عنوان</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var article in Model)
+            {
+                <tr>
+                    <td>
+                        @if (article.Picture != null)
+                        {
+
+                            string imageBase64PossiblePicture = Convert.ToBase64String(article.Picture);
+                            var imageSrcPossiblePicture = string.Format("data:image/gif;base64,{0}", imageBase64PossiblePicture);
+                            <img id="ID_PossiblePicture" class="img-thumbnail img-rounded img-responsive" src="@imageSrcPossiblePicture" width="100%" />
+                        }
+                        else
+                        {
+                            <i class="fa fa-arrow-left"></i>
+                        }
+                    </td>
+                    <td>@Html.ConvertToPersianDateTime(article.StartDate)</td>
+                    <td><strong>@article.Title</strong></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <div class="pagination pagination-centered">
+        <ul>
+            <li>@Ajax.ActionLink("ابتدا", MVC.Admin.articles.ActionNames.DataTable, MVC.Admin.articles.Name, new { azmoonid=ViewBag.AzmoonId, page = 0, term = ViewBag.TERM, count = ViewBag.COUNT, searchBy = ViewBag.SEARCHBY }, new AjaxOptions { HttpMethod = "Post", InsertionMode = InsertionMode.Replace, OnBegin = "showLoading", UpdateTargetId = "article-table", OnSuccess = "loadAjaxComponents", OnComplete = "hideLoading" }, null)</li>
+            @for (int i = firstPage; i <= lastPage; i++)
+            {
+                if (i + 1 == currentPage)
+                {
+                    <li class="active"><a href="#">@Html.ConvertToPersianString(i + 1)</a></li>
+                }
+                else
+                {
+                    <li>
+                        @Ajax.ActionLink(Html.ConvertToPersianString(i + 1).ToString(), MVC.Admin.articles.ActionNames.DataTable, MVC.Admin.articles.Name, new { azmoonid = ViewBag.AzmoonId, page = i, term = ViewBag.TERM, count = ViewBag.COUNT, searchBy = ViewBag.SEARCHBY }, new AjaxOptions { HttpMethod = "Post", InsertionMode = InsertionMode.Replace, OnBegin = "showLoading", UpdateTargetId = "article-table", OnSuccess = "loadAjaxComponents", OnComplete = "hideLoading" }, null)
+                </li>
+                }
+            }
+            <li>@Ajax.ActionLink("انتها", MVC.Admin.articles.ActionNames.DataTable, MVC.Admin.articles.Name, new { azmoonid = ViewBag.AzmoonId, page = max, term = ViewBag.TERM, count = ViewBag.COUNT, searchBy = ViewBag.SEARCHBY }, new AjaxOptions { HttpMethod = "Post", InsertionMode = InsertionMode.Replace, OnBegin = "showLoading", UpdateTargetId = "article-table", OnSuccess = "loadAjaxComponents", OnComplete = "hideLoading" }, null)</li>
+        </ul>
+    </div>
+
+
+</div>

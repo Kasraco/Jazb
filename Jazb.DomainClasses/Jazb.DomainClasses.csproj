@@ -1,0 +1,149 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{53E93FF6-8ACA-40A1-9486-3AC018AE8FA0}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Jazb.DomainClasses</RootNamespace>
+    <AssemblyName>Jazb.DomainClasses</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework">
+      <HintPath>..\packages\EntityFramework.6.1.2\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer">
+      <HintPath>..\packages\EntityFramework.6.1.2\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="log4net, Version=2.0.7.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
+      <HintPath>..\packages\log4net.2.0.7\lib\net45-full\log4net.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.Helpers.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.3\lib\net45\System.Web.Mvc.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.3\lib\net45\System.Web.Razor.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Entities\AcceptResult.cs" />
+    <Compile Include="Entities\AmountCard.cs" />
+    <Compile Include="Entities\AnonymousUser.cs" />
+    <Compile Include="Entities\article.cs" />
+    <Compile Include="Entities\AttachmentImageSanjesh.cs" />
+    <Compile Include="Entities\AutochthonType.cs" />
+    <Compile Include="Entities\Azmoon.cs" />
+    <Compile Include="Entities\AzmoonAnswerKey.cs" />
+    <Compile Include="Entities\AzmoonDegree.cs" />
+    <Compile Include="Entities\AzmoonDevotionType.cs" />
+    <Compile Include="Entities\AzmoonDevotionValentear.cs" />
+    <Compile Include="Entities\AzmooneducatedSkill.cs" />
+    <Compile Include="Entities\AzmoonJob.cs" />
+    <Compile Include="Entities\AzmoonPlace.cs" />
+    <Compile Include="Entities\AzmoonQoutasValentear.cs" />
+    <Compile Include="Entities\AzmoonQoutaType.cs" />
+    <Compile Include="Entities\AzmoonStatuse.cs" />
+    <Compile Include="Entities\AzmoonValentearResult.cs" />
+    <Compile Include="Entities\AzmoonValentearAnswer.cs" />
+    <Compile Include="Entities\category.cs" />
+    <Compile Include="Entities\ConscriptStatus.cs" />
+    <Compile Include="Entities\cooperationHistory.cs" />
+    <Compile Include="Entities\degree.cs" />
+    <Compile Include="Entities\DevotionType.cs" />
+    <Compile Include="Entities\educatedSkill.cs" />
+    <Compile Include="Entities\ErrorCode.cs" />
+    <Compile Include="Entities\Faith.cs" />
+    <Compile Include="Entities\ForgottenPassword.cs" />
+    <Compile Include="Entities\Gender.cs" />
+    <Compile Include="Entities\Job.cs" />
+    <Compile Include="Entities\marriageStatus.cs" />
+    <Compile Include="Entities\MassageList.cs" />
+    <Compile Include="Entities\Message.cs" />
+    <Compile Include="Entities\MessageAnsware.cs" />
+    <Compile Include="Entities\Option.cs" />
+    <Compile Include="Entities\Payment.cs" />
+    <Compile Include="Entities\Place.cs" />
+    <Compile Include="Entities\PlaneStatus.cs" />
+    <Compile Include="Entities\QoutaType.cs" />
+    <Compile Include="Entities\RecordState.cs" />
+    <Compile Include="Entities\Religion.cs" />
+    <Compile Include="Entities\Role.cs" />
+    <Compile Include="Entities\User.cs" />
+    <Compile Include="Entities\UserMetaData.cs" />
+    <Compile Include="Entities\Valentear.cs" />
+    <Compile Include="EntityConfiguration\AnonymousUserConfig.cs" />
+    <Compile Include="EntityConfiguration\ForgottenPasswordConfig.cs" />
+    <Compile Include="EntityConfiguration\MessageAnswareConfig.cs" />
+    <Compile Include="EntityConfiguration\MessageConfig.cs" />
+    <Compile Include="EntityConfiguration\OptionConfig.cs" />
+    <Compile Include="EntityConfiguration\RoleConfig.cs" />
+    <Compile Include="EntityConfiguration\UserConfig.cs" />
+    <Compile Include="EntityConfiguration\UserMetaDataConfig.cs" />
+    <Compile Include="Entities\FAQ.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

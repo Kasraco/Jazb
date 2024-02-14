@@ -1,0 +1,122 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{DDDD9B26-28C0-4C06-85A0-8CE350F68920}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Jazb.Servicelayer</RootNamespace>
+    <AssemblyName>Jazb.Servicelayer</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\EntityFramework.6.1.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.BulkInsert, Version=6.0.2.8, Culture=neutral, PublicKeyToken=630a17433349cb76, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\EntityFramework.BulkInsert-ef6.6.0.2.8\lib\Net45\EntityFramework.BulkInsert.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.MappingAPI, Version=6.1.0.9, Culture=neutral, PublicKeyToken=7ee2e825d201459e, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\EntityFramework.MappingAPI.6.1.0.9\lib\net45\EntityFramework.MappingAPI.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\EntityFramework.6.1.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.Linq" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="EFServices\AmountCardService.cs" />
+    <Compile Include="EFServices\AnounymousUserService.cs" />
+    <Compile Include="EFServices\ArticleService.cs" />
+    <Compile Include="EFServices\AzmoonJobService.cs" />
+    <Compile Include="EFServices\AzmoonService.cs" />
+    <Compile Include="EFServices\Enums\Enums.cs" />
+    <Compile Include="EFServices\ForgottenPasswordService.cs" />
+    <Compile Include="EFServices\JobCityService.cs" />
+    <Compile Include="EFServices\MessageService.cs" />
+    <Compile Include="EFServices\OptionService.cs" />
+    <Compile Include="EFServices\ReportService.cs" />
+    <Compile Include="EFServices\RoleService.cs" />
+    <Compile Include="EFServices\UniqueKeyGenerator.cs" />
+    <Compile Include="EFServices\UserMetaDataService.cs" />
+    <Compile Include="EFServices\UserService.cs" />
+    <Compile Include="EFServices\ValentearService.cs" />
+    <Compile Include="Interfaces\IAmountCardService.cs" />
+    <Compile Include="Interfaces\IAnonymousUser.cs" />
+    <Compile Include="Interfaces\IArticleService.cs" />
+    <Compile Include="Interfaces\IAzmoon.cs" />
+    <Compile Include="Interfaces\IAzmoonJobService.cs" />
+    <Compile Include="Interfaces\IForgottenPasswordService.cs" />
+    <Compile Include="Interfaces\IJobCityService.cs" />
+    <Compile Include="Interfaces\IMessageService.cs" />
+    <Compile Include="Interfaces\IOptionService.cs" />
+    <Compile Include="Interfaces\IReportService.cs" />
+    <Compile Include="Interfaces\IRoleService.cs" />
+    <Compile Include="Interfaces\IUserMetaDataService.cs" />
+    <Compile Include="Interfaces\IUserService.cs" />
+    <Compile Include="Interfaces\IValentearService.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Jazb.Datalayer\Jazb.Datalayer.csproj">
+      <Project>{1ed6ba6f-6106-4b74-b5db-d1b94ab55fdb}</Project>
+      <Name>Jazb.Datalayer</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Jazb.DomainClasses\Jazb.DomainClasses.csproj">
+      <Project>{53e93ff6-8aca-40a1-9486-3ac018ae8fa0}</Project>
+      <Name>Jazb.DomainClasses</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Jazb.Model\Jazb.Model.csproj">
+      <Project>{b324b857-755c-47a8-a282-5e7f4ea707a0}</Project>
+      <Name>Jazb.Model</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Jazb.Utilities\Jazb.Utilities.csproj">
+      <Project>{567f8589-682d-49eb-9f57-2993a9b5688d}</Project>
+      <Name>Jazb.Utilities</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

@@ -1,0 +1,43 @@
+﻿@model Jazb.Model.ValentearModel.ViewCardModel
+@{
+    ViewBag.Title = "ViewCard";
+    Layout = "~/Views/Shared/_LayoutAzmoon.cshtml";
+}
+
+
+  <div class="panel panel-primary">
+            <div class="panel-heading">
+                <h3 class="panel-title">دریافت کارت ورود به جلسه الکترونیکی @Html.Action(MVC.MetaTag.ActionNames.GetCompanyName, MVC.MetaTag.Name) </h3>
+            </div>
+            <div class="panel-body">
+                <div class="well">
+                     
+                    <div class="page-header">
+                        <h3>دریافت کارت ورود به جلسه</h3>
+                    </div>
+                    @using (Html.BeginForm(null, null, FormMethod.Post, new { Id = "wizForm", enctype = "multipart/form-data", @class = "form-horizontal" }))
+                    {
+
+                        @Html.AntiForgeryToken()
+                        @Html.HiddenFor(x => x.AzmoonId);
+                        <h3>داوطلب گرامی ! <b style="color:red;">کد رهگیری پرداخت</b> بر روی <b style="color:red;">کارت ورود به جلسه</b> درج شده است</h3>
+                        <h3>درصورتی که <b style="color:red;">کارت ورود به جلسه</b> شما فاقد <b style="color:red;">کد رهگیری پرداخت</b> باشد ،لطفا نسبت به دریافت دوباره کارت ورود به جلسه اقدام کنید</h3>
+                        
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.NationalCode, new { @class = "control-label col-md-2" })
+                            <div class="col-md-5">
+                                @Html.TextBoxFor(model => model.NationalCode, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.NationalCode, null, new { @class = "has-error help-block" })
+                            </div>
+                        </div>
+    
+                        <input type="submit" value="جستجو" title="جستجو" id="btn_Save" class="btn btn-success " />
+    
+}
+
+                </div>
+            </div>
+        </div>
+
+

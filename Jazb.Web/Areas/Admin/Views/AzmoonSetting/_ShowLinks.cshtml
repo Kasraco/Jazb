@@ -1,0 +1,91 @@
+﻿@model Jazb.Model.AdminModel.ManageAzmoon.ButtonLinksViewModel
+
+<div class="row-fluid">
+    <div class="span12">
+        <div class="alert alert-info">
+            <div id="ButtonLinks">
+                @if (!Model.Active)
+                {
+                    @Ajax.ActionLink("فعال کردن آزمون", MVC.Admin.AzmoonSetting.ActionNames.ActiveAzmoonLink, new { AID = Model.AzmoonId }, new AjaxOptions { HttpMethod = "Post", InsertionMode = InsertionMode.Replace, OnBegin = "showLoading", UpdateTargetId = "ButtonLinks", OnSuccess = "loadAjaxComponents", OnComplete = "hideLoading" }, new { @Class = "btn btn-success" })
+                }
+                else
+                {
+                    @Ajax.ActionLink("غیر فعال کردن آزمون", MVC.Admin.AzmoonSetting.ActionNames.DontActiveAzmoonLink, new { AID = Model.AzmoonId }, new AjaxOptions { HttpMethod = "Post", InsertionMode = InsertionMode.Replace, OnBegin = "showLoading", UpdateTargetId = "ButtonLinks", OnSuccess = "loadAjaxComponents", OnComplete = "hideLoading" }, new { @Class = "btn btn-warning" })
+                }
+
+                @if (Model.ShowEveryOneSee)
+                {
+                    @Ajax.ActionLink("همه میتوانند ثبت نام کنند", MVC.Admin.AzmoonSetting.ActionNames.ShowAzmoonForUser, new { AID = Model.AzmoonId }, new AjaxOptions { HttpMethod = "Post", InsertionMode = InsertionMode.Replace, OnBegin = "showLoading", UpdateTargetId = "ButtonLinks", OnSuccess = "loadAjaxComponents", OnComplete = "hideLoading" }, new { @Class = "btn btn-warning" })
+                }
+                else
+                {
+                    @Ajax.ActionLink("ثبت نام مختص کاربران باشد", MVC.Admin.AzmoonSetting.ActionNames.ShowAzmoonForEveryOne, new { AID = Model.AzmoonId }, new AjaxOptions { HttpMethod = "Post", InsertionMode = InsertionMode.Replace, OnBegin = "showLoading", UpdateTargetId = "ButtonLinks", OnSuccess = "loadAjaxComponents", OnComplete = "hideLoading" }, new { @Class = "btn btn-success" })
+                }
+
+                @*@if (!Model.ShowAzmoon)
+                    {
+                        @Ajax.ActionLink("فعال کردن آزمون", MVC.Admin.AzmoonSetting.ActionNames.ActiveAzmoonLink, new { AID = Model.AzmoonId }, new AjaxOptions { HttpMethod = "Post", InsertionMode = InsertionMode.Replace, OnBegin = "showLoading", UpdateTargetId = "ButtonLinks", OnSuccess = "loadAjaxComponents", OnComplete = "hideLoading" }, new { @Class = "btn btn-success" })
+                    }
+                    else
+                    {
+                        @Ajax.ActionLink("غیر فعال کردن آزمون", MVC.Admin.AzmoonSetting.ActionNames.DontActiveAzmoonLink, new { AID = Model.AzmoonId }, new AjaxOptions { HttpMethod = "Post", InsertionMode = InsertionMode.Replace, OnBegin = "showLoading", UpdateTargetId = "ButtonLinks", OnSuccess = "loadAjaxComponents", OnComplete = "hideLoading" }, new { @Class = "btn btn-warning" })
+                    }*@
+
+                @if (!Model.ShowDownloadAgahi)
+                {
+                    @Ajax.ActionLink("لینک دانلود آگهی فعال شود", MVC.Admin.AzmoonSetting.ActionNames.ShowAgahiLink, new { AID = Model.AzmoonId }, new AjaxOptions { HttpMethod = "Post", InsertionMode = InsertionMode.Replace, OnBegin = "showLoading", UpdateTargetId = "ButtonLinks", OnSuccess = "loadAjaxComponents", OnComplete = "hideLoading" }, new { @Class = "btn btn-success" })
+                }
+                else
+                {
+                    @Ajax.ActionLink("غیرفعال کردن لینک دانلود آگهی", MVC.Admin.AzmoonSetting.ActionNames.DontShowAgahiLink, new { AID = Model.AzmoonId }, new AjaxOptions { HttpMethod = "Post", InsertionMode = InsertionMode.Replace, OnBegin = "showLoading", UpdateTargetId = "ButtonLinks", OnSuccess = "loadAjaxComponents", OnComplete = "hideLoading" }, new { @Class = "btn btn-warning" })
+                }
+
+                @if (!Model.ShowRegisters)
+                {
+                    @Ajax.ActionLink("لینک ثبت نام قعال شود", MVC.Admin.AzmoonSetting.ActionNames.ShowRegisterLink, new { AID = Model.AzmoonId }, new AjaxOptions { HttpMethod = "Post", InsertionMode = InsertionMode.Replace, OnBegin = "showLoading", UpdateTargetId = "ButtonLinks", OnSuccess = "loadAjaxComponents", OnComplete = "hideLoading" }, new { @Class = "btn btn-success" })
+                }
+                else
+                {
+                    @Ajax.ActionLink("غیرفعال کردن لینک ثبت نام", MVC.Admin.AzmoonSetting.ActionNames.DontShowRegisterLink, new { AID = Model.AzmoonId }, new AjaxOptions { HttpMethod = "Post", InsertionMode = InsertionMode.Replace, OnBegin = "showLoading", UpdateTargetId = "ButtonLinks", OnSuccess = "loadAjaxComponents", OnComplete = "hideLoading" }, new { @Class = "btn btn-warning" })
+                }
+
+                @if (!Model.ShowPrintCard)
+                {
+                    @Ajax.ActionLink("لینک دریافت کارت ورود به جلسه قعال شود", MVC.Admin.AzmoonSetting.ActionNames.ShowViewCardLink, new { AID = Model.AzmoonId }, new AjaxOptions { HttpMethod = "Post", InsertionMode = InsertionMode.Replace, OnBegin = "showLoading", UpdateTargetId = "ButtonLinks", OnSuccess = "loadAjaxComponents", OnComplete = "hideLoading" }, new { @Class = "btn btn-success" })
+                }
+                else
+                {
+                    @Ajax.ActionLink("غیرفعال کردن لینک دریافت کارت ورود به جلسه", MVC.Admin.AzmoonSetting.ActionNames.DontShowViewCardLink, new { AID = Model.AzmoonId }, new AjaxOptions { HttpMethod = "Post", InsertionMode = InsertionMode.Replace, OnBegin = "showLoading", UpdateTargetId = "ButtonLinks", OnSuccess = "loadAjaxComponents", OnComplete = "hideLoading" }, new { @Class = "btn btn-warning" })
+                }
+
+                @if (!Model.ShowCanPrintResult)
+                {
+                    @Ajax.ActionLink("لینک دریافت نتیجه آزمون قعال شود", MVC.Admin.AzmoonSetting.ActionNames.ShowViewResultLink, new { AID = Model.AzmoonId }, new AjaxOptions { HttpMethod = "Post", InsertionMode = InsertionMode.Replace, OnBegin = "showLoading", UpdateTargetId = "ButtonLinks", OnSuccess = "loadAjaxComponents", OnComplete = "hideLoading" }, new { @Class = "btn btn-success" })
+                }
+                else
+                {
+                    @Ajax.ActionLink("غیرفعال کردن لینک دریافت نتیجه آزمون", MVC.Admin.AzmoonSetting.ActionNames.DontShowViewResultLink, new { AID = Model.AzmoonId }, new AjaxOptions { HttpMethod = "Post", InsertionMode = InsertionMode.Replace, OnBegin = "showLoading", UpdateTargetId = "ButtonLinks", OnSuccess = "loadAjaxComponents", OnComplete = "hideLoading" }, new { @Class = "btn btn-warning" })
+                }
+
+
+
+
+                @if (!Model.ShowCanEditResult)
+                {
+                    @Ajax.ActionLink("لینک ویرایش ثبت نام فعال شود", MVC.Admin.AzmoonSetting.ActionNames.ShowViewEditLink, new { AID = Model.AzmoonId }, new AjaxOptions { HttpMethod = "Post", InsertionMode = InsertionMode.Replace, OnBegin = "showLoading", UpdateTargetId = "ButtonLinks", OnSuccess = "loadAjaxComponents", OnComplete = "hideLoading" }, new { @Class = "btn btn-success" })
+                }
+                else
+                {
+                    @Ajax.ActionLink("غیرفعال کردن لینک ویرایش ثبت نام", MVC.Admin.AzmoonSetting.ActionNames.DontShowViewEditLink, new { AID = Model.AzmoonId }, new AjaxOptions { HttpMethod = "Post", InsertionMode = InsertionMode.Replace, OnBegin = "showLoading", UpdateTargetId = "ButtonLinks", OnSuccess = "loadAjaxComponents", OnComplete = "hideLoading" }, new { @Class = "btn btn-warning" })
+                }
+
+
+
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>

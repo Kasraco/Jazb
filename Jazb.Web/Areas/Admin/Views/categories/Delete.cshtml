@@ -1,0 +1,52 @@
+@model Jazb.Models.category
+
+@{
+    ViewBag.Title = "Delete";
+}
+@section ContentPanel{
+
+<div class="page-header">
+			  <h1>Delete
+			      <small>category</small>			  
+			  </h1>
+			</div>
+
+<div class="container" id="divpanle">
+
+    <div class="row">
+       <div class="col-xs-6 col-sm-6 col-md-6">
+
+<h3>are you sure for delete this item?</h3>
+<div class="panel panel-danger">
+   <div class="panel-heading">
+      <h3 class="panel-title">category</h3>
+   </div> 
+   <div class="panel-body">
+    <div class="form-group">
+       @Html.LabelFor(model => model.Name, new { @class = "control-label" })
+       <div class="form-control">@Model.Name</div>
+	</div>
+    <div class="form-group">
+       @Html.LabelFor(model => model.Description, new { @class = "control-label" })
+       <div class="form-control">@Model.Description</div>
+	</div>
+    <div class="form-group">
+       @Html.LabelFor(model => model.Order, new { @class = "control-label" })
+       <div class="form-control">@Model.Order</div>
+	</div>
+    <div class="form-group">
+       @Html.LabelFor(model => model.Articles, new { @class = "control-label" })
+       <div class="form-control">@(Model.Articles == null ? "None" : Model.Articles.Count.ToString())</div>
+	</div>
+</div>
+</div>
+@using (Html.BeginForm()) {
+    <p>
+        <input type="submit" value="Delete"  class="btn btn-danger" /> |
+        @Html.ActionLink("Back To List", "Index", null, new { @class = "btn btn-default" })
+    </p>
+}
+</div>
+</div>
+</div>
+}

@@ -1,0 +1,188 @@
+﻿@model IEnumerable<Jazb.Model.AdminModel.AzmoonDataTableModel>
+@{
+    int currentPage = ViewBag.PAGE + 1;
+    int count = ViewBag.COUNT;
+    int max = ViewBag.TotalRecords / count;
+    int firstPage = ((currentPage - 2) <= 0) ? 0 : currentPage - 3;
+    int lastPage = ((currentPage + 2) >= max) ? max : currentPage + 3;
+}
+
+@Html.Action(MVC.Admin.Azmoons.ActionNames.NavBar, MVC.Admin.Azmoons.Name)
+<div id="user-table">
+   
+    <table>
+
+
+        @foreach (var azmoon in Model)
+        {
+            <tr>
+                <td>
+                    <div class="bs-callout bs-callout-danger" style="display: table-cell">
+                        <table style="border: 0px solid none;">
+                            <tr>
+                                <td style="border: 0px solid none; padding-left: 20px; width:700px;">
+                                    <strong>شماره آزمون : @Html.ConvertToPersianString(azmoon.AzmoonId)</strong>
+                                    <h4>@azmoon.AzmoonTitle</h4>
+                                    <p>@azmoon.AzmoonDescription</p>
+                                    <strong>مهلت ثبت نام</strong>
+                                    <p>از @Html.ConvertToPersianDateTime(azmoon.StartDate) تا @Html.ConvertToPersianDateTime(azmoon.EndDate) </p>
+
+
+                                </td>
+                                <td style="border: 0px solid none; width: 250px;">
+                                    <dl class="dl-horizontal">
+                                        <dt>تعداد داوطلبان</dt>
+                                        <dd>@Html.ConvertToPersianString(azmoon.ValentearCount) نفر</dd>
+                                        <dt>تعداد داوطلبان رد شده</dt>
+                                        <dd>@Html.ConvertToPersianString(azmoon.RejectCount) نفر</dd>
+                                        <dt>تعداد داوطلبان تایید شده</dt>
+                                        <dd>@Html.ConvertToPersianString(azmoon.AcceptCount) نفر</dd>
+                                        <dt>تعداد داوطلبان قبول شده</dt>
+                                        <dd>@Html.ConvertToPersianString(azmoon.WinCount) نفر</dd>
+                                    </dl>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">
+                                    <div class="pull-left">
+                                        @Ajax.ButtonDialog("ویرایش آزمون", Url.Action(MVC.Admin.Azmoons.ActionNames.Edit, MVC.Admin.Azmoons.Name, new { id = azmoon.AzmoonId }), "GET", null, "dialog", new DialogOptions { Height = "700", Width = "1000", Title = "وبرایش آزمون ", IsModal = "true", ShowEffect = "size", ShowDir = "down", HideEffect = "fold", HideDir = "right" }, "btn btn-info")
+                                       
+                                        <div class="btn-group dropup">
+                                            <button type="button" class="btn btn-success">تنظیمات</button>
+                                            <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                                                <span class="caret"></span>
+                                            </button>
+                                            <ul class="dropdown-menu" role="menu">
+                                                <li>@Ajax.ActionLink("مدیریت آزمون", MVC.Admin.AzmoonSetting.ActionNames.Index, MVC.Admin.AzmoonSetting.Name, new { AzmoonId = azmoon.AzmoonId }, new AjaxOptions { HttpMethod = "GET", InsertionMode = InsertionMode.Replace, UpdateTargetId = "main-content", OnSuccess = "loadAjaxComponents", OnComplete = "hideLoading", OnBegin = "showLoading" })</li>
+                                                <li>@Ajax.ActionLink("تولید کارت خرید", MVC.Admin.ManageAmountCard.ActionNames.AddAmondCard, MVC.Admin.ManageAmountCard.Name, new { AzmoonId = azmoon.AzmoonId }, new AjaxOptions { HttpMethod = "GET", InsertionMode = InsertionMode.Replace, UpdateTargetId = "logOnModal", LoadingElementDuration = 0, LoadingElementId = "loadingMessage", OnSuccess = "LogOnForm.onSuccess" })</li>
+                                                <li>@Ajax.ActionLink("تنظیم کارت آزمون", MVC.Admin.Azmoons.ActionNames.AzmoonCardSetting, MVC.Admin.Azmoons.Name, new { id = azmoon.AzmoonId }, new AjaxOptions { HttpMethod = "Get", InsertionMode = InsertionMode.Replace, UpdateTargetId = "logOnModal", LoadingElementDuration = 0, LoadingElementId = "loadingMessage", OnSuccess = "LogOnForm.onSuccess" }, new { tabindex = "-1" })</li>
+                                                <li>@Ajax.ActionLink("تنظیم شماره صندلی", MVC.Admin.AzmoonJob.ActionNames.SetChairNumber, MVC.Admin.AzmoonJob.Name, new { AzmoonId = azmoon.AzmoonId }, new AjaxOptions { HttpMethod = "Get", InsertionMode = InsertionMode.Replace, UpdateTargetId = "logOnModalBig", LoadingElementDuration = 0, LoadingElementId = "loadingMessage", OnSuccess = "LogOnBigForm.onSuccess" }, new { tabindex = "-1" })</li>                                          
+                                             </ul>
+                                        </div>
+
+                                        <div class="btn-group dropup">
+                                            <button type="button" class="btn btn-success">پرسش و پاسخ ها</button>
+                                            <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                                                <span class="caret"></span>
+                                            </button>
+                                            <ul class="dropdown-menu" role="menu">
+                                                <li>@Ajax.ActionLink("سئوالات داوطبلان", MVC.Admin.ContactUs.ActionNames.GetByAzmoonId, MVC.Admin.ContactUs.Name, new { AzmoonId = azmoon.AzmoonId }, new AjaxOptions { HttpMethod = "GET", InsertionMode = InsertionMode.Replace, UpdateTargetId = "main-content", OnSuccess = "loadAjaxComponents", OnComplete = "hideLoading", OnBegin = "showLoading" })</li>
+                                                <li>@Ajax.ActionLink("پاسخ داده شده", MVC.Admin.ContactUs.ActionNames.GetAnswerByAzmoonId, MVC.Admin.ContactUs.Name, new { AzmoonId = azmoon.AzmoonId }, new AjaxOptions { HttpMethod = "GET", InsertionMode = InsertionMode.Replace, UpdateTargetId = "main-content", OnSuccess = "loadAjaxComponents", OnComplete = "hideLoading", OnBegin = "showLoading" })</li>
+                                                <li>@Ajax.ActionLink("سئوالات بدون پاسخ", MVC.Admin.ContactUs.ActionNames.GetNoneAnswerByAzmoonId, MVC.Admin.ContactUs.Name, new { AzmoonId = azmoon.AzmoonId }, new AjaxOptions { HttpMethod = "GET", InsertionMode = InsertionMode.Replace, UpdateTargetId = "main-content", OnSuccess = "loadAjaxComponents", OnComplete = "hideLoading", OnBegin = "showLoading" })</li>
+
+                                            </ul>
+                                        </div>
+
+                                        <div class="btn-group dropup">
+                                            <button type="button" class="btn btn-warning">گزارش ها</button>
+                                            <button type="button" class="btn btn-warning dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                                                <span class="caret"></span>
+                                            </button>
+                                            <ul class="dropdown-menu multi-level" role="menu">
+                                                <li>@Ajax.ActionLink("لیست داوطلبان", MVC.Admin.Valentear.ActionNames.GetDataTableByAzmoon, MVC.Admin.Valentear.Name, new { AzmoonId = azmoon.AzmoonId }, new AjaxOptions { HttpMethod = "GET", InsertionMode = InsertionMode.Replace, UpdateTargetId = "main-content", OnSuccess = "loadAjaxComponents", OnComplete = "hideLoading", OnBegin = "showLoading" })</li>
+                                                <li class="dropdown-submenu">
+                                                    <a tabindex="-1" href="#">ذخیره در اکسل</a>
+                                                    <ul class="dropdown-menu">
+                                                        <li>
+                                                            @*<button id="GetFullValentearExport" title="دریافت لیست داوطلبان" value="دریافت لیست داوطلبان" onclick="ExportFullValentear(@azmoon.AzmoonId)">دریافت لیست داوطلبان</button>*@
+                                                            @Html.ActionLink("دریافت لیست داوطلبان", MVC.Admin.Valeantearreports.ActionNames.ValentearFullExport, MVC.Admin.Valeantearreports.Name, new { AzmoonId = azmoon.AzmoonId }, new { @class = "" })
+                                                            @Html.ActionLink("دریافت لیست داوطلبان با نمره", MVC.Admin.Valeantearreports.ActionNames.ValentearFullWithNumberExport, MVC.Admin.Valeantearreports.Name, new { AzmoonId = azmoon.AzmoonId }, new { @class = "" })
+                                                            @Html.ActionLink("دریافت داوطلبان تایید شده برای پاسخنامه", MVC.Admin.Valeantearreports.ActionNames.SavePicturesValentera, MVC.Admin.Valeantearreports.Name, new { AzmoonId = azmoon.AzmoonId }, new { @class = "" })
+
+                                                        </li>
+                                                    </ul>
+                                                </li>
+                                                <li class="dropdown-submenu pull-right">
+                                                    <a tabindex="-1" href="#">چاپ گزارش</a>
+                                                    <ul class="dropdown-menu">
+                                                        <li>@Html.ActionLink("لیست ایثارگران", MVC.Admin.Valeantearreports.ActionNames.GetAllDevotion, MVC.Admin.Valeantearreports.Name, new { id = azmoon.AzmoonId }, new { @class = "" })</li>
+                                                        <li>@Html.ActionLink("لیست ایثارگران به تفکیک جنسیت", MVC.Admin.Valeantearreports.ActionNames.GetAllDevotionByGender, MVC.Admin.Valeantearreports.Name, new { id = azmoon.AzmoonId }, new { @class = "" })</li>
+                                                        <li>@Html.ActionLink("لیست داوطلبان طبق آگهی", MVC.Admin.Valeantearreports.ActionNames.GetAllValentearGroupBy, MVC.Admin.Valeantearreports.Name, new { id = azmoon.AzmoonId }, new { @class = "" })</li>
+                                                        <li>@Html.ActionLink("داوطلبان  به تفکیک جنسیت", MVC.Admin.Valeantearreports.ActionNames.GetAllValentearGroupByGender, MVC.Admin.Valeantearreports.Name, new { id = azmoon.AzmoonId }, new { @class = "" })</li>
+                                                       
+
+                                                        @*<li>@Ajax.ActionLink("داوطلبان  به تفکیک جنسین", MVC.Admin.Valentear.ActionNames.ReportValentearFillterGendederByAgahi, MVC.Admin.Valentear.Name, new { AzmoonId = azmoon.AzmoonId }, new AjaxOptions { HttpMethod = "GET", InsertionMode = InsertionMode.Replace, UpdateTargetId = "main-content", OnSuccess = "loadAjaxComponents", OnComplete = "hideLoading", OnBegin = "showLoading" })</li>*@
+                                                        <li>@Ajax.ActionLink("آمار کلی", MVC.Admin.Valentear.ActionNames.ReportValentear, MVC.Admin.Valentear.Name, new { AzmoonId = azmoon.AzmoonId }, new AjaxOptions { HttpMethod = "GET", InsertionMode = InsertionMode.Replace, UpdateTargetId = "main-content", OnSuccess = "loadAjaxComponents", OnComplete = "hideLoading", OnBegin = "showLoading" })</li>
+                                                        <li>@Ajax.ActionLink("به تفکیک شهر و رشته", MVC.Admin.Valentear.ActionNames.ReportSepratJobCity, MVC.Admin.Valentear.Name, new { AzmoonId = azmoon.AzmoonId }, new AjaxOptions { HttpMethod = "GET", InsertionMode = InsertionMode.Replace, UpdateTargetId = "main-content", OnSuccess = "loadAjaxComponents", OnComplete = "hideLoading", OnBegin = "showLoading" })</li>
+                                                        <li>@Ajax.ActionLink("آمار بر طبق آگهی", MVC.Admin.Valentear.ActionNames.ReportSepratJobCitySortByAghi, MVC.Admin.Valentear.Name, new { AzmoonId = azmoon.AzmoonId }, new AjaxOptions { HttpMethod = "GET", InsertionMode = InsertionMode.Replace, UpdateTargetId = "main-content", OnSuccess = "loadAjaxComponents", OnComplete = "hideLoading", OnBegin = "showLoading" })</li>
+                                                        <li>@Html.ActionLink("کارت ورود به جلسه", MVC.Admin.Valeantearreports.ActionNames.GetAllCardValentearView, MVC.Admin.Valeantearreports.Name, new { id = azmoon.AzmoonId }, new { @class = "" })</li>
+                                                        <li>@Html.ActionLink("کارت صندلی", MVC.Admin.Valeantearreports.ActionNames.GetAllChairNumberValentear, MVC.Admin.Valeantearreports.Name, new { id = azmoon.AzmoonId }, new { @class = "" })</li>
+                                                        <li>@Html.ActionLink("چاپ پاسخنامه", MVC.Admin.Valeantearreports.ActionNames.GetAllPasokhnamehValentearView, MVC.Admin.Valeantearreports.Name, new { id = azmoon.AzmoonId }, new { @class = "" })</li>
+                                                        <li>@Html.ActionLink("چاپ نتایج", MVC.Admin.Valeantearreports.ActionNames.ValentearAnswerFinalExport, MVC.Admin.Valeantearreports.Name, new { AzmoonId = azmoon.AzmoonId, Grade=4 }, new { @class = "" })</li>
+                                                      
+
+                                                    </ul>
+                                                </li>
+
+                                                
+                                                
+                                            </ul>
+                                        </div>
+
+  <div class="btn-group dropup">
+                                            <button type="button" class="btn btn-default">عملیات</button>
+                                            <button type="button" class="btn btn-warning dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                                                <span class="caret"></span>
+                                            </button>
+                                            <ul class="dropdown-menu" role="menu">
+                                                <li>@Ajax.ActionLink("مدیریت خبرها", MVC.Admin.articles.ActionNames.Index, MVC.Admin.articles.Name, new { AzmoonId = azmoon.AzmoonId }, new AjaxOptions { HttpMethod = "GET", InsertionMode = InsertionMode.Replace, UpdateTargetId = "main-content", OnSuccess = "loadAjaxComponents", OnComplete = "hideLoading", OnBegin = "showLoading" })</li>
+                                                <li>@Ajax.ActionLink("محاسبه نمرات", MVC.Admin.Answer.ActionNames.CalculateAnswer, MVC.Admin.Answer.Name, new { AzmoonId = azmoon.AzmoonId }, new AjaxOptions { HttpMethod = "GET", InsertionMode = InsertionMode.Replace, UpdateTargetId = "main-content", OnSuccess = "loadAjaxComponents", OnComplete = "hideLoading", OnBegin = "showLoading" })</li>
+                                                <li>@Ajax.ActionLink("رتبه بندی داوطلبان با محاسبه 25 درصدی ایثارگران", MVC.Admin.Answer.ActionNames.SetScore, MVC.Admin.Answer.Name, new { AzmoonId = azmoon.AzmoonId, HasBistoPanjDarsad = true }, new AjaxOptions { HttpMethod = "GET", InsertionMode = InsertionMode.Replace, UpdateTargetId = "main-content", OnSuccess = "loadAjaxComponents", OnComplete = "hideLoading", OnBegin = "showLoading" })</li>
+                                                <li>@Ajax.ActionLink("رتبه بندی داوطلبان بدون محاسبه 25 درصدی ایثارگران", MVC.Admin.Answer.ActionNames.SetScore, MVC.Admin.Answer.Name, new { AzmoonId = azmoon.AzmoonId , HasBistoPanjDarsad=false }, new AjaxOptions { HttpMethod = "GET", InsertionMode = InsertionMode.Replace, UpdateTargetId = "main-content", OnSuccess = "loadAjaxComponents", OnComplete = "hideLoading", OnBegin = "showLoading" })</li>
+                                            </ul>
+                                        </div>
+
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </td>
+            </tr>
+        }
+    </table>
+
+    <div class="pagination pagination-centered">
+        <ul>
+            <li>@Ajax.ActionLink("ابتدا", MVC.Admin.Azmoons.ActionNames.DataTable, MVC.Admin.Azmoons.Name, new { page = 0, term = ViewBag.TERM, count = ViewBag.COUNT, searchBy = ViewBag.SEARCHBY }, new AjaxOptions { HttpMethod = "Post", InsertionMode = InsertionMode.Replace, OnBegin = "showLoading", UpdateTargetId = "user-table", OnSuccess = "loadAjaxComponents", OnComplete = "hideLoading" }, null)</li>
+            @for (int i = firstPage; i <= lastPage; i++)
+            {
+                if (i + 1 == currentPage)
+                {
+                    <li class="active"><a href="#">@Html.ConvertToPersianString(i + 1)</a></li>
+                }
+                else
+                {
+                    <li>
+                        @Ajax.ActionLink(Html.ConvertToPersianString(i + 1).ToString(), MVC.Admin.Azmoons.ActionNames.DataTable, MVC.Admin.Azmoons.Name, new { page = i, term = ViewBag.TERM, count = ViewBag.COUNT, searchBy = ViewBag.SEARCHBY }, new AjaxOptions { HttpMethod = "Post", InsertionMode = InsertionMode.Replace, OnBegin = "showLoading", UpdateTargetId = "user-table", OnSuccess = "loadAjaxComponents", OnComplete = "hideLoading" }, null)
+                </li>
+                }
+            }
+            <li>@Ajax.ActionLink("انتها", MVC.Admin.Azmoons.ActionNames.DataTable, MVC.Admin.Azmoons.Name, new { page = max, term = ViewBag.TERM, count = ViewBag.COUNT, searchBy = ViewBag.SEARCHBY }, new AjaxOptions { HttpMethod = "Post", InsertionMode = InsertionMode.Replace, OnBegin = "showLoading", UpdateTargetId = "user-table", OnSuccess = "loadAjaxComponents", OnComplete = "hideLoading" }, null)</li>
+        </ul>
+    </div>
+
+
+</div>
+@*<script>
+    function  ExportFullValentear(azmoonId)
+    {
+       
+        $.ajax(
+           {
+               type: 'POST',
+               url:'@Url.Action(MVC.Admin.Valeantearreports.ActionNames.ValentearFullExport,MVC.Admin.Valeantearreports.Name)',
+               data: '{ "AzmoonId": ' +azmoonId +'}',
+               contentType: 'application/json; charset=utf-8',
+               dataType: 'json',
+               success: function () {
+                   alert('jj');
+                 
+               }
+
+
+           });
+    }
+
+</script>*@
+@Html.Raw(TempData["Message"])

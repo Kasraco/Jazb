@@ -1,0 +1,230 @@
+﻿@model Jazb.Model.ValentearModel.CardAuthorizationExam
+@using Jazb.Web.Helpers
+@{
+    ViewBag.Title = "PrintCard";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style type="text/css">
+    body {
+        padding-top: 70px;
+    }
+</style>
+
+<div class="row-fluid">
+    <div class="span7">
+        <input type="button" class="btn btn-info" onclick="printDiv('printThis')" value="چاپ اطلاعات " />
+    </div>
+</div>
+<div id="printThis">
+    <table style="width: 100%;">
+        <tr>
+            <td></td>
+            <td style="border: solid 1px black; width: 600px;">
+
+
+                    <table class="table table-striped table-hover">
+                        <tr>
+                            <td>
+                                <img src="@Url.Content(Model.CompanyLogo)" width="100px" alt="@Model.CompanyName" />
+                            </td>
+                            <td class="text-center" colspan="2">
+                                <h3>بسمه تعالی</h3>
+                                <h4>@string.Format(Model.InputCardTitle,Model.DateExecuteAzmoon) </h4>
+                                <h5>@Model.CompanyName</h5>
+                            </td>
+                            <td>
+                                @if (Model.ValentearPicture != null)
+                                {
+
+                                    string imageBase64 = Convert.ToBase64String(Model.ValentearPicture);
+                                    var imageSrc = string.Format("data:image/gif;base64,{0}", imageBase64);
+                                    <img id="ID_gavahi_do_tarh" src="@imageSrc" style="width:100px;" />
+                                }
+                                else
+                                {
+                                    <div class="col-md-12" style="width:100px; height:100px; border:solid 1px black;">
+                                        <h6>داوطلب گرامی شما تصویر خود را به صورت صحیح وارد نکرده اید</h6>
+                                    </div>
+                                }
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="text-right">
+                                <strong>شماره صندلی : </strong>
+                            </td>
+                            <td class="text-right" colspan="3">
+                                @Model.ChairCode
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                نام:
+                            </td>
+                            <td>@Model.FirstName</td>
+                            <td class="text-left">نام خانوادگی:</td>
+                            <td>@Model.LastName</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                نام پدر:
+                            </td>
+                            <td>@Model.FatherName</td>
+                            <td class="text-left">کدملی :</td>
+                            <td>@Model.NationalId</td>
+                        </tr>
+                        <tr>
+                            <td class="text-right">
+                                <strong>مقطع تحصیلی : </strong>
+                            </td>
+                            <td class="text-right" colspan="3">
+                                @Model.DegreeTitle
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                شغل مورد تقاضا :
+                            </td>
+                            <td>@Model.JobTitle</td>
+                            <td class=" text-left">شهرمورد تقاضا :</td>
+                            <td>@Model.PlaceTitle</td>
+                        </tr>
+                        <tr>
+                            <td colspan="4">
+                                <table style="border: none;">
+                                    <tr>
+                                        <td style="border: none;">
+                                            <b>وضعیت ایثارگری</b>
+                                            <ol>
+
+                                                @{
+                                                    foreach (var t in Model.SelectedDevotionTypes)
+                                                    {
+                                                        <li><b>@t.DevotionTypeTitle</b></li>
+                                                    }
+                                                }
+
+
+                                            </ol>
+                                        </td>
+                                        <td style="border: none;">
+                                            <b>سایر موارد</b>
+                                            <ol>
+                                                @{
+                                                    foreach (var t in Model.SelectedQoutaTypes)
+                                                    {
+                                                        <li><b>@t.QoutaTypeTitle</b></li>
+                                                    }
+                                                }
+
+
+                                            </ol>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+
+                        </tr>
+                        <tr>
+                            <td>
+                                زمان برگزاری آزمون:
+                            </td>
+                            <td colspan="3">
+                               @string.Format(Model.TimeExecuteAzmoon, Model.DateExecuteAzmoon)
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                محل برگزاری آزمون:
+                            </td>
+                            <td colspan="3">
+                               @string.Format("{0} - {1}", Model.LocationExecuteAzmoon, Model.AreaExecuteAzmoon)
+                            </td>
+                        </tr>
+                        
+
+                    </table>
+
+
+            </td>
+            <td></td>
+        </tr>
+    </table>
+
+    <div class="row">
+        <div class="col-md-12">
+            <hr />
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12" style="border: double 6px black;">
+            <h4 class="text-center center">@string.Format("راهنماي آزمون استخدامي مورخ {0} {1}",Model.DateExecuteAzmoon,Model.CompanyName)</h4>
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <b> تذکرات: </b>
+                            <ol>
+                                <li>آزمون @string.Format(Model.TimeExecuteAzmoon, Model.DateExecuteAzmoon) برگزار خواهد شد. درب سالن‌هاي آزمون 30 دقيقه قبل از شروع آزمون بسته مي‌شود، لذا رأس ساعت 8 صبح در محل حوزه حضور بهم رسانيد؛ در غير اين صورت از ورود به جلسه جلوگيري بعمل خواهد آمد.</li>
+                                <li>درب ورودی دانشگاه در روز آزمون به نشانی: @Model.CompanyAddress خواهد بود. لذا عبور و مرور صرفاً از این طریق ممکن می‌باشد. </li>
+                                <li>از به همراه آوردن هر گونه وسایل شخصی و الکترونیکی مانند کیف، تلفن همراه و .... خودداری شود.</li>
+                                <li>پس از دریافت کارت ورود به جلسه آزمون، در صورت وجود هر گونه مغایرت در مشخصات درج شده در کارت ورود به جلسه، صحیح آن را با خودکار در پشت کارت یادداشت و در روز آزمون به مسؤول جمع آوری کارتها تحویل نمایید تا مورد بررسی قرار گیرد.</li>
+                                <li>با توجه به اعلام زمان و مكان برگزاري آزمون در كارت ورود به جلسه، پيشنهاد مي‌نمايد روز قبل از آزمون محل را بطور كامل شناسایي نمایید</li>
+                                <li>در جلسه آزمون، 2 عدد مداد مشكي نرم پررنگ، يك عدد مداد پاك كن، يك عدد مداد تراش و يك عدد سنجاق ته گرد همراه داشته باشيد</li>
+                            </ol>
+</div>
+                </div>
+
+
+            @*<div class="breackPage"></div>*@
+            <div class="row">
+                <div class="col-md-12">
+
+
+                    <b>نكاتي در مورد آزمون : </b>
+                    <ol>
+                        <li>زمان پاسخگویي به 60 سؤال توانمندی عمومي 60 دقيقه و براي 60 سؤال توانمندی تخصصي 60 دقيقه مي‌باشد.</li>
+                        @*<li>سؤالات عمومی با ضریب نیم (0/5) و سؤالات تخصصی با ضریب سه (3) محاسبه خواهد شد. </li>*@
+                        @*<li>در سؤالات توانمندی عمومی، به ازاء هر چهار پاسخ غلط نیم (0/5) نمره منفی و در سؤالات توانمندی تخصصی، به ازاء هر چهار پاسخ غلط یک (1) نمره منفی محاسبه خواهد شد.</li>*@
+                        <li>در سؤالات توانمندی عمومی و در سؤالات توانمندی تخصصی، به ازاء هر سه پاسخ غلط یک (1) نمره منفی محاسبه خواهد شد.</li>
+                        <li>هر سؤال فقط يك پاسخ صحيح دارد. اگر براي يك سؤال، دو گزينه در محل پاسخ علامت‌گذاری شده باشد، هر چند یكي از آنها صحيح باشد، آن پاسخ به هر لحاظ غلط تلقي خواهد شد.</li>
+                        <li>
+                            .پس از اطمينان از صحيح بودن پاسخ، جواب را در پاسخنامه به شكل صحيح وارد كنيد. نحوه پركردن صحيح پاسخنامه به شكل ذيل مي‌باشد
+                            <img src="~/Images/Gozineh.jpg" />
+                        </li>
+                        <li> سؤالات آزمون توانمندی‌های عمومی شامل: زبان و ادبیات فارسی – دین و زندگی  – زیان انگلیسی عمومی</li>
+                        <li>سؤالات آزمون توانمندی تخصصی کتبی شامل: دروس تخصصی مرتبط بهورزی</li>
+                        <li>پاسخنامه را با مداد مشكي نرم پررنگ بطور كامل پر كنيد. از نوشتن هر گونه جمله يا كلمه يا علامت بر روي پاسخنامه به جز پر كردن خانه هاي پاسخنامه جداً خودداري نمایید.</li>
+                        <li>از درج علامت بر روي دفترچه سؤالات خودداري نمایید؛ زيرا منحصراً پاسخنامه ها تصحيح و ملاك عمل قرار خواهد گرفت.</li>
+                        <li>پس از ورود به جلسه آزمون، با توجه به شماره كارت ورود به جلسه، محل صندلي خود را پيدا كرده و بر روي صندلي خود استقرار يابيد و كارت ورود به جلسه را به وسيله سنجاق به سمت چپ سينه خود نصب کنید و شماره كارت خود را با شماره پاسخنامه و شماره صندلي خود مطابقت نمایید.</li>
+                        <li>كارت ورود به جلسه پس از تطبيق عكس با چهره شما توسط مسئول مربوطه جمع آوري مي‌گردد.</li>
+                        <li>عدم رعايت مقررات جلسه و عدم تحويل پاسخنامه و دفترچه سؤالات يا هرگونه دخل و تصرف در آن، ضمن دارا بودن پيگرد قانوني، موجب محروميت شما در آزمون خواهد شد.</li>
+                        <li>نتيجه آزمون متعاقباً بر روي سايت دانشگاه به آدرس @Model.SiteUrl  اعلام خواهد شد. </li>
+                    </ol>
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="text-center">
+                                <h5>با آرزوي موفقيت </h5>
+                                <h5>کارگروه آزمون @Model.CompanyName</h5>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+        </div>
+        @{
+            <script type="text/javascript">
+                function printDiv(divName) {
+                    var printContents = document.getElementById(divName).innerHTML;
+                    var originalContents = document.body.innerHTML;
+
+                    document.body.innerHTML = printContents;
+
+                    window.print();
+
+                    document.body.innerHTML = originalContents;
+                }
+            </script>
+        }

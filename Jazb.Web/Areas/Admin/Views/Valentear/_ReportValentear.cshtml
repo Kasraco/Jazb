@@ -1,0 +1,63 @@
+﻿@model IEnumerable<Jazb.Model.AdminModel.ValentearGroups>
+
+<div class="row-fluid">
+    <div class="span7">
+        <input type="button" class="btn btn-info" onclick="printDiv('printThis')" value="چاپ اطلاعات " />
+    </div>
+</div>
+<div id="printThis">
+    <h4>تعداد کل شرکت کنندگان <i class="text-danger">@Model.Sum(x => x.TotlaCount)</i> نفر </h4>
+    <h5>تعداد شرکت کنندگان مرد <i class="text-danger">@Model.Sum(x => x.CountMan)</i> نفر </h5>
+    <h5>تعداد شرکت کنندگان زن <i class="text-danger">@Model.Sum(x => x.CountWoman)</i> نفر </h5>
+    <table class="table table-striped table-hover table-bordered">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayName("عنوان رشته شغلی")
+                </th>
+                <th>
+                    @Html.DisplayName("تعداد مردها")
+                </th>
+                <th>
+                    @Html.DisplayName("تعداد خانم ها")
+                </th>
+                <th>
+                    @Html.DisplayName("جمع")
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.JobName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CountMan)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CountWoman)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TotlaCount)
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+@{
+    <script type="text/javascript">
+        function printDiv(divName) {
+            var printContents = document.getElementById(divName).innerHTML;
+            var originalContents = document.body.innerHTML;
+
+            document.body.innerHTML = printContents;
+
+            window.print();
+
+            document.body.innerHTML = originalContents;
+        }
+    </script>
+}

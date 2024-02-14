@@ -1,0 +1,50 @@
+﻿@model IEnumerable<Jazb.DomainClasses.Entities.FAQ>
+<div class="row-fluid">
+    <div class="span7">
+        <input type="button" class="btn btn-info" onclick="printDiv('printThis')" value="چاپ اطلاعات " />
+    </div>
+</div>
+<div id="printThis">
+<div id="label-table">
+    <table style="width: 100%;" class="table Jazb-table">
+        <thead>
+            <tr>
+                <td>سئوال / مشکل</td>                
+                <td>ارسال کننده</td>
+                <td>کد ملی</td>                
+                <td>پاسخ</td>
+                <td>عملیات</td>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var message in Model)
+            {
+                <tr>
+                    <td>@message.Body</td>
+                    <td>@string.Format("{0} {1}", message.FirstName,message.LastName) </td>
+                    <td>@Html.ConvertToPersianString(message.MeliCode)</td>
+                    <td>@message.BodyAnswer</td>
+
+                    <td>
+                        @Ajax.ButtonDialog("مشاهده", Url.Action(MVC.Admin.ContactUs.ActionNames.Detail, MVC.Admin.ContactUs.Name), "GET", "id=" + message.Id, "dialog", new DialogOptions { Height = "600", Width = "800", IsModal = "true", Title = "مشاهده", ShowDir = "down", ShowEffect = "drop", HideEffect = "puff", HideDir = "up" }, "btn btn-primary")
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+</div>
+@{
+    <script type="text/javascript">
+        function printDiv(divName) {
+            var printContents = document.getElementById(divName).innerHTML;
+            var originalContents = document.body.innerHTML;
+
+            document.body.innerHTML = printContents;
+
+            window.print();
+
+            document.body.innerHTML = originalContents;
+        }
+    </script>
+}

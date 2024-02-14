@@ -1,0 +1,18 @@
+﻿@model List<Jazb.DomainClasses.Entities.article>
+
+<div class="list-group ">
+    @foreach (var item in Model)
+            {
+                var strMini = @item.MinBody;
+
+        <a href="articles/Details/@item.Id" class="list-group-item clearfix">
+            <h4 class="list-group-item-heading">@item.Title  <small><i class="fa fa-clock-o"></i> @Html.ConvertToPersianDateTime(item.StartDate)</small></h4>
+       
+           
+            <div class="pull-right">
+               
+            </div>
+        </a>
+
+    }
+</div>

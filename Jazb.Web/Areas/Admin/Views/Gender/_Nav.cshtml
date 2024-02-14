@@ -1,0 +1,27 @@
+﻿<div class="navbar">
+    <div class="navbar-inner">
+        <a class="brand" href="#">مدیریت جنسیت</a>
+        <ul class="nav">
+            <li>
+                @Ajax.ActionLink("جنسیت جدید", MVC.Admin.Gender.ActionNames.Add, MVC.Admin.Gender.Name, null,
+                                         new AjaxOptions
+                                         {
+                                             HttpMethod = "Get",
+                                             InsertionMode = InsertionMode.Replace,
+                                             UpdateTargetId = "logOnModal",
+                                             LoadingElementDuration = 0,
+                                             LoadingElementId = "loadingMessage",
+                                             OnSuccess = "LogOnForm.onSuccess"
+                                         }, new { tabindex = "-1" })
+            </li>
+
+            <li class="pull-left">
+
+                @Ajax.ActionLink("بازگشت", MVC.Admin.Gender.ActionNames.Index, MVC.Admin.Gender.Name, new AjaxOptions { HttpMethod = "GET", InsertionMode = InsertionMode.Replace, UpdateTargetId = "main-content", OnSuccess = "loadAjaxComponents", OnComplete = "hideLoading", OnBegin = "showLoading" })
+
+
+            </li>
+        </ul>
+    </div>
+</div>
+

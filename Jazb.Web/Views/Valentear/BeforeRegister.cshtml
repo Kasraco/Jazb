@@ -1,0 +1,52 @@
+﻿@model Jazb.Model.Payment.BeforeRegisterModel
+@{
+    ViewBag.Title = "ViewCard";
+    Layout = "~/Views/Shared/_LayoutAzmoon.cshtml";
+}
+
+
+<div class="panel panel-primary">
+    <div class="panel-heading">
+        <h3 class="panel-title">دریافت اطلاعات کارت ثبت نام @Html.Action(MVC.MetaTag.ActionNames.GetCompanyName, MVC.MetaTag.Name) </h3>
+    </div>
+    <div class="panel-body ">
+        <div class="well">
+
+            <div class="page-header">
+                <h3>دریافت اطلاعات کارت ثبت نام</h3>
+            </div>
+            @using (Html.BeginForm(null, null, FormMethod.Post, new { Id = "wizForm", enctype = "multipart/form-data", @class = "form-horizontal" }))
+            {
+
+                @Html.AntiForgeryToken()
+                @Html.HiddenFor(x => x.AzmoonId);
+              <h3>داوطلب گرامی! <span class="text-red">کد ثبت نام</span> و <span class="text-red"> شماره سفارش</span> مندرج در کارت ثبت نام (خریداری شده) را در این قسمت وارد کنید</h3>
+                <h3>درصورتی که <span class="text-red">کارت ثبت نام</span> را خریداری نکرده اید @Html.ActionLink("از این قسمت", MVC.Payment.ActionNames.Index, MVC.Payment.Name, new { AID = Model.AzmoonId }, new { @class = "btn btn-warning" }) اقدام کنید</h3>
+
+               
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.SaleRefrenceId, new { @class = "control-label col-md-2" })
+                            <div class="col-md-5">
+                                @Html.TextBoxFor(model => model.SaleRefrenceId, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.SaleRefrenceId, null, new { @class = "has-error help-block" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.PaymentId, new { @class = "control-label col-md-2" })
+                            <div class="col-md-5">
+                                @Html.TextBoxFor(model => model.PaymentId, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.PaymentId, null, new { @class = "has-error help-block" })
+                            </div>
+                        </div>
+                
+                    <input type="submit" value="تایید و ادامه" title="تایید و ادامه" id="btn_Save" class="btn btn-success " />
+
+            }
+
+        </div>
+    </div>
+</div>
+
+

@@ -1,0 +1,62 @@
+﻿@model Jazb.Model.ResultModel.FinalResultModel
+
+<style>
+    body{
+        margin-top:70px;
+    }
+</style>
+<div class="row">
+    <div class="col col-md-offset-3 col-md-6">
+        <div class="panel panel-success">
+            <div class="panel-heading">
+                <h3 class="panel-title">وضعیت داوطلب</h3>
+            </div>
+            <div class="panel-body">
+                <table class="table table-bordered table-striped">
+                    <tr>                                              
+                        <th>نام:</th>
+                        <td>@Model.FirstName</td>
+                        <th rowspan="3" class="text-center center center-block">
+                            <h1>
+                                @if (Model.StatuseTitle == "قبول" ||
+                                     Model.StatuseTitle == "قبول شده اصلی" || 
+                                     Model.StatuseTitle == "قبول شده" ||
+                                     Model.StatuseTitle == "قبول شده ذخیره" ||
+                                     Model.StatuseTitle == "ذخیره شده" || 
+                                     Model.StatuseTitle == "ذخیره")
+                                {
+                                    <span style="color:green">@Model.StatuseTitle</span>
+                                }
+                                else
+                                {
+                                    <span style="color:red">@Model.StatuseTitle</span>
+                                }
+                            </h1>
+                        </th>
+                    </tr>
+                    <tr>
+                        <th>نام خانوادگی:</th>
+                        <td>@Model.LastName</td>
+                    </tr>
+                    <tr>
+                        <th>نام پدر:</th>
+                        <td>@Model.FatherName</td>
+                    </tr>
+                    <tr>
+                          
+                        <th colspan="2">رشته شغلی:</th>
+                        <td>@Model.JobTitle</td>
+                    </tr>
+                </table>
+                <div class="text-center center center-block">
+
+                    @Html.ActionLink("بازگشت", MVC.Result.ActionNames.Index, MVC.Result.Name,new { AID=Model.AzmoonId }, new { @class = "btn btn-default" })
+                </div>
+               
+
+            </div>
+        </div>
+
+    </div>
+
+</div>

@@ -1,0 +1,16 @@
+﻿@model Jazb.Model.AdminModel.ManageAzmoon.AzmoonJobModel
+
+            @using (Ajax.BeginForm(MVC.Admin.AzmoonSetting.ActionNames.AddAzmoonJob, MVC.Admin.AzmoonSetting.Name, null, new AjaxOptions { UpdateTargetId = "AzmoonJobList", InsertionMode = InsertionMode.Replace, HttpMethod = "POST", OnBegin = "showLoading", OnComplete = "hideLoading" }, new { @class = "navbar-form ", id = "add-AzmoonJob-form" }))
+            {
+                @Html.HiddenFor(x => x.AzmoonId)
+                @Html.LabelFor(x => x.JobId,new { @class="span2"})
+                @Html.DropDownListFor(model => model.JobId, ViewBag.PossibleJobs as IEnumerable<SelectListItem>, "--- انتخاب ---", new { @class = "selectpicker  span7" })
+
+
+                <button type="submit" class="btn">ذخیره</button>
+            }
+
+
+
+
+

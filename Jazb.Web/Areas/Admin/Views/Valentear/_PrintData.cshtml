@@ -1,0 +1,435 @@
+﻿@model Jazb.Model.ValentearModel.RegisterModel
+@using Jazb.Web.Helpers
+
+
+
+<div class="row">
+    <div class="col-md-7">
+        <input type="button" class="btn btn-info" onclick="printDiv('printThis')" value="چاپ اطلاعات " />
+        <input type="button" class="btn btn-info" onclick="printDiv('printThisPic')" value="چاپ مدارک " />
+        @Ajax.ActionLink("بازگشت", MVC.Admin.Valentear.ActionNames.GetDataTableByAzmoon, MVC.Admin.Valentear.Name, new { AzmoonId = Model.Valentear.AzmoonId, term = Model.Valentear.NationalID.ToString(), searchBy = Jazb.Servicelayer.EFServices.Enums.ValentearSearchBy.Melicode  }, new AjaxOptions { HttpMethod = "GET", InsertionMode = InsertionMode.Replace, UpdateTargetId = "main-content", OnSuccess = "loadAjaxComponents", OnComplete = "hideLoading", OnBegin = "showLoading" }, new { @class="btn btn-success"})
+        @Ajax.ActionLink("بازگشت به رشته", MVC.Admin.Valentear.ActionNames.GetDataTableByAzmoon, MVC.Admin.Valentear.Name, new { AzmoonId = Model.Valentear.AzmoonId, term = Model.Valentear.JobId, searchBy = Jazb.Servicelayer.EFServices.Enums.ValentearSearchBy.Job }, new AjaxOptions { HttpMethod = "GET", InsertionMode = InsertionMode.Replace, UpdateTargetId = "main-content", OnSuccess = "loadAjaxComponents", OnComplete = "hideLoading", OnBegin = "showLoading" }, new { @class = "btn btn-success" })
+        @Ajax.ActionLink("بازگشت به محل مورد تقاضا", MVC.Admin.Valentear.ActionNames.GetDataTableByAzmoon, MVC.Admin.Valentear.Name, new { AzmoonId = Model.Valentear.AzmoonId, term = Model.Valentear.PlaceId, searchBy = Jazb.Servicelayer.EFServices.Enums.ValentearSearchBy.City  }, new AjaxOptions { HttpMethod = "GET", InsertionMode = InsertionMode.Replace, UpdateTargetId = "main-content", OnSuccess = "loadAjaxComponents", OnComplete = "hideLoading", OnBegin = "showLoading" }, new { @class="btn btn-success"})
+        <div class="label label-info " style="font-size:18px;">
+        <b> وضعیت اطلاعات داوطلب: </b>
+        @switch (Model.Valentear.Accept)
+        {
+            case 1:
+            <span class="label label-success ">تایید شده</span>
+                break;
+            case 2:
+            <span class="label label-danger ">دارای اشکال می باشد .
+
+                         @Ajax.ActionLink("تغییر", MVC.Admin.Valentear.ActionNames.Edit, MVC.Admin.Valentear.Name, new {AzmoonId=Model.Valentear.AzmoonId,NationalId=Model.Valentear.NationalID }, new AjaxOptions { HttpMethod = "GET", InsertionMode = InsertionMode.Replace, UpdateTargetId = "main-content", OnSuccess = "loadAjaxComponents", OnComplete = "hideLoading", OnBegin = "showLoading" }, new { @class = "btn btn-success" })
+
+            </span>
+                break;
+                case 0:
+            <span class="label label-warrning ">بررسی نشده</span>
+                break;
+        }
+            </div>
+    </div>
+</div>
+<div class="row" id="printThis">
+    <link href="~/Content/bootstrap-rtl.css" rel="stylesheet" />
+    <link href="~/Content/Docs.css" rel="stylesheet" />
+ 
+    <div class="col-md-7">      
+            
+            <table class="table table-striped table-hover table-bordered">
+                <tr>
+                    <td>
+                        @if (ViewBag.PossiblePicture != null)
+                        {
+
+                            string imageBase64PossiblePicture = Convert.ToBase64String(ViewBag.PossiblePicture);
+                            var imageSrcPossiblePicture = string.Format("data:image/gif;base64,{0}", imageBase64PossiblePicture);
+                            <img id="ID_PossiblePicture" src="@imageSrcPossiblePicture" width="100%"  />
+                        }
+                        else
+                        {
+                            <img src="~/Images/AzmoonHeader.jpg" width="100%" />
+                        }
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="text-center">
+                        <h4><b>کد رهگیری :</b>@Model.Valentear.TrackingCode</h4>
+                      
+                    </td>
+                </tr>
+            </table>
+       
+       
+        <table class="table table-striped table-hover table-bordered">
+
+            <tr>
+                <th>نام خانوادگی: </th>
+                <td>@Model.Valentear.LastName</td>
+                <th>نام: </th>
+                <td>@Model.Valentear.FirstName</td>
+                <th></th>
+                <td></td>
+            </tr>
+            <tr>
+                <th>نام پدر: </th>
+                <td>@Model.Valentear.FatherName</td>
+                <th>جنسیت: </th>
+                <td>@Model.Valentear.GenderTitle</td>
+                <td colspan="2" rowspan="5">
+                    @if (Model.Valentear.PictureValenteer != null)
+                    {
+
+                        string imageBase64 = Convert.ToBase64String(Model.Valentear.PictureValenteer);
+                        var imageSrc = string.Format("data:image/gif;base64,{0}", imageBase64);
+                        <img id="ID_gavahi_do_tarh" src="@imageSrc" width="100px"  />
+                    }
+                    else
+                    {
+                        <div class="col-md-12">
+                            <h3>داوطلب گرامی شما تصویر خود را به صورت صحیح وارد نکرده اید</h3>
+                        </div>
+                    }
+                </td>
+            </tr>
+            <tr>
+                <th>محل تولد: </th>
+                <td>@Model.Valentear.CityPart_BirthPlace</td>
+                <th>تاریخ تولد: </th>
+                <td>@Model.Valentear.BirthDate</td>
+            </tr>
+            <tr>
+                <th>کد ملی: </th>
+                <td>@Model.Valentear.NationalID</td>
+                <th>شماره شناسنامه: </th>
+                <td>@Model.Valentear.BirthCertificateNo</td>
+            </tr>
+            <tr>
+                <th>محل صدور: </th>
+                <td>@Model.Valentear.IssuancePlace_City</td>
+                <th>وضعیت تاهل: </th>
+                <td>@Model.Valentear.MarriageStatusTitle</td>
+            </tr>
+            <tr>
+                <th>دین: </th>
+                <td>@Model.Valentear.ReligionTitle</td>
+                <th>مذهب: </th>
+                <td>@Model.Valentear.FaithTitle</td>
+            </tr>
+            <tr>
+                <th>وضعیت نظام وظیفه: </th>
+                <td>@Model.Valentear.ConscriptStatusTitle</td>
+                <th></th>
+                <td></td>
+                <th></th>
+                <td></td>
+            </tr>
+
+        </table>
+ 
+      
+        <table class="table table-striped table-hover table-bordered">
+
+            <tr>
+                <td >
+                    <b>وضعیت ایثارگری</b>
+                    <ol>
+                        @if (Model.Valentear.WoundedPercent != null)
+                        {
+                            <li><b>جانباز</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <b>درصد جانبازی &nbsp; &nbsp;</b> @Model.Valentear.WoundedPercent<b>درصد</b></li>
+                        }
+                         
+                        @if (Model.Valentear.FightInWarMonth != null || Model.Valentear.FightInWarYear != null || Model.Valentear.FightInWarDay != null)
+                        {<li><b>رزمنده ( دارای خداقل 6 ماه حضور داوطلبانه در جبهه ) مدت حضور در جبهه </b><b>@Model.Valentear.FightInWarDay روز -  @Model.Valentear.FightInWarMonth ماه-  @Model.Valentear.FightInWarYear سال </b></li>}
+
+                        @if (Model.Valentear.CaptivationYear != null || Model.Valentear.CaptivationMonth != null || Model.Valentear.CaptivationDay != null)
+                        {<li><b>آزاده </b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;   <b>مدت اسارت:   @Model.Valentear.CaptivationDay روز -  @Model.Valentear.CaptivationMonth ماه -  @Model.Valentear.CaptivationYear سال </b></li>}
+                         @{
+                             foreach (var t in Model.SelectedDevotionTypes)
+                             {
+                                    <li><b>@t.DevotionTypeTitle</b></li>
+                             }
+                            }
+                     
+
+                    </ol>
+                </td>
+                <td>
+                        <b>سایر موارد</b>
+                        <ol> 
+                            @{
+                                foreach (var t in Model.SelectedQoutaTypes)
+                                {
+                                    <li><b>@t.QoutaTypeTitle</b></li>
+                                }
+                            }
+                       
+                       
+                        </ol>
+                    </td>
+                
+            </tr>
+
+        </table>
+
+        <table class="table table-striped table-hover table-bordered">
+
+            <tr>
+                <th>آخرین مدرک تحصیلی : </th>
+                <td>@Model.Valentear.DegreeTitle</td>
+                <th>تاریخ اخذ آخرین مدرک تحصیلی :  </th>
+                <td>@Model.Valentear.LicenseDate</td>
+                <th>محل اخذ دیپلم </th>
+                <td>@Model.Valentear.SchoolName</td>
+            </tr>
+            <tr>
+                <th>رشته تحصیلی : </th>
+                <td>@Model.Valentear.EducatedSkillTitle</td>
+                <th>گرایش تحصیلی :</th>
+                <td>@Model.Valentear.EducatedField</td>
+                <th>معدل :</th>
+                <td>@Model.Valentear.Average.ToString()</td>
+            </tr>
+            <tr>
+                <th>دانشگاه محل تحصیل :</th>
+                <td colspan="3">@Model.Valentear.University_Name</td>
+                <th>استان محل تحصیل :</th>
+                <td>@Model.Valentear.UniversityProvinceTitle</td>
+            </tr>  
+            <tr>
+                <th>رشته شغلی موردتقاضا :</th>
+                <td colspan="3">@Model.Valentear.JobTitle</td>
+                <th>محل مورد تقاضا :</th>
+                <td>@Model.Valentear.PlaceTitle</td>
+            </tr>         
+        </table>
+
+
+        <table class="table table-striped table-hover table-bordered">
+           
+            <tr>
+                <td colspan="3">
+                    محل جغرافیایی انجام طرح برای مشمولین خدمت پزشکان و پیراپزشکان که در حین انجام تعهدات قانونی هستند : <br />محل خدمت :   <b>@(Model.Valentear.PlaceKhedmat == null ? "مشخص نشده" : Model.Valentear.PlaceKhedmat)</b>
+                   <div class="row">
+                       <div class="col-md-12">
+                           <b>رزومه یا سوابق کاری خود در بخش های مختلف درمانی : </b>
+                           @Model.Valentear.DetailPlaceKhedmat
+                       </div>
+                   </div>
+
+                </td>
+            </tr>
+            <tr>
+                <td colspan="3">
+                    <b>نشانی کامل : محل سکونت : استان </b>@Model.Valentear.Address_ProvinceName &nbsp; &nbsp;<b>شهرستان </b>@Model.Valentear.Address_CityName&nbsp; &nbsp; <b>بخش</b>&nbsp; &nbsp;@Model.Valentear.Address_ZoneName &nbsp; &nbsp;  <b>آدرس</b> &nbsp; &nbsp; @Model.Valentear.Adress_Adress &nbsp; &nbsp; <b>کد پستی</b> &nbsp; @Model.Valentear.PostalCode &nbsp; &nbsp;<b>تلفن</b>&nbsp; @Model.Valentear.Tel.ToString() &nbsp; &nbsp; <b>شماره تلفن همراه</b> &nbsp; @Model.Valentear.Mobile
+                    <b>شماره تلفن برای تماس ضروری :</b> @Model.Valentear.TellNeed
+                </td>
+            </tr>
+           
+            <tr>
+                <td colspan="3">
+                    @{
+                        string qSignVal = string.Format(ViewBag.PossibleSignTextValenter, Model.Valentear.FirstName, Model.Valentear.LastName);
+                        qSignVal = qSignVal.Replace("<h4>", "");
+                        qSignVal = qSignVal.Replace("</h4>", "");
+                 }
+               @Html.Raw(qSignVal)
+                    
+                    
+                  
+                </td>
+            </tr>
+            <tr>
+                <td>تاریخ تنظیم فرم :  @Html.ConvertToPersianDateTime(Model.Valentear.DateRegister)</td>
+                <td>
+                    <br />
+                    <br />
+                    <br />
+                </td>
+                <td>امضاء و اثر انگشت متقاضی</td>
+            </tr>
+        </table>
+    </div>
+
+    
+  
+   
+</div>
+
+ 
+<div class="row"  id="printThisPic">
+     <link href="~/Content/bootstrap-rtl.css" rel="stylesheet" />
+    <link href="~/Content/Docs.css" rel="stylesheet" />
+    <div class="col-md-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">تصویر مدرک پایان طرح</h3>
+            </div>
+            <div class="panel-body">
+                @if (Model.Valentear.PictureValenteer != null)
+                    {
+
+                        string imageBase64Pic_Tarth = Convert.ToBase64String(Model.Valentear.Pic_Tarth);
+                        var imageSrcPic_Tarth = string.Format("data:image/gif;base64,{0}", imageBase64Pic_Tarth);
+                        <img id="ID_gavahi_do_tarhPic_madrakk" src="@imageSrcPic_Tarth"  style="width:900px;"   />
+                    }
+                    else
+                    {
+                        <div class="col-md-12">
+                            <h3>تصویر مدرک پیان طرح را وارد نکرده</h3>
+                        </div>
+                    }
+            </div>
+        </div>       
+
+    </div>
+    <div class="col-md-12">      
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">تصویر فیش واریزی یا کارت پایان خدمت</h3>
+            </div>
+            <div class="panel-body">
+                @if (Model.Valentear.Pic_Conscript != null)
+                {
+
+                    string imageBase64PicConscript = Convert.ToBase64String(Model.Valentear.Pic_Conscript);
+                    var imageSrcPicConscript = string.Format("data:image/gif;base64,{0}", imageBase64PicConscript);
+                    <img id="ID_gavahi_do_tarhPicConscript" src="@imageSrcPicConscript" style="width:400px;" />
+                }
+                else
+                {
+                    <div class="col-md-12">
+                        <h3>تصویر کارت پایان خدمت  را وارد نکرده</h3>
+                    </div>
+                }
+
+                @if (Model.Valentear.FishVariszi != null)
+                    {
+
+                        string imageBase64FishVariszi = Convert.ToBase64String(Model.Valentear.FishVariszi);
+                        var imageSrcFishVariszi = string.Format("data:image/gif;base64,{0}", imageBase64FishVariszi);
+                        <img id="ID_gavahi_do_tarhFishVariszi" src="@imageSrcFishVariszi" style="width:400px;"   />
+                    }
+                    else
+                    {
+                        <div class="col-md-12">
+                            <h3>تصویر فیش واریزی را وارد نکرده</h3>
+                        </div>
+                    }
+            </div>
+        </div>
+    </div>
+    <div class="col-md-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">تصویر 5</h3>
+            </div>
+            <div class="panel-body">
+                @if (Model.Valentear.Pic5 != null)
+                {
+
+                    string imageBase64Pic_Pic5 = Convert.ToBase64String(Model.Valentear.Pic5);
+                    var imageSrcPic_Pic5 = string.Format("data:image/gif;base64,{0}", imageBase64Pic_Pic5);
+                    <img id="ID_gavahi_do_tarhPic5" src="@imageSrcPic_Pic5" style="width:900px;" />
+                }
+                else
+                {
+                    <div class="col-md-12">
+                        <h3>تصویر 5 را وارد نکرده</h3>
+                    </div>
+                }
+            </div>
+        </div>
+
+    </div>
+
+    <div class="col-md-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">تصویر 6</h3>
+            </div>
+            <div class="panel-body">
+                @if (Model.Valentear.Pic6 != null)
+                {
+
+                    string imageBase64Pic_Pic6 = Convert.ToBase64String(Model.Valentear.Pic6);
+                    var imageSrcPic_Pic6 = string.Format("data:image/gif;base64,{0}", imageBase64Pic_Pic6);
+                    <img id="ID_gavahi_do_tarhPic6" src="@imageSrcPic_Pic6" style="width:900px;" />
+                }
+                else
+                {
+                    <div class="col-md-12">
+                        <h3>تصویر 6 را وارد نکرده</h3>
+                    </div>
+                }
+            </div>
+        </div>
+
+    </div>
+
+    <div class="col-md-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">تصویر 7</h3>
+            </div>
+            <div class="panel-body">
+                @if (Model.Valentear.Pic7 != null)
+                {
+
+                    string imageBase74Pic_Pic7 = Convert.ToBase64String(Model.Valentear.Pic7);
+                    var imageSrcPic_Pic7 = string.Format("data:image/gif;base64,{0}", imageBase74Pic_Pic7);
+                    <img id="ID_gavahi_do_tarhPic7" src="@imageSrcPic_Pic7" style="width:900px;" />
+                }
+                else
+                {
+                    <div class="col-md-12">
+                        <h3>تصویر 7 را وارد نکرده</h3>
+                    </div>
+                }
+            </div>
+        </div>
+
+    </div>
+    <div class="col-md-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">تصویر 8</h3>
+            </div>
+            <div class="panel-body">
+                @if (Model.Valentear.Pic8 != null)
+                {
+
+                    string imageBase64Pic_Pic8 = Convert.ToBase64String(Model.Valentear.Pic8);
+                    var imageSrcPic_Pic8 = string.Format("data:image/gif;base64,{0}", imageBase64Pic_Pic8);
+                    <img id="ID_gavahi_do_tarhPic8" src="@imageSrcPic_Pic8" style="width:900px;" />
+                }
+                else
+                {
+                    <div class="col-md-12">
+                        <h3>تصویر 8 را وارد نکرده</h3>
+                    </div>
+                }
+            </div>
+        </div>
+
+    </div>
+     
+</div>
+        @Ajax.ActionLink("بازگشت", MVC.Admin.Valentear.ActionNames.GetDataTableByAzmoon, MVC.Admin.Valentear.Name, new { AzmoonId = Model.Valentear.AzmoonId, term = Model.Valentear.NationalID.ToString(), searchBy = Jazb.Servicelayer.EFServices.Enums.ValentearSearchBy.Melicode  }, new AjaxOptions { HttpMethod = "GET", InsertionMode = InsertionMode.Replace, UpdateTargetId = "main-content", OnSuccess = "loadAjaxComponents", OnComplete = "hideLoading", OnBegin = "showLoading" }, new { @class="btn btn-success"})
+
+@{
+    <script type="text/javascript">
+        function printDiv(divName) {
+            var printContents = document.getElementById(divName).innerHTML;
+            var originalContents = document.body.innerHTML;
+
+            document.body.innerHTML = printContents;
+
+            window.print();
+
+            document.body.innerHTML = originalContents;
+        }
+    </script>
+}

@@ -1,0 +1,91 @@
+﻿@model Jazb.DomainClasses.Entities.Payment
+@using System.Globalization
+
+<style>
+    body {
+        padding-top: 75px;
+    }
+</style>
+<div class="row">
+    <div class="col col-md-offset-1 col-md-10" style="border:2px solid black;">
+        <br />
+        @using (Html.BeginForm(MVC.Payment.ActionNames.SendRequestPayment, MVC.Payment.Name, FormMethod.Post, new { @class = "form-horizontal" }))
+        {
+            @Html.AntiForgeryToken()
+            @Html.HiddenFor(x => x.Amount)
+            @Html.HiddenFor(x => x.AzmoonId)
+            @Html.HiddenFor(x => x.BankName)
+            @Html.HiddenFor(x => x.EmailAddress)
+            @Html.HiddenFor(x => x.FirstName)
+            @Html.HiddenFor(x => x.InsertDatetime)
+            @Html.HiddenFor(x => x.LastName)
+            @Html.HiddenFor(x => x.Mobile)
+            @Html.HiddenFor(x => x.PaymentFinished)
+            @Html.HiddenFor(x => x.PaymentId)
+            @Html.HiddenFor(x => x.PaymentIdstring)
+            @Html.HiddenFor(x => x.ReferenceNumber)
+            @Html.HiddenFor(x => x.SaleReferenceId)
+            @Html.HiddenFor(x => x.StatusPayment)
+            @Html.HiddenFor(x => x.ValentearId)
+
+        <div class="row">
+            <div class="col-md-offset-2 col-md-8">
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th class="text-center" style="background-color:silver; color:black;" colspan="2">@ViewBag.AzmoonTitle</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="text-right" style="background-color:black; color:white;">شماره پیگیری پرداخت </td>
+                            <td class="text-center" style="background-color:black; color:white;">@Model.PaymentId</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <table class="table table-bordered">
+                    <tr>
+                        <th class="text-right">نام:</th>
+                        <td class="text-right">@Model.FirstName</td>
+                    </tr>
+                    <tr>
+                        <th class="text-right">نام خانوادگی:</th>
+                        <td class="text-right">@Model.LastName</td>
+                    </tr>
+                    <tr>
+                        <th class="text-right">مبلغ:</th>
+                        <td class="text-right">@Model.Amount ریال</td>
+                    </tr>
+                    <tr>
+                        <th class="text-right">شماره تلفن(همراه) :</th>
+                        <td class="text-right">@Model.Mobile</td>
+                    </tr>
+                    <tr>
+                        <th class="text-right">پست الکترونیکی</th>
+                        <td class="text-right">@Model.EmailAddress</td>
+                    </tr>
+                    <tr>
+                        <th class="text-right" style="vertical-align:middle;">درگاه پرداخت</th>
+                        <td class="text-right"><img src="~/Images/saman.png" width="100" height="70" /></td>
+                    </tr>
+                </table>
+
+                <div style="color:red;">
+                    @Html.Raw(ViewBag.message)
+                </div>
+
+                <div class="alert alert-danger">
+                    چنانچه در فرايند پرداخت مشكلي بروز كند و شما «شماره پيگيري پرداخت» را يادداشت نكرده باشيد،
+                    امکان پیگیری برای علوم پزشکی وجود ندارد و مسئولیت آن برعهده شما می باشد
+                </div>
+            </div>
+        </div>
+
+                <div class="center text-center">
+                    <input type="submit" value="پرداخت" class="btn btn-danger">
+                </div>
+                <br />
+                }
+</div>
+</div>

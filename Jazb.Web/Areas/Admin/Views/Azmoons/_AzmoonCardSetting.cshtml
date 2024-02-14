@@ -1,0 +1,64 @@
+﻿@model Jazb.Model.AdminModel.AzmoonCardModel
+<div class="modal-dialog modal-lg">
+    <div class="modal-content">
+        @using (Ajax.BeginForm(MVC.Admin.Azmoons.ActionNames.AzmoonCardSetting, MVC.Admin.Azmoons.Name, null, new AjaxOptions { UpdateTargetId = "index-result", InsertionMode = InsertionMode.Replace, HttpMethod = "POST", OnBegin = "showLoading", OnComplete = "hideLoading", OnSuccess = "LogOnForm.onEndSuccess" }, new { enctype = "multipart/form-data", @class = "form-horizontal", id = "add-Degree-form" }))
+        {
+            @Html.AntiForgeryToken()
+            @Html.HiddenFor(x => x.AzmoonId)
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h3>تنظیمات کارت آزمون</h3>
+            </div>
+            <div class="modal-body">
+
+
+                @Html.ValidationSummary(true, null, new { @class = "alert alert-danger" })
+                @Html.AntiForgeryToken()
+
+                <div class="control-group">
+                    @Html.LabelFor(model => model.DateExecuteAzmoon, new { @class = "control-label" })
+                    @Html.TextBoxFor(model => model.DateExecuteAzmoon, new { placeholder = "تاریخ برگزاری", @class = "date-pickers", style = "direction: ltr" })
+                    @Html.ValidationMessageFor(model => model.DateExecuteAzmoon, null, new { @class = "has-error help-block" })
+                </div>
+                <div class="control-group">
+                    @Html.LabelFor(model => model.InputCardTitle, new { @class = "control-label" })
+                    @Html.TextBoxFor(model => model.InputCardTitle, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.InputCardTitle, null, new { @class = "has-error" })
+                    <span class="help-block">کارت ورود به جلسه آزمون مورخ {0}</span>
+                </div>
+                <div class="control-group">
+                    @Html.LabelFor(model => model.LocationExecuteAzmoon, new { @class = "control-label" })
+                    @Html.TextBoxFor(model => model.LocationExecuteAzmoon, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.LocationExecuteAzmoon, null, new { @class = "has-error help-block" })
+                </div>               
+                <div class="control-group">
+                    @Html.LabelFor(model => model.TimeExecuteAzmoon, new { @class = "control-label" })
+                    @Html.TextBoxFor(model => model.TimeExecuteAzmoon, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.TimeExecuteAzmoon, null, new { @class = "has-error help-block" })
+                    <span class="help-block">
+                        9 صبح روز چهارشنبه مورخ {0}
+                    </span>
+                </div>
+                <span class="help-block"> در خروجی بجای این علامت {0} تاریخ برگزاری آزمون که در بالا تنظیم شده قرار می گیرد</span>
+                
+                
+                
+
+
+            </div>
+            <div class="modal-footer" style="text-align: right;">
+                <input type="submit" value="ذخیره" class="btn btn-primary " />
+                <button class="btn btn-danger" data-dismiss="modal" aria-hidden="true">بستن</button>
+            </div>
+        }
+    </div>
+</div>
+
+<script>
+    run(function () {
+        $.validator.unobtrusive.parse('#add-Degree-form');
+
+    })
+
+</script>
+

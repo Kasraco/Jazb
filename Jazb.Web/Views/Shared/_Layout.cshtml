@@ -1,0 +1,113 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    @Html.Action(MVC.MetaTag.ActionNames.Index, MVC.MetaTag.Name, new { title = ViewBag.Title, keywords = ViewBag.Keywords, description = ViewBag.Description })
+    <link rel="canonical" href="@Request.Url.AbsoluteUri" />
+    <meta http-equiv="Content-Language" content="fa" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    @RenderSection("metatags", false)
+
+    <meta charset="utf-8" />
+    <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    @Styles.Render("~/Content/css")
+
+    @Scripts.Render("~/bundles/modernizr")
+
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+         <script src="~/Scripts/html5shiv.js"></script>
+         <script src="~/Scripts/respond.min.js"></script>
+    <![endif]-->
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryui")
+    @*<script src=@Url.Content("~/Scripts/BootstrapFormValidation.js")></script>*@
+  
+
+
+
+    @RenderSection("scripts", required: false)
+
+
+    <style type="text/css">
+        /*body {
+            padding-top: 50px;
+        }*/
+
+        .section-preview {
+            padding: 4em 0 4em;
+        }
+
+        .preview {
+            margin-bottom: 4em;
+            background-color: #eaf1f1;
+            border: 1px solid rgba(0,0,0,0.1);
+            border-radius: 6px;
+        }
+
+            .preview .image {
+                padding: 5px;
+            }
+
+                .preview .image img {
+                    border: 1px solid rgba(0,0,0,0.1);
+                }
+
+            .preview .options {
+                padding: 0 2em 2em;
+                text-align: center;
+            }
+
+                .preview .options p {
+                    margin-bottom: 2em;
+                }
+
+
+        .lead {
+            margin-bottom: 2em;
+        }
+
+        .text-justify
+        {
+            text-align:justify;
+        }
+    </style>
+
+</head>
+<body>
+    <div class="container-fluid ">
+        <header class="header">
+            @Html.Partial("_LoginPartial")
+            @RenderSection("header", required: false)
+        </header>
+    </div>
+    <div class="container ">
+        @RenderSection("featured", required: false)
+    </div>
+    <div class="container ">
+        @*<div class="col-md-3">
+                @Html.Partial("_NavList")
+
+            </div>
+            <div class="col-md-9">*@
+        @RenderBody()
+        @RenderSection("ContentPanel", required: false)
+
+        @*</div>*@
+        <div class="push">
+            <!--//-->
+        </div>
+    </div>
+    @Html.Partial("_Toastr")
+    <!-- page-content-wrapper -->
+    <footer class="panel-footer">
+        <div class="container">
+            <p>&copy; @DateTime.Now.Year - تمام حقوق مادی ومعنوی این سایت متعلق به @Html.Action(MVC.MetaTag.ActionNames.GetCompanyName, MVC.MetaTag.Name) می باشد.</p>
+
+        </div>
+    </footer>
+   
+</body>
+</html>

@@ -1,0 +1,60 @@
+@model Jazb.Models.Azmoon
+@using KRBMembership.PersianDate
+@{
+    ViewBag.Title = "Delete";
+}
+@section ContentPanel{
+
+<div class="page-header">
+			  <h1>Delete
+			      <small>Azmoon</small>			  
+			  </h1>
+			</div>
+
+<div class="container" id="divpanle">
+
+    <div class="row">
+       <div class="col-xs-6 col-sm-6 col-md-6">
+
+<h3>are you sure for delete this item?</h3>
+<div class="panel panel-danger">
+   <div class="panel-heading">
+      <h3 class="panel-title">Azmoon</h3>
+   </div> 
+   <div class="panel-body">
+    <div class="form-group">
+       @Html.LabelFor(model => model.Name, new { @class = "control-label" })
+       <div class="form-control">@Model.Name</div>
+	</div>
+    <div class="form-group">
+       @Html.LabelFor(model => model.Title, new { @class = "control-label" })
+       <div class="form-control">@Model.Title</div>
+	</div>
+    <div class="form-group">
+       @Html.LabelFor(model => model.Discription, new { @class = "control-label" })
+       <div class="form-control">@Model.Discription</div>
+	</div>
+    <div class="form-group">
+       @Html.LabelFor(model => model.StartDate, new { @class = "control-label" })
+       <div class="form-control">@String.Format("{0:g}", Model.StartDate.ToPeString("dddd, dd MMMM,yyyy"))</div>
+	</div>
+    <div class="form-group">
+       @Html.LabelFor(model => model.EndDate, new { @class = "control-label" })
+       <div class="form-control">@String.Format("{0:g}", Model.EndDate.ToPeString("dddd, dd MMMM,yyyy"))</div>
+	</div>
+    <div class="form-group">
+       @Html.LabelFor(model => model.Active, new { @class = "control-label" })
+       <div class="form-control">@Model.Active</div>
+	</div>
+</div>
+</div>
+@using (Html.BeginForm()) {
+    <p>
+        <input type="submit" value="Delete"  class="btn btn-danger" /> |
+        @Html.ActionLink("Back To List", "Index", null, new { @class = "btn btn-default" })
+    </p>
+}
+</div>
+</div>
+</div>
+}

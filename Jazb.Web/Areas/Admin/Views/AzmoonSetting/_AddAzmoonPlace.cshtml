@@ -1,0 +1,42 @@
+﻿@model Jazb.Model.AdminModel.ManageAzmoon.AzmoonPlaceModel
+
+@using (Ajax.BeginForm(MVC.Admin.AzmoonSetting.ActionNames.AddAzmoonPlace, MVC.Admin.AzmoonSetting.Name, null, new AjaxOptions { UpdateTargetId = "AzmoonPlaceList", InsertionMode = InsertionMode.Replace, HttpMethod = "POST", OnBegin = "showLoading", OnComplete = "hideLoading" }, new { @class = "navbar-form ", id = "add-AzmoonPlace-form" }))
+            {
+
+    @Html.HiddenFor(x => x.AzmoonId)
+
+    <div class="table-responsive">
+        <table class="table">
+            <tr>
+                <td>@Html.LabelFor(x => x.PlaceJobId)</td>
+                <td>@Html.LabelFor(x => x.PlaceId)</td>
+                <td>@Html.LabelFor(x => x.Capacity)</td>
+                <td>@Html.LabelFor(x => x.WillMan)</td>
+                <td>@Html.LabelFor(x => x.WillWoman)</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>@Html.DropDownListFor(model => model.PlaceJobId, ViewBag.PossiblePlaceJobs as IEnumerable<SelectListItem>, "--- انتخاب رشته شغلی ---", new { @class = "selectpicker  span12" })</td>
+                <td>@Html.DropDownListFor(model => model.PlaceId, ViewBag.PossiblePlaces as IEnumerable<SelectListItem>, "--- انتخاب محل مورد تقاضا ---", new { @class = "selectpicker  span12" })</td>
+                <td>@Html.TextBoxFor(model => model.Capacity, new { @class = "span5" })</td>
+                <td>@Html.CheckBoxFor(model => model.WillMan, new { @class = "span1" })</td>
+                <td>@Html.CheckBoxFor(model => model.WillWoman, new { @class = "span1" })</td>
+                <td><button type="submit" class="btn">ذخیره</button></td>
+            </tr>
+        </table>
+    </div>
+
+
+
+
+
+
+   
+}
+
+
+
+
+
+
+

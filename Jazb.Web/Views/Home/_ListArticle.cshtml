@@ -1,0 +1,35 @@
+﻿@model PagedList.IPagedList<Jazb.DomainClasses.Entities.article>
+
+
+<link href="~/Content/bootstrap-fileupload.min.css" rel="stylesheet" />
+<link href="~/Content/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
+
+
+
+<div class="list-group ">
+    @foreach (var item in Model)
+            {
+                var strMini = @item.MinBody;
+
+            <a href="articles/Details/@item.Id" class="list-group-item clearfix">
+                <h4 class="list-group-item-heading">@item.Title</h4>
+                <p class="list-group-item-text">
+                    @if (item.MinBody.Length >= 120)
+                        {
+                            strMini = item.MinBody.Substring(0, 120);
+                        }
+                    @strMini
+                </p>
+                <div class="pull-left">
+                    <span class="label label-success "><i class="glyphicon glyphicon-pencil"></i> @item.User.UserMetaData.LastName</span>
+                </div>
+                <div class="pull-right">
+                    <i class="fa fa-clock-o"></i> <abbr class="timeago" title="@Html.ConvertToPersianDateTime(item.StartDate)">@Html.ConvertToPersianDateTime(item.StartDate)</abbr>
+                </div>
+            </a>
+
+            }
+</div>
+
+@*@Html.PagedListPager(Model, page => Url.Action("Index", new { page, pageSize = ViewBag.pageSize }), PagedListRenderOptions.EnableUnobtrusiveAjaxReplacing("#articlesListpages"))*@
+

@@ -1,0 +1,137 @@
+﻿@model List<Jazb.Model.AdminModel.ReportValentearByGender>
+@{
+    var Rowindex = 0;
+    var Colindex = 0;
+    var recIndex=0;
+    var recBreak = 0;
+}
+<div class="row-fluid">
+    <div class="span7">
+        <input type="button" class="btn btn-info" onclick="printDiv('printThis')" value="چاپ اطلاعات " />
+    </div>
+</div>
+<div id="printThis">
+
+    <div class="print">
+
+
+
+        @foreach (var Gen in Model)
+        {
+            <table class="table" >
+
+                <tbody>
+                    <tr>
+                        <td>
+                            @foreach (var vg in Gen.ValentearsGroups)
+                            {
+                                recIndex = 0;                               
+                                 <table class="table">
+                                     <tbody>
+                                         <tr>
+                                             <td>
+                                                 @Html.Raw("<table class='table' style='padding:5px;'>")
+                                                 @Html.Raw("<tbody>")
+                                                 @foreach (var v in vg.Valentears)
+                                                 {
+
+                                                     recBreak += 1;
+                                                     recIndex += 1;
+                                                     if (Rowindex == 0)
+                                                     {
+                                                     @Html.Raw("<tr>")
+                                                         Rowindex += 1;
+                                                     }
+                                                     if (Rowindex > 0)
+                                                     { 
+                                                     @Html.Raw("<td style='border:1px solid black; margin:5px; width:250px; min-height:250px;'>")
+                                                     <table class="table">
+                                                         <tbody>
+                                                             <tr>
+                                                                 <td colspan="5">
+                                                                     <h6 style="text-align: center">@Html.Action(MVC.MetaTag.ActionNames.GetCompanyName,MVC.MetaTag.Name)</h6>
+                                                                 </td>
+                                                             </tr>
+                                                             <tr>
+                                                                 <td colspan="3" style="padding: 2px; width: 210px;">
+                                                                     <div style="border: 1px solid black; text-align: center">
+                                                                         <h1 style="text-align: center">@Html.ConvertToPersianString(v.ChairCode)</h1>
+                                                                     </div>
+
+                                                                     @Html.Raw(string.Format("<span style='font-size:9px;'>شغل مورد تقاضا: <strong>{0}</strong></span>", v.JobTitle))
+                                                                     <br />
+                                                                     @Html.Raw(string.Format("<span style='font-size:9px;'>محل مورد تقاضا: <strong>{0}</strong></span>", v.PlaceTitle))
+                                                                     <br />
+                                                                     @Html.Raw(string.Format("<span style='font-size:9px;'>نام ونام خانوادگی :  <strong>{0} {1}</strong></span>", v.FirstName, v.LastName))
+                                                                 </td>
+                                                                 <td colspan="2">
+                                                                     @if (v.PictureValenteer != null)
+                                                                     {
+
+                                                                         string imageBase64 = Convert.ToBase64String(v.PictureValenteer);
+                                                                         var imageSrc = string.Format("data:image/gif;base64,{0}", imageBase64);
+                                                                         <img id="valPic" src="@imageSrc" style="width:80px;"  />
+                                                                         }
+                                                                 </td>
+                                                             </tr>
+                                                             <tr>
+                                                                 <td colspan="5">
+                                                                     <h5 style="text-align: center">آزمون استخدامی @Html.Action(MVC.MetaTag.ActionNames.GetCompanyName, MVC.MetaTag.Name)</h5>
+                                                                     <div style="text-align: center; font-size: 8px;">جهت استفاده از سیستم اطلاع رسانی این برچسب را حفظ نمایید</div>
+                                                                 </td>
+                                                             </tr>
+                                                         </tbody>
+                                                     </table>
+                                                     @Html.Raw("</td>")
+                                                                     Colindex += 1;
+                                                     }
+
+                                                     if (vg.Valentears.Count()<2)
+                                                     {
+                                                         @Html.Raw("<td style='border:1px solid black; margin:5px; width:250px; min-height:250px;'></td>")
+                                                     }
+                                                     
+                                                     if ((Rowindex == 1 && Colindex == 2) || vg.Valentears.Count() == recIndex)
+                                                     {
+                                                         
+
+                                                     @Html.Raw("</tr>")
+                                                         Rowindex = 0;
+                                                         Colindex = 0;
+                                                     }
+
+
+                                                    
+                                                 }
+                                                 @Html.Raw("</tbody>")
+                                                 @Html.Raw("</table>")
+
+
+
+
+                                             </td>
+                                         </tr>
+                                     </tbody>
+                                 </table>
+                            }
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        }
+    </div>
+</div>
+@{
+    <script type="text/javascript">
+        function printDiv(divName) {
+            var printContents = document.getElementById(divName).innerHTML;
+            var originalContents = document.body.innerHTML;
+
+            document.body.innerHTML = printContents;
+
+            window.print();
+
+            document.body.innerHTML = originalContents;
+        }
+    </script>
+}

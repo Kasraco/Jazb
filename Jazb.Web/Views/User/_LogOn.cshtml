@@ -1,0 +1,66 @@
+﻿@model Jazb.Model.LogOnModel
+
+<div class="modal-dialog">
+    <div class="modal-content">
+
+
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            <h4 class="modal-title" id="LogonUserLabel">ورود به سایت</h4>
+        </div>
+        <div class="modal-body">
+            @using (Ajax.BeginForm(MVC.User.ActionNames.LogOn, MVC.User.Name, new AjaxOptions { HttpMethod = "POST", OnBegin = "", OnComplete = "", LoadingElementDuration = 300, LoadingElementId = "loadingMessage" }, new { @class = "form-horizontal", id = "logOnForm" }))
+            {
+                @Html.AntiForgeryToken()
+                @Html.Hidden("returnUrl", ViewBag.ReturnUrl as string)
+                <div class="alert alert-danger"><b>نام کاربری و کلمه عبور </b> کاربرانی که برای اولین بار   می خواهند از سامانه استفاده کننده به ترتیب <b> کد ملی </b> و <b>&#64;کدملی</b> می باشد</div>
+                <div class="form-group">
+                    <label class="col-lg-3  control-label" for="Identity">کد ملی :</label>
+                    <div class="col-lg-9">
+                        @Html.TextBoxFor(user => user.Identity, new { placeholder = "Email or Username", @class = "form-control ltr" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-lg-3  control-label" for="Password">کلمه عبور</label>
+                    <div class="col-lg-9">
+                        @Html.PasswordFor(user => user.Password, new { placeholder = "Password", @class = "form-control ltr" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-lg-offset-3 col-lg-9">
+                        <label>
+                            @Html.CheckBox("RememberMe", false, new { @class = "checkbox" })مرا به یاد داشته باش           
+                        </label>
+                    </div>
+                </div>      
+                <div class="form-group">
+                    <div class="col-lg-offset-3 col-lg-9">
+                        <input type="submit" id="btnLogOn" name="name" value="" class="btn btn-success" style="display: none;" />             
+                        @Ajax.ActionLink("کلمه عبور را فراموش کردم", MVC.ForgottenPassword.ActionNames.Index, MVC.ForgottenPassword.Name,null, 
+                                         new AjaxOptions { HttpMethod = "Get",  InsertionMode = InsertionMode.Replace, UpdateTargetId = "logOnModal", LoadingElementDuration = 300, 
+                                         LoadingElementId = "loadingMessage" }, new { tabindex = "-1"})
+                    </div>
+                </div>
+                <div class="form-group" id="aa-result">
+                    <div class="col-lg-offset-2 col-lg-9">
+                        @Html.ValidationSummary()
+                    </div>
+                </div>
+        
+            }
+        </div>
+        <div class="modal-footer" style="text-align: right;">
+            <input type="submit" name="btn-submit" onclick="$('#btnLogOn').trigger('click');" value="ورود" class="btn btn-success" />
+        
+
+            <button type="button" class="btn btn-default" data-dismiss="modal">بستن</button>
+        </div>
+
+    </div>
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        validateForm('logOnForm');
+    });
+</script>

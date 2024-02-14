@@ -1,0 +1,52 @@
+﻿
+
+@model Jazb.Model.AdminModel.JobViewModel
+<div class="modal-dialog modal-lg">
+    <div class="modal-content">
+        @using (Ajax.BeginForm(MVC.Admin.Job.ActionNames.Edit, MVC.Admin.Job.Name, null, new AjaxOptions { UpdateTargetId = "index-result", InsertionMode = InsertionMode.Replace, HttpMethod = "POST", OnBegin = "showLoading", OnComplete = "hideLoading", OnSuccess = "LogOnForm.onEndSuccess" }, new { enctype = "multipart/form-data", @class = "form-horizontal", id = "edit-Degree-form" }))
+        {
+            @Html.AntiForgeryToken()
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h3>ویرایش رشته شغلی</h3>
+            </div>
+            <div class="modal-body">
+
+
+                @Html.ValidationSummary(true, null, new { @class = "alert alert-danger" })
+                @Html.AntiForgeryToken()
+
+
+                @Html.HiddenFor(model => model.Id)
+                <div class="control-group">
+                    @Html.LabelFor(model => model.JobCode, new { @class = "control-label" })
+                    @Html.TextBoxFor(model => model.JobCode, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.JobCode, null, new { @class = "has-error help-block" })
+
+                </div>
+
+                <div class="control-group">
+                    @Html.LabelFor(model => model.JobTitle, new { @class = "control-label" })
+                    @Html.TextBoxFor(model => model.JobTitle, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.JobTitle, null, new { @class = "has-error help-block" })
+
+                </div>
+
+
+
+            </div>
+            <div class="modal-footer" style="text-align: right;">
+                <input type="submit" value="Save" class="btn btn-primary " />
+                <button class="btn btn-danger" data-dismiss="modal" aria-hidden="true">بستن</button>
+            </div>
+        }
+    </div>
+</div>
+
+<script>
+    run(function () {
+        $.validator.unobtrusive.parse('#edit-Degree-form');
+
+    })
+
+</script>

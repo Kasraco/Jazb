@@ -1,0 +1,26 @@
+﻿<div class="navbar">
+    <div class="navbar-inner">
+        <a class="brand" href="#">مدیریت مقاطع تحصیلی</a>
+        <ul class="nav">
+            <li>
+                @Ajax.ActionLink("مقطع تحصیلی جدید", MVC.Admin.Degree.ActionNames.Add, MVC.Admin.Degree.Name, null,
+                                         new AjaxOptions
+                                         {
+                                             HttpMethod = "Get",
+                                             InsertionMode = InsertionMode.Replace,
+                                             UpdateTargetId = "logOnModal",
+                                             LoadingElementDuration = 0,
+                                             LoadingElementId = "loadingMessage",
+                                             OnSuccess = "LogOnForm.onSuccess"
+                                         }, new { tabindex = "-1" })
+            </li>
+
+            <li class="pull-left">
+
+                @Ajax.ActionLink("بازگشت", MVC.Admin.Degree.ActionNames.Index, MVC.Admin.Degree.Name, new AjaxOptions { HttpMethod = "GET", InsertionMode = InsertionMode.Replace, UpdateTargetId = "main-content", OnSuccess = "loadAjaxComponents", OnComplete = "hideLoading", OnBegin = "showLoading" })
+
+
+            </li>
+        </ul>
+    </div>
+</div>

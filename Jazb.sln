@@ -1,0 +1,52 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.40629.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jazb.DomainClasses", "Jazb.DomainClasses\Jazb.DomainClasses.csproj", "{53E93FF6-8ACA-40A1-9486-3AC018AE8FA0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jazb.Utilities", "Jazb.Utilities\Jazb.Utilities.csproj", "{567F8589-682D-49EB-9F57-2993A9B5688D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jazb.Datalayer", "Jazb.Datalayer\Jazb.Datalayer.csproj", "{1ED6BA6F-6106-4B74-B5DB-D1B94AB55FDB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jazb.Servicelayer", "Jazb.Servicelayer\Jazb.Servicelayer.csproj", "{DDDD9B26-28C0-4C06-85A0-8CE350F68920}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jazb.Web", "Jazb.Web\Jazb.Web.csproj", "{DC3EC127-4155-4083-BCF2-A71A2E7DF9A7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jazb.Model", "Jazb.Model\Jazb.Model.csproj", "{B324B857-755C-47A8-A282-5E7F4EA707A0}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{53E93FF6-8ACA-40A1-9486-3AC018AE8FA0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{53E93FF6-8ACA-40A1-9486-3AC018AE8FA0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{53E93FF6-8ACA-40A1-9486-3AC018AE8FA0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{53E93FF6-8ACA-40A1-9486-3AC018AE8FA0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{567F8589-682D-49EB-9F57-2993A9B5688D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{567F8589-682D-49EB-9F57-2993A9B5688D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{567F8589-682D-49EB-9F57-2993A9B5688D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{567F8589-682D-49EB-9F57-2993A9B5688D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1ED6BA6F-6106-4B74-B5DB-D1B94AB55FDB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1ED6BA6F-6106-4B74-B5DB-D1B94AB55FDB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1ED6BA6F-6106-4B74-B5DB-D1B94AB55FDB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1ED6BA6F-6106-4B74-B5DB-D1B94AB55FDB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DDDD9B26-28C0-4C06-85A0-8CE350F68920}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DDDD9B26-28C0-4C06-85A0-8CE350F68920}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DDDD9B26-28C0-4C06-85A0-8CE350F68920}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DDDD9B26-28C0-4C06-85A0-8CE350F68920}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DC3EC127-4155-4083-BCF2-A71A2E7DF9A7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DC3EC127-4155-4083-BCF2-A71A2E7DF9A7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DC3EC127-4155-4083-BCF2-A71A2E7DF9A7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DC3EC127-4155-4083-BCF2-A71A2E7DF9A7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B324B857-755C-47A8-A282-5E7F4EA707A0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B324B857-755C-47A8-A282-5E7F4EA707A0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B324B857-755C-47A8-A282-5E7F4EA707A0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B324B857-755C-47A8-A282-5E7F4EA707A0}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

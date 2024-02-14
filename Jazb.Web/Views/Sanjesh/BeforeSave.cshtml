@@ -1,0 +1,104 @@
+﻿@model Jazb.Model.Sanjesh.PrintDataSanjeshModel
+@using Jazb.Web.Helpers
+@{
+    Layout = "~/Views/Shared/_LayoutAzmoon.cshtml";
+}
+
+
+@using (Html.BeginForm(MVC.Sanjesh.ActionNames.SaveDate, MVC.Sanjesh.Name, FormMethod.Post, new { Id = "wizForm", enctype = "multipart/form-data", @class = "form-horizontal" }))
+{
+
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true, "لطفا اطلاعات را کامل و به صورت صحیح وارد کنید", new { @class = "alert alert-danger" })
+    @Html.HiddenFor(model => model.AddPM.DavNO);
+    @Html.HiddenFor(model => model.AddPM.Fname);
+    @Html.HiddenFor(model => model.AddPM.ID);
+    @Html.HiddenFor(model => model.AddPM.Lname);
+    @Html.HiddenFor(model => model.AddPM.Melicode);
+    @Html.HiddenFor(model => model.AddPM.personel_Bomi1);
+    @Html.HiddenFor(model => model.AddPM.personel_Bomi2);
+    @Html.HiddenFor(model => model.AddPM.personel_Bomi3);
+    @Html.HiddenFor(model => model.AddPM.personel_Bomi4);
+    @Html.HiddenFor(model => model.AddPM.personel_CoronaForm);
+    @Html.HiddenFor(model => model.AddPM.personel_Doctor);
+    @Html.HiddenFor(model => model.AddPM.personel_Gavahinameh_back);
+    @Html.HiddenFor(model => model.AddPM.personel_Gavahinameh_on);
+    @Html.HiddenFor(model => model.AddPM.personel_GVT);
+    @Html.HiddenFor(model => model.AddPM.personel_Isargari1);
+    @Html.HiddenFor(model => model.AddPM.personel_Isargari2);
+    @Html.HiddenFor(model => model.AddPM.personel_Isargari3);
+    @Html.HiddenFor(model => model.AddPM.personel_Kardani);
+    @Html.HiddenFor(model => model.AddPM.personel_Karshenasi);
+    @Html.HiddenFor(model => model.AddPM.personel_KarshenasiArshad);
+    @Html.HiddenFor(model => model.AddPM.personel_melicode_Back);
+    @Html.HiddenFor(model => model.AddPM.personel_melicode_On);
+    @Html.HiddenFor(model => model.AddPM.personel_Nezamvazifeh1);
+    @Html.HiddenFor(model => model.AddPM.personel_Nezamvazifeh2);
+    @Html.HiddenFor(model => model.AddPM.personel_OtheDoc1);
+    @Html.HiddenFor(model => model.AddPM.personel_OtheDoc2);
+    @Html.HiddenFor(model => model.AddPM.personel_OtheDoc3);
+    @Html.HiddenFor(model => model.AddPM.personel_picture);
+    @Html.HiddenFor(model => model.AddPM.personel_SaghfSeni1);
+    @Html.HiddenFor(model => model.AddPM.personel_SaghfSeni2);
+    @Html.HiddenFor(model => model.AddPM.personel_SaghfSeni3);
+    @Html.HiddenFor(model => model.AddPM.personel_Sanjesh);
+    @Html.HiddenFor(model => model.AddPM.personel_Shsh1);
+    @Html.HiddenFor(model => model.AddPM.personel_Shsh2);
+    @Html.HiddenFor(model => model.AddPM.personel_Shsh3);
+    @Html.HiddenFor(model => model.AddPM.PNO);
+    @Html.HiddenFor(model => model.DateSign);
+    @Html.HiddenFor(model => model.Hasmolahezat);
+    @Html.HiddenFor(model => model.StrMessage);
+    @Html.HiddenFor(model => model.TrackingCode);
+
+    <div class="row">
+
+        <div class="col-md-12">
+            <table class="table table-striped table-hover table-bordered">
+                <tr>
+                    <td colspan="3">
+                        @Model.StrMessage
+
+                    </td>
+
+                </tr>
+                @if (Model.Hasmolahezat)
+                {
+                    <tr>
+                        <td>
+                            ملاحظات:
+                            <br />
+                            <strong style="color:red;">تصاویر زیر ارسال نشده اند . درصورت لزوم نسبت به ارسال مدارک اقدام کنید</strong>
+                            <br />
+                            @Html.Raw(Model.Molahezat)
+                        </td>
+                    </tr>
+                }
+                <tr>
+                    <td>
+                        <h4 style="color:red;">توجه توجه</h4>
+                        <ul>
+                            <li>داوطلب گرامی بارگذاری مدارک <span style="color:red;">فقط یکبار</span> انجام می شود </li>
+                            <li>فقط درصورت دریافت <span style="color:red;">کد رهگیری</span> مدارک شما ثبت میشوند</li>
+                            <li>درصورتی که مدارک شما <span style="color:red;">ناقص</span> میباشند از بارگذاری آنها خود داری فرمایید ، مدارک را کامل کرده و سپس اقدام به بارگذاری مدارک کنید</li>
+                        </ul> 
+                        <br />
+                        <br />
+                        @Html.Raw(ViewBag.PossibleSignTextValenter)                       
+                        <input type="submit" class="btn btn-info" value="ذخیره " />
+                        @Html.ActionLink("بازگشت",MVC.Sanjesh.ActionNames.Index,MVC.Sanjesh.Name)
+                    </td>
+                </tr>
+                <tr>
+                    <td>تاریخ تنظیم فرم :  @Html.ConvertToPersianDateTime(Model.DateSign)</td>
+
+                </tr>
+            </table>
+        </div>
+
+
+    </div>
+}
+
+
+

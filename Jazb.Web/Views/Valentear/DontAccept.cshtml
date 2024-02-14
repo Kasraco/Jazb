@@ -1,0 +1,40 @@
+﻿
+<style type="text/css">
+    body {
+        padding-top: 70px;
+    }
+</style>
+
+<div class="row">
+    <div class="col col-md-offset-3 col-md-6" style="border:2px solid black;">
+        <br />
+
+
+        @if (ViewBag.Check == "Yes")
+        {
+            <div class="alert alert-danger">
+                <p style="line-height:2em;">
+                    متقاضی گرامی <strong> @ViewBag.AzmoonTitle  @ViewBag.GenterTitle  @ViewBag.FullName</strong> به دلیل <strong> @ViewBag.MessageDontAccept </strong> با توجه به شرایط مندرج در آگهی آزمون مورخ @ViewBag.AzmoonDate واجد شرایط شرکت در آزمون نمی باشید.
+                </p>
+            </div>
+        }
+        else if (ViewBag.Check == "No")
+        {
+            <div class="alert alert-danger">
+                <p style="line-height:2em;">
+                    متقاضی گرامی <strong> @ViewBag.AzmoonTitle  @ViewBag.GenterTitle  @ViewBag.FullName </strong> به دلیل عدم تحویل مدارک در زمان مقرر واجد شرایط شرکت در آزمون نمی باشید
+                </p>
+            </div>
+        }
+        else if (ViewBag.Check == "YesNo")
+        {
+            <div class="alert alert-success">
+                <p style="line-height:2em;">
+                    متقاضی گرامی رشته شغلی <strong>@ViewBag.AzmoonJobTitle در @ViewBag.AzmoonTitle  @ViewBag.GenterTitle  @ViewBag.FullName</strong> @ViewBag.MessageDontAccept
+                </p>
+            </div>
+        }
+        <br />
+
+    </div>
+</div>

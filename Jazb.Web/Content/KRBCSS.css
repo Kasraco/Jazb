@@ -1,0 +1,78 @@
+﻿
+.bs_bg {
+    position: relative;
+    padding: 70px 0;
+    color: #cdbfe3;
+    text-shadow: 0 1px 0 rgba(0,0,0,.1);
+    background-color: #6f5499;
+    background-image: -webkit-gradient(linear,left top,left bottom,from(#563d7c),to(#6f5499));
+    background-image: -webkit-linear-gradient(top,#563d7c 0,#6f5499 100%);
+    background-image: -o-linear-gradient(top,#563d7c 0,#6f5499 100%);
+    background-image: linear-gradient(to bottom,#563d7c 0,#6f5499 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#563d7c', endColorstr='#6F5499', GradientType=0);
+    background-repeat: repeat-x;
+  padding-bottom:5px;
+  padding-top:50px;
+}
+
+
+.get-started-now
+{
+    position:static;
+    margin-top: -70px;
+}
+
+.white-panel
+{
+    background-color: #fff;
+    border: 1px solid #dadada;
+    padding: 0px;
+    margin-bottom: 40px;
+    color: #333;
+    -webkit-border-radius: 6px;
+    -moz-border-radius: 6px;
+    border-radius: 6px;
+    -webkit-box-shadow: 0 1px 2px rgba(0, 0, 0, .075);
+    -moz-box-shadow: 0 1px 2px rgba(0,0,0,.075);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, .075);
+}
+
+
+.button-text-panel
+{
+    text-align: center;
+    padding: 25px 30px;
+}
+
+    .button-text-panel h1, .button-text-panel h2, .button-text-panel h3
+    {
+        display: inline;
+    }
+
+    .button-text-panel a
+    {
+        position: relative;
+        top: -3px;
+        margin-left: 20px;
+    }
+
+a.btn-block
+{
+    display: block;
+}
+
+.white-panel h2
+{
+    margin: 0px 0px 30px 0px;
+}
+
+
+ul.defaultList , ol.defaultList
+{
+}
+
+
+ul.defaultList li, ol.defaultList li
+{ 
+    margin-bottom:10px;
+}

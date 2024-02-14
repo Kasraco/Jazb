@@ -1,0 +1,49 @@
+﻿@model List<Jazb.DomainClasses.Entities.AzmoonPlace>
+@using Jazb.Web
+<div class="table-responsive">
+
+    <table class="table table-bordered table-striped  ">
+        <thead>
+            <tr>
+                <th>رشته شغلی</th>
+                <th>عنوان محل مورد تقاضا</th>
+                <th>ظرفیت</th>
+                <th>شامل آقایان میشود</th>
+                <th>شامل خانم ها میشود</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var t in Model)
+            {
+                <tr>
+                    <td>@Html.GetJobTitle(t.JobId)</td>
+                    <td>@t.PlaceTitle</td>
+                    <td>@t.Capacity</td>
+                    <td>@Html.ConvertBooleanToPersian2(t.WillMan)</td>
+                    <td>@Html.ConvertBooleanToPersian2(t.WillWoman)</td>
+                    <td>
+                        @Ajax.ActionLink(" ", MVC.Admin.AzmoonSetting.ActionNames.UpAzmoonPlace, MVC.Admin.AzmoonSetting.Name, new { Id = t.Id, AzmoonId = t.Azmoon.AzmoonId }, new AjaxOptions { HttpMethod = "POST", InsertionMode = InsertionMode.Replace, UpdateTargetId = "AzmoonPlaceList", OnSuccess = "loadAjaxComponents", OnComplete = "hideLoading", OnBegin = "showLoading" }, new { @class = "fa fa-caret-square-o-up fa-2x", style = "color:gray;" })
+
+                        @Ajax.ActionLink(" ", MVC.Admin.AzmoonSetting.ActionNames.DownAzmoonPlace, MVC.Admin.AzmoonSetting.Name, new { Id = t.Id, AzmoonId = t.Azmoon.AzmoonId }, new AjaxOptions { HttpMethod = "POST", InsertionMode = InsertionMode.Replace, UpdateTargetId = "AzmoonPlaceList", OnSuccess = "loadAjaxComponents", OnComplete = "hideLoading", OnBegin = "showLoading" }, new { @class = "fa fa-caret-square-o-down fa-2x", style = "color:gray;" })
+
+
+
+
+                        @Ajax.ActionLink(" ", MVC.Admin.AzmoonSetting.ActionNames.DeleteAzmoonPlace, MVC.Admin.AzmoonSetting.Name, new { Id = t.Id }, new AjaxOptions { HttpMethod = "DELETE", InsertionMode = InsertionMode.Replace, UpdateTargetId = "AzmoonPlaceList", OnSuccess = "loadAjaxComponents", OnComplete = "hideLoading", OnBegin = "showLoading", Confirm = "آیا برای حذف اطمینان دارید؟" }, new { @class = " fa fa-minus-square fa-2x ", style = "color:red;" })
+
+
+
+
+
+
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+@Html.Raw(TempData["Message"])
+
+

@@ -1,0 +1,33 @@
+﻿@model IEnumerable<Jazb.DomainClasses.Entities.FAQ>
+<div id="label-table">
+    <table style="width: 100%;" class="table Jazb-table">
+        <thead>
+            <tr>
+                <td></td>
+                <td>موضوع</td>
+                <td>تاریخ</td>
+                <td>ارسال کننده</td>
+                <td>کد ملی</td>                
+                <td style="text-align: center">عملیات</td>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var message in Model)
+            {
+                <tr>
+                    <td>
+                        <input type="checkbox" name="PostsId" value="@Html.ConvertToPersianString(message.Id)" />
+                    </td>
+                    <td>@message.Subject</td>
+                    <td>@Html.ConvertToPersianDateTime(message.QuestionDate)</td>
+                    <td>@string.Format("{0} {1}", message.FirstName,message.LastName) </td>
+                    <td>@Html.ConvertToPersianString(message.MeliCode)</td>
+                    <td>
+                        @Ajax.ButtonDialog("مشاهده", Url.Action(MVC.Admin.ContactUs.ActionNames.Detail, MVC.Admin.ContactUs.Name), "GET", "id=" + message.Id, "dialog", new DialogOptions { Height = "600", Width = "800", IsModal = "true", Title = "مشاهده", ShowDir = "down", ShowEffect = "drop", HideEffect = "puff", HideDir = "up" }, "btn btn-primary")
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+

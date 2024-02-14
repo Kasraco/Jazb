@@ -1,0 +1,116 @@
+@model Jazb.DomainClasses.Entities.article
+
+
+<link href="~/Content/Select2/select2.min.css" rel="stylesheet" />
+
+<link href="~/Content/redactor/redactor.css" rel="stylesheet" />
+<link href="~/Content/PersianDatePicker.css" rel="stylesheet" />
+<link href="~/Content/persianDatepicker-default.css" rel="stylesheet" />
+<link href="~/Content/bootstrap-fileupload.min.css" rel="stylesheet" />
+<link href="~/Content/toastr.min.css" rel="stylesheet" />
+
+
+<script src="~/Scripts/Select2/select2.min.js"></script>
+<script src="~/Scripts/redactor/redactor.js"></script>
+<script src="~/Scripts/redactor/fa.js"></script>
+<script src="~/Scripts/bootstrap-fileupload/bootstrap-fileupload.min.js"></script>
+<script src="~/Scripts/knockout-2.1.0.js"></script>
+<script src="~/Scripts/toastr.js"></script>
+<script src="~/Scripts/PersianDatePicker.js"></script>
+
+<div class="container-fluid" id="divpanle">
+
+
+
+           @using (Ajax.BeginForm(MVC.Admin.articles.ActionNames.Create, MVC.Admin.articles.Name, null, new AjaxOptions { UpdateTargetId = "add-result", InsertionMode = InsertionMode.Replace, HttpMethod = "POST", OnBegin = "showLoading", OnComplete = "hideLoading" }, new { enctype = "multipart/form-data", @class = "form-horizontal", id = "add-article-form" }))
+      
+            {
+                @Html.ValidationSummary(true, null, new { @class = "alert alert-danger" })
+                @Html.AntiForgeryToken()
+                @Html.HiddenFor(model => model.AzmoonId)
+                @Html.Partial("_CreateOrEdit", Model)
+
+            <div class="progress progress-striped">
+                <div class="progress-bar progress-bar-success">0%</div>
+            </div>
+                <div id="add-result"></div>
+
+                <div class="row">
+                    <div class="col-md-4">
+                        <input type="submit" value="Save" class="btn btn-primary btn-block" />
+                    </div>
+                    <div class="col-md-2">
+                        @Html.ActionLink("Back To List", "Index", null, new { @class = "btn btn-warning" })
+                    </div>
+                </div>
+            }
+
+
+
+</div>
+@{
+
+    <script src="~/Scripts/jquery.form.js"></script>
+    <script type="text/javascript">
+
+    $(document).ready(function () {
+
+        $(".datepicker-fullscreen").persianDatepicker();
+        $('#Body').redactor({
+            focus: true,
+            lang: 'fa',
+            imageUpload: '@Url.Action("ImageUpload", "areas")',
+            fileUpload: '@Url.Action("FileUpload", "areas")',
+            linkFileUpload: '@Url.Action("FileLinkUpload", "areas")',
+            autoformat: false,
+            convertDivs: false
+        });
+
+        $('.selectpicker').select2();
+    }
+  );
+
+    run(function () {
+        //$('.date-picker').datepicker({ changeMonth: true, changeYear: true });
+        //$('select').chosen();
+        $.validator.unobtrusive.parse('#add-Azmoon-form');
+
+        var bar = $('.progress-bar');
+
+        var percent = $('.progress-bar');
+
+        var status = $('#add-result');
+
+        $('form').ajaxForm({
+            beforeSend: function () {
+
+                status.empty();
+                var percentVal = '0%';
+                bar.width(percentVal)
+                percent.html(percentVal);
+            },
+            uploadProgress: function (event, position, total, percentComplete) {
+                var percentVal = percentComplete + '%';
+                bar.width(percentVal)
+                percent.html(percentVal);
+            },
+            success: function () {
+                var percentVal = '100%';
+                bar.width(percentVal)
+                percent.html(percentVal);
+            },
+            complete: function (xhr) {
+                status.html(xhr.responseText);
+            }
+        });
+    });
+
+
+    //(function () {
+
+
+    //})();
+
+    </script>
+
+}

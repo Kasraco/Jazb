@@ -1,0 +1,288 @@
+﻿.header .menu a{
+
+    font-family:'Montserrat',sans-serif;
+    color: #414141;
+    font-weight: 300!important;
+    outline: medium none;
+    text-decoration: none;
+    transition: all 0.21s ease-in-out 0s;
+
+}
+
+.header{
+	width: 100%;
+	height: 75px;
+	border-bottom:1px solid rgba(0,0,0,.07);
+	background: #fff;
+	background-color: rgba(255,255,255,0.85);
+	position: absolute;
+	z-index: 75;
+
+
+}
+
+
+/* Jump Menu */
+#nav2
+	{
+		display:none;
+		width: 60em; /* 1000 */
+		font-family: 'Open Sans', sans-serif;
+		font-weight: 400;
+		position: absolute;
+		top: 25%;
+		left: 50%;
+		margin-left: -30em; /* 30 480 */
+	}
+
+	#nav2 > a
+	{
+		display: none;
+	}
+
+	#nav2 li
+	{
+		position: relative;
+	}
+		#nav2 li a
+		{
+			color: #777;
+			display: block;
+			font-weight: 600;
+			text-decoration:none;
+			text-transform:uppercase;
+		}
+		
+
+	#nav2 span:after
+	{
+		width: 0;
+		height: 0;
+		border: 0.313em solid transparent; /* 5 */
+		border-bottom: none;
+		border-top-color: #efa585;
+		content: '';
+		vertical-align: middle;
+		display: inline-block;
+		position: relative;
+		right: -0.313em; /* 5 */
+	}
+
+	/* first level */
+
+	#nav2 > ul
+	{
+		height: 3.75em; /* 60 */
+		background-color: #f5f5f5;
+		padding:0;
+	}
+		#nav2 > ul > li
+		{
+			width: 25%;
+			height: 100%;
+			float: left;
+		}
+			#nav2 > ul > li > a
+			{
+				height: 100%;
+				font-size: 1.7em;
+				line-height: 2.5em; 
+				text-align: center;
+			}
+				#nav2 > ul > li:not( :last-child ) > a
+				{
+					border-right: 1px solid #cc470d;
+				}
+				#nav2 > ul > li:hover > a,
+				#nav2 > ul:not( :hover ) > li.active > a
+				{
+					color:#333;
+				}
+
+
+		/* second level */
+
+		#nav2 li ul
+		{
+			background-color: #cc470d;
+			display: none;
+			position: absolute;
+			top: 100%;
+		}
+			#nav2 li:hover ul
+			{
+				display: block;
+				left: 0;
+				right: 0;
+			}
+				#nav2 li:not( :first-child ):hover ul
+				{
+					left: -1px;
+				}
+				#nav2 li ul a
+				{
+					font-size: 1.25em; /* 20 */
+					border-top: 1px solid #e15a1f;
+					padding: 0.75em; /* 15 (20) */
+				}
+
+
+@media only screen and ( max-width: 62.5em ) /* 1000 */
+{
+	#nav2
+	{
+		display:none;
+		width: 100%;
+		position: static;
+		margin: 0;
+	}
+}
+
+@media only screen and ( max-width: 974px ) /* 640 */
+{
+	html
+	{
+		font-size: 75%; /* 12 */
+	}
+
+	#nav2
+	{
+		display:block;
+		position: relative;
+		top: auto;
+		left: auto;
+		font-size: 75%;
+	}
+		#nav2 > a
+		{
+			width: 50px; /* 50 */
+			height: 75px; /* 50 */
+			text-align: left;
+			text-indent: -9999px;
+			position: relative;
+			background:url("images/menu-bullets.png") no-repeat scroll 0 0 rgba(0, 0, 0, 0);
+			float:right;
+			cursor:pointer;            
+		}
+
+
+		#nav2:not( :target ) > a:first-of-type,
+		#nav2:target > a:last-of-type
+		{
+			display: block;
+		}
+
+
+	/* first level */
+	#nav2.active > ul{ display:block;}
+
+	#nav2 > ul
+	{
+		height: auto;
+		display: none;
+		position: absolute;
+		left: 0;
+		right: 0;
+		margin-top:75px;
+	}
+		#nav2:target > ul
+		{
+			display: block;
+		}
+		#nav2 > ul > li
+		{
+			width: 100%;
+			float: none;
+		}
+			#nav2 > ul > li > a
+			{
+				height: auto;
+				text-align: left;
+				padding: 0.5em 1em;
+			}
+				#nav2 > ul > li:not( :last-child ) > a
+				{
+					border-right: none;
+					border-bottom: 1px solid #ccc;
+				}
+
+
+		/* second level */
+
+		#nav2 li ul
+		{
+			position: static;
+			padding: 1.25em; /* 20 */
+			padding-top: 0;
+		}
+}
+
+/* JumpMenu Styles */
+.jump-menu{
+	display: none;
+	position: absolute;
+	top: 0;
+	right: 0;
+}
+.jump-selector{
+	border-radius: 0;
+	background: url("images/menu-bullets.png") no-repeat;
+	position: absolute;
+	width: 50px;
+	height: 75px;
+	top: 0;
+	right: 0;
+	border: none;
+	-webkit-appearance: none;
+	padding-right: 50px;
+	cursor: pointer;
+    padding:10px;
+    background-color:red;
+}
+
+
+
+
+
+
+
+#nav .current a {color: #F8434A !important;}
+.header .menu a{
+
+    font-family:'Montserrat',sans-serif;
+    color: #414141;
+    font-weight: 300!important;
+    outline: medium none;
+    text-decoration: none;
+    transition: all 0.21s ease-in-out 0s;
+
+}
+
+.menu{
+	float: right;
+	margin-right: 68px;
+}
+.menu ul{list-style: none; padding: 0; height: 75px; margin: 0;}
+.menu ul li{
+	float: left;
+    font-size: 15px;
+    font-weight: 400;
+    letter-spacing: 1px;
+    line-height: 75px;
+    padding: 0 22px;
+    text-transform: uppercase;
+}
+.menu a{
+	color: #414141;
+    font-weight: 600;
+    outline: medium none;
+    text-decoration: none;
+    transition: all 0.21s ease-in-out 0s;
+}.menu a:hover{
+	color: #F8434A;
+	-webkit-transition: all 0.21s ease-in-out;
+	-moz-transition: all 0.21s ease-in-out;
+	-o-transition: all 0.21s ease-in-out;
+	transition: all 0.21s ease-in-out;
+}
+#nav .current a {color: #F8434A !important;}

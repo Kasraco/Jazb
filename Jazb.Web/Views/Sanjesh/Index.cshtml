@@ -1,0 +1,58 @@
+﻿@model Jazb.Model.Sanjesh.LoginSanjesh
+
+@{
+    Layout = "~/Views/Shared/_LayoutAzmoon.cshtml";
+}
+
+
+
+<div class="panel panel-primary">
+    <div class="panel-heading">
+        <h3 class="panel-title"></h3>
+    </div>
+    <div class="panel-body ">
+        <div class="well">
+            <div class="page-header">
+                <h3>ورود داوطلبان</h3>
+                <h4 style="color:red;">توجه توجه</h4>
+                    <ul>
+                        <li>داوطلب گرامی بارگذاری مدارک <span style="color:red;">فقط یکبار</span> انجام می شود </li>
+                        <li>ویرایش مدارک انجام نمیشود</li>
+                        <li>فقط درصورت دریافت <span style="color:red;">کد رهگیری</span> مدارک شما ثبت میشوند</li>
+                        <li>درصورتی که مدارک شما <span style="color:red;">ناقص</span> میباشند از بارگذاری آنها خود داری فرمایید ، مدارک را کامل کرده و سپس اقدام به بارگذاری مدارک کنید</li>
+                    </ul>
+             
+            </div>
+            @using (Html.BeginForm(MVC.Sanjesh.ActionNames.CheckData, MVC.Sanjesh.Name, FormMethod.Post, new { Id = "wizForm", @class = "form-horizontal" }))
+            {
+                @Html.ValidationSummary("", new{ @class = "alert alert-danger" })
+                @Html.AntiForgeryToken()
+             
+                <h4>لطفا کد ملی و شماره داوطلبی (شماره مندرج روی برچسب صندلی) خود را در کادرهای مربوطه وارد کنید</h4>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.UserName, new { @class = "control-label col-md-2" })
+                    <div class="col-md-5">
+                        @Html.TextBoxFor(model => model.UserName, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.UserName, null, new { @class = "has-error help-block" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Password, new { @class = "control-label col-md-2" })
+                    <div class="col-md-5">
+                        @Html.TextBoxFor(model => model.Password, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.Password, null, new { @class = "has-error help-block" })
+                    </div>
+                </div>
+
+                <input type="submit" value="ورود" title="ورود" id="btn_Login" class="btn btn-success " />
+
+            }
+         
+
+        </div>
+    </div>
+</div>
+
+

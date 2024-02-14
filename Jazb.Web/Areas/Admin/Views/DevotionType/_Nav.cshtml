@@ -1,0 +1,28 @@
+﻿
+<div class="navbar">
+    <div class="navbar-inner">
+        <a class="brand" href="#">مدیریت سهمیه ایثارگری</a>
+        <ul class="nav">
+            <li>
+                @Ajax.ActionLink("سهمیه ایثارگری جدید", MVC.Admin.DevotionType.ActionNames.Add, MVC.Admin.DevotionType.Name, null,
+                                         new AjaxOptions
+                                         {
+                                             HttpMethod = "Get",
+                                             InsertionMode = InsertionMode.Replace,
+                                             UpdateTargetId = "logOnModal",
+                                             LoadingElementDuration = 0,
+                                             LoadingElementId = "loadingMessage",
+                                             OnSuccess = "LogOnForm.onSuccess"
+                                         }, new { tabindex = "-1" })
+            </li>
+
+            <li class="pull-left">
+
+                @Ajax.ActionLink("بازگشت", MVC.Admin.DevotionType.ActionNames.Index, MVC.Admin.DevotionType.Name, new AjaxOptions { HttpMethod = "GET", InsertionMode = InsertionMode.Replace, UpdateTargetId = "main-content", OnSuccess = "loadAjaxComponents", OnComplete = "hideLoading", OnBegin = "showLoading" })
+
+
+            </li>
+        </ul>
+    </div>
+</div>
+

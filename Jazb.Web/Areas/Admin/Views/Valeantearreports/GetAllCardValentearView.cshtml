@@ -1,0 +1,20 @@
+﻿@{
+    ViewBag.Title = "Index";
+}
+
+
+@using System.Web.UI.WebControls;
+@using Stimulsoft.Report.Mvc
+
+@Html.Stimulsoft().RenderMvcViewerScripts()
+@Html.Stimulsoft().StiMvcViewer(new StiMvcViewerOptions()
+{
+    Localization = "~/content/reports/fa.xml",
+    ActionGetReportSnapshot = "LoadReportCardValentear",
+    ActionViewerEvent = "ViewerEvent",
+    ActionExportReport = "ExportReport",
+    ActionPrintReport = "PrintReport",
+    RightToLeft = true,
+    PageAlignment = StiContentAlignment.Center
+
+})

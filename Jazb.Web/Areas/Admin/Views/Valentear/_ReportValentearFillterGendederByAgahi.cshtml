@@ -1,0 +1,102 @@
+﻿@model List<Jazb.Model.AdminModel.ReportValentearByGender>
+@{
+    var Rowindex = 0;
+}
+<div class="row-fluid">
+    <div class="span7">
+        <input type="button" class="btn btn-info" onclick="printDiv('printThis')" value="چاپ اطلاعات " />
+    </div>
+</div>
+<div id="printThis">
+
+    <div class="print">
+
+
+
+        @foreach (var Gen in Model)
+        {
+            <table class="table table-striped table-hover table-bordered breck">
+
+                <tbody>
+                    <tr>
+                        <td>
+                            <h4>تعداد کل شرکت کنندگان @Gen.GenderTitle</h4>
+
+                            @foreach (var item in Gen.ValentearsGroups)
+                            {
+                                Rowindex = 0;
+                                <table class="table table-striped table-hover table-bordered breck">
+
+                                    <thead>
+                                        <tr>
+                                            <th>
+                                                <div class="row-fluid">
+                                                    <div class="snap4">@string.Format("{0} : {1}", "عنوان رشته شغلی", item.JobName)</div>
+                                                    <div class="snap4">@string.Format("{0} : {1}", "محل ورد تقاضا", item.PlaceTitle)</div>
+                                                    <div class="snap4">@string.Format("{0} : {1}", "ظرفیت", item.TotlaCount)</div>
+                                                </div>
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+
+                                        <tr>
+                                            <td>
+
+
+                                                <table class="table table-striped table-hover table-bordered">
+
+                                                    <thead>
+                                                        <tr>
+                                                            <th>ردیف</th>
+                                                            <th>نام و نام خانوادگی</th>
+                                                            <th>نام پدر</th>
+                                                            <th>شماره شناسنامه</th>
+                                                            <th>کد ملی</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        @foreach (var v in item.Valentears)
+                                                        {
+                                                            Rowindex += 1;
+                                                            <tr>
+                                                                <td>@Html.ConvertToPersianString(Rowindex)</td>
+                                                                <td>@string.Format("{0} {1}", v.FirstName, v.LastName)</td>
+                                                                <td>@v.FatherName</td>
+                                                                <td>@Html.ConvertToPersianString(v.BirthCertificateNo)</td>
+
+                                                                <td>@Html.ConvertToPersianString(v.NationalID)</td>
+                                                            </tr>
+                                                        }
+                                                    </tbody>
+                                                </table>
+
+
+                                            </td>
+
+                                        </tr>
+
+                                    </tbody>
+                                </table>
+                            }
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        }
+    </div>
+</div>
+@{
+    <script type="text/javascript">
+        function printDiv(divName) {
+            var printContents = document.getElementById(divName).innerHTML;
+            var originalContents = document.body.innerHTML;
+
+            document.body.innerHTML = printContents;
+
+            window.print();
+
+            document.body.innerHTML = originalContents;
+        }
+    </script>
+}

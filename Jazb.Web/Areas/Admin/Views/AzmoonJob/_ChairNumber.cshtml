@@ -1,0 +1,114 @@
+﻿@model Jazb.Model.AdminModel.ManageAzmoon.AdminAzmoonJob.ChaireNumberViewModel
+<div class="modal-dialog modal-lg" >
+    <div class="modal-content">
+        @using (Ajax.BeginForm(MVC.Admin.AzmoonJob.ActionNames.SetChairNumber, MVC.Admin.AzmoonJob.Name, null, new AjaxOptions { UpdateTargetId = "index-result", InsertionMode = InsertionMode.Replace, HttpMethod = "POST", OnBegin = "showLoading", OnComplete = "hideLoading", OnSuccess = "LogOnForm.onEndSuccess" }, new { enctype = "multipart/form-data", @class = "form-horizontal", id = "add-Degree-form" }))
+        {
+           
+            <div class="modal-header" >
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h3>فرم ایجاد شماره صندلی</h3>
+            </div>
+            <div class="modal-body" >
+
+
+                @Html.ValidationSummary(true, null, new { @class = "alert alert-danger" })
+                @Html.AntiForgeryToken()
+                @Html.HiddenFor(x => x.AzmoonId)
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>ردیف</th>
+                            <th>رشته شغلی</th>
+                            <th style="background-color:gainsboro;" >تعداد آقایان</th>
+                            <th style = "width:50px;">آقایان از شماره</th>
+                            <th style = "width:50px;">آقایان تا شماره</th>
+                            <th>حوزه امتحانی آقایان</th>
+                            <th style="background-color:gainsboro;" >تعداد خانم ها</th>
+                            <th style = "width:50px;">خانم ها از شماره</th>
+                            <th style = "width:50px;">خانم ها تا شماره</th>                           
+                            <th>حوزه امتحانی خانم ها</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                      
+                        @for (int index = 0; index < Model.ChairNModel.Count(); index++)
+                        {
+                         <tr>
+                             <td>
+                                 @{var row = index + 1;}
+                                 @row
+                         </td>
+                             <td>
+                                 <div class="control-group" >
+                                     @Html.HiddenFor(model => Model.ChairNModel[index].Id)
+                                     @Html.HiddenFor(model => Model.ChairNModel[index].JobName)
+                                     <span class="control-label">@Model.ChairNModel[index].JobName</span>
+                                   
+                                 </div>
+                             </td>
+                             <td style="background-color:gainsboro; width:30px;">
+                                 @string.Format("{0} نفر", Model.ChairNModel[index].ManCapacity)
+                             </td>
+                             <td>
+                                 <div class="control-group">
+                                     @Html.TextBoxFor(model => model.ChairNModel[index].ManFrom, new { @class = "form-control col-md-2" , style = "width:50px;" })
+                                     @Html.ValidationMessageFor(model => model.ChairNModel[index].ManFrom, null, new { @class = "has-error help-block" })
+                                 </div>
+                             </td>
+                             <td>
+                                 <div class="control-group">
+                                     @Html.TextBoxFor(model => model.ChairNModel[index].ManTo, new { @class = "form-control", style = "width:50px;" })
+                                     @Html.ValidationMessageFor(model => model.ChairNModel[index].ManTo, null, new { @class = "has-error help-block" })
+                                 </div>
+                             </td>
+                             <td>
+                                 <div class="control-group">
+                                     @Html.TextBoxFor(model => model.ChairNModel[index].ManRegionExam, new { @class = "form-control", style = "width:100px;" })
+                                     @Html.ValidationMessageFor(model => model.ChairNModel[index].ManRegionExam, null, new { @class = "has-error help-block" })
+                                 </div>
+                             </td>
+                             <td style="background-color:gainsboro; width:30px;">
+                                 @string.Format("{0} نفر", Model.ChairNModel[index].WomanCapacity)
+                             </td>
+                             <td>                             
+                                 <div class="control-group" >
+                                     @Html.TextBoxFor(model => model.ChairNModel[index].WomanFrom, new { @class = "form-control", style = "width:50px;" })
+                                     @Html.ValidationMessageFor(model => model.ChairNModel[index].WomanFrom, null, new { @class = "has-error help-block" })
+                                 </div>
+                             </td>
+                             <td>
+                                 <div class="control-group" >
+                                     @Html.TextBoxFor(model => model.ChairNModel[index].WomanTo, new { @class = "form-control", style = "width:50px;" })
+                                     @Html.ValidationMessageFor(model => model.ChairNModel[index].WomanTo, null, new { @class = "has-error help-block" })
+                                 </div>
+                             </td>
+                             <td>
+                                 <div class="control-group">
+                                     @Html.TextBoxFor(model => model.ChairNModel[index].WomanRegionExam, new { @class = "form-control", style = "width:100px;" })
+                                     @Html.ValidationMessageFor(model => model.ChairNModel[index].WomanRegionExam, null, new { @class = "has-error help-block" })
+                                 </div>
+                             </td>
+                         </tr>  
+                        }
+
+                    </tbody>
+                </table> 
+               
+
+            </div>
+            <div class="modal-footer" style="text-align: right;">
+                <input type="submit" value="Save" class="btn btn-primary " />
+                <button class="btn btn-danger" data-dismiss="modal" aria-hidden="true">بستن</button>
+            </div>
+        }
+    </div>
+</div>
+
+<script>
+    run(function () {
+        $.validator.unobtrusive.parse('#add-Degree-form');
+
+    })
+
+</script>
+

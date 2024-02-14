@@ -1,0 +1,51 @@
+﻿
+@page
+{
+    size: A4 portrait;
+    margin: .5mm; /* change the margins as you want them to be. */
+}
+
+
+
+@media print
+{
+        .page-break
+    {
+        height: 0;
+        page-break-before: always;
+        margin: .5mm;
+        border-top: none;
+        font-size: 8pt;
+    }
+
+      .btn
+    {
+        display:none;
+    }
+
+      .lnk1{
+           display:none;
+      }
+
+
+}
+
+
+body
+{
+    margin-left: 1mm;
+    margin-right: 1mm;
+     font-size: 8pt;
+}
+
+.page
+{
+    padding-top: 1px;
+    page-break-after: always;
+    
+    
+    position: relative;
+    border-bottom: 1px solid #000;
+}
+
+

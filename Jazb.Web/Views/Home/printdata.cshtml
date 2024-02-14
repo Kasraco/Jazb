@@ -1,0 +1,236 @@
+﻿@model Jazb.Model.ValentearModel.ValentearModel
+@{
+    ViewBag.Title = "ViewPrint";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+
+<div class="row">
+    <div class="col-md-7">
+        <input type="button" class="btn btn-info" onclick="printDiv('printThis')" value="چاپ اطلاعات " />
+    </div>
+</div>
+<div class="row" id="printThis">
+    <link href="~/Content/Docs.css" rel="stylesheet" />
+  
+    <div class="col-md-7">
+        @{
+            string imageBase64 = Convert.ToBase64String(Model.PictureValenteer);
+            var imageSrc = string.Format("data:image/gif;base64,{0}", imageBase64);
+        }
+        <table class="table table-striped table-hover table-bordered">
+            <tr>
+                <td>
+                    <img src="~/Images/AzmoonHeader.jpg" width="100%" /></td>
+            </tr>
+            <tr>
+                <td class="text-center">
+                    <h4><b>کد رهگیری :</b>@Model.TrackingCode</h4>
+                </td>
+            </tr>
+        </table>
+
+        <table class="table table-striped table-hover table-bordered">
+
+            <tr>
+                <th>نام خانوادگی: </th>
+                <td>@Model.LastName</td>
+                <th>نام: </th>
+                <td>@Model.FirstName</td>
+                <th></th>
+                <td></td>
+            </tr>
+            <tr>
+                <th>نام پدر: </th>
+                <td>@Model.FatherName</td>
+                <th>جنسیت: </th>
+                <td>@Model.Gender.GenderName</td>
+                <td colspan="2" rowspan="5">
+                    <img id="ID_gavahi_do_tarh" src="@imageSrc" width="100px"  />
+                </td>
+            </tr>
+            <tr>
+                <th>محل تولد: </th>
+                <td>@(Model.CityPart_BirthPlace == null ? "مشخص نشده" :  Model.CityPart_BirthPlace.City.Province.Title + " - " +  Model.CityPart_BirthPlace.City.Title +" - " + Model.CityPart_BirthPlace.Title)</td>
+                <th>تاریخ تولد: </th>
+                <td>@Model.BirthDate</td>
+            </tr>
+            <tr>
+                <th>کد ملی: </th>
+                <td>@Model.NationalID</td>
+                <th>شماره شناسنامه: </th>
+                <td>@Model.BirthCertificateNo</td>
+            </tr>
+            <tr>
+                <th>محل صدور: </th>
+                <td>@Model.IssuancePlace_City.Title</td>
+                <th>وضعیت تاهل: </th>
+                <td>@Model.MarriageStatus.MarriageStatusTitle</td>
+            </tr>
+            <tr>
+                <th>دین: </th>
+                <td>@Model.Religion.Title</td>
+                <th>مذهب: </th>
+                <td>@Model.Faith.Title</td>
+            </tr>
+            <tr>
+                <th>وضعیت نظام وظیفه: </th>
+                <td>@Model.ConscriptStatus.Title</td>
+                <th></th>
+                <td></td>
+                <th></th>
+                <td></td>
+            </tr>
+
+        </table>
+
+        <table class="table table-striped table-hover table-bordered">
+
+            <tr>
+                <td>
+                    <b>وضعیت ایثارگری</b>
+                    <ol>
+                        @if (Model.WoundedPercent != null)
+                        {
+                            <li><b>جانباز</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <b>درصد جانبازی &nbsp; &nbsp;</b> Model.WoundedPercent<b>درصد</b></li>
+                        }
+                         
+                        @if (Model.FightInWarMonth != null || Model.FightInWarYear != null || Model.FightInWarDay != null)
+                        {<li><b>رزمنده ( دارای خداقل 6 ماه حضور داوطلبانه در جبهه ) مدت حضور در جبهه </b><b>@Model.FightInWarDay روز -  @Model.FightInWarMonth ماه-  @Model.FightInWarYear سال </b></li>}
+
+                        @if (Model.CaptivationYear != null || Model.CaptivationMonth != null || Model.CaptivationDay != null)
+                        {<li><b>آزاده </b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;   <b>مدت اسارت:   @Model.CaptivationDay روز -  @Model.CaptivationMonth ماه -  @Model.CaptivationYear سال </b></li>}
+
+                        @if (Model.Child_Shahid == true)
+                        {<li>فرزند شهید</li>}
+                        @if (Model.Wife_Shahid == true)
+                        {<li>همسر شهید</li>}
+                        @if (Model.Child_JanBazUp == true)
+                        {<li>فرزند جانبازان 25% و بالاتر </li>}
+                        @if (Model.Wife_JanBazUp == true)
+                        {<li>همسر جانبازان 25% و بالاتر</li>}
+                        @if (Model.Child_AzadehUp == true)
+                        {<li>فرزند آزادگان بالای یکسال اسارت  فرزند</li>}
+                        @if (Model.Wife_AzadehUp == true)
+                        {<li>همسر آزادگان بالای یکسال اسارت  فرزند</li>}
+                        @if (Model.Child_Janbaz_Jebhe == true)
+                        {<li>فرزند رزمندگان دارای سابقه حداقل شش ماه حضور داوطلبانه در جبهه </li>}
+                        @if (Model.Wife_Janbaz_Jebhe == true)
+                        {<li>همسر رزمندگان دارای سابقه حداقل شش ماه حضور داوطلبانه در جبهه </li>}
+                        @if (Model.Child_JanbazDown == true)
+                        {<li>فرزند جانبازان زیر 25%</li>}
+                        @if (Model.Child_AzadehDown == true)
+                        {<li>فرزند آزادگان زیر یکسال اسارت </li>}
+                        @if (Model.Broder_Shahid == true)
+                        {<li>برادر شهید </li>}
+                        @if (Model.Sister_Shahid == true)
+                        {<li>خواهر شهید </li>}
+
+                    </ol>
+                </td>
+
+                <td>
+                    <b>سایر موارد</b>
+                    <ol>
+                        @if (Model.Sahmeyeh_Azad == true)
+                        {<li>سهمیه آزاد</li>}
+                        @if (Model.Maloline_Adi == true)
+                        {<li>معلولین عادی</li>}
+                        @if (Model.Boomi_City == true)
+                        {<li>افراد بومی محل مورد تقاضا</li>}
+                        @if (Model.Boomy_Provine == true)
+                        {<li>افراد بومی استان</li>}
+                        @if (Model.MashmoolKhedmat == true)
+                        {<li>مشمولین خدمت پزشکان و پیراپزشکان
+                            <ul>
+                                <li>مدت خدمت  روز @Model.Khedmat_Day - ماه: @Model.Khedmat_Month - سال: @Model.Khedmat_Year</li>
+                            </ul>
+                        </li>}
+                        @if (Model.Afrade_Not_Boomy == true)
+                        {<li>افراد غیر بومی</li>}
+                    </ol>
+                </td>
+            </tr>
+
+        </table>
+
+        <table class="table table-striped table-hover table-bordered">
+
+            <tr>
+                <th>آخرین مدرک تحصیلی : </th>
+                <td colspan="5">@Model.Degree.DegreeTitle</td>
+            </tr>
+            <tr>
+                <th>رشته تحصیلی : </th>
+                <td>@Model.EducatedSkill.EducatedSkillTitle</td>
+                <th>گرایش تحصیلی :</th>
+                <td>@Model.EducatedField</td>
+                <th>معدل :</th>
+                <td>@Model.Average.ToString()</td>
+            </tr>
+            <tr>
+                <th>دانشگاه محل تحصیل :</th>
+                <td colspan="3">@Model.University_Code.UniversityName</td>
+                <th>استان محل تحصیل :</th>
+                <td>@Model.UniversityProvince.Title</td>
+            </tr>
+            <tr>
+                <th>تاریخ اخذ آخرین مدرک تحصیلی :  </th>
+                <td colspan="2">@Model.LicenseDate</td>
+                <th>محل اخذ دیپلم بهیاری </th>
+                <td colspan="2">@Model.SchoolName</td>
+            </tr>
+        </table>
+
+
+        <table class="table table-striped table-hover table-bordered">
+
+            <tr>
+                <td><b>شغل مورد درخواست :</b>  @Model.Job.Title</td>
+                <td><b>محل جغرافیایی مورد تقاضا ( فقط یک محل ) : </b>@Model.Place.Title</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td colspan="3">محل جغرافیایی انجام طرح برای مشمولین خدمت پزشکان و پیراپزشکان که در حین انجام تعهدات قانونی هستند محل خدمت  <b>@Model.PlanPlace.UniversityName</b></td>
+            </tr>
+            <tr>
+                <td colspan="3">
+                    <b>نشانی کامل : محل سکونت : استان </b>@Model.Address_Zone.City.Province.Title &nbsp; &nbsp;<b>شهرستان </b>@Model.Address_Zone.City.Title &nbsp; &nbsp; <b>بخش</b>&nbsp; &nbsp;@Model.Address_Zone.Title &nbsp; &nbsp;<b>آدرس</b> &nbsp; &nbsp; @Model.Adress_Adress &nbsp; &nbsp; <b>کد پستی</b> &nbsp; @Model.PostalCode &nbsp; &nbsp;<b>تلفن</b>&nbsp; @Model.Tel.ToString() &nbsp; &nbsp; <b>شماره تلفن همراه</b> &nbsp; @Model.Mobile
+                </td>
+            </tr>
+            <tr>
+                <td colspan="3">شماره تلفن برای تماس ضروری : @Model.Tel</td>
+            </tr>
+            <tr>
+                <td colspan="3">اینجانب <b>&nbsp;&nbsp;@Model.FirstName &nbsp; @Model.LastName&nbsp;&nbsp;</b> متقاضی شرکت در آزمون قرارداد کار معین  @Html.Action(MVC.MetaTag.ActionNames.GetCompanyAddress, MVC.MetaTag.Name) متن آگهی مربوطه را با دقت و بطور کامل مطالعه و سپس تقاضای فوق را تکمیل نموده ام و مسئولیت صحت کلیه مندرجات آن را به عهده میگیرم . در صورت اثبات خلاف اظهارات اینجانب در هر مقطع زمانی ( قبل و بعد از اشتغال ) هرگونه حقی را برای استخدام در آن دستگاه از خود سلب مینمایند.
+                </td>
+            </tr>
+            <tr>
+                <td>تاریخ تنظیم فرم :  @Model.DateRegister.ToPeString("dddd, dd MMMM,yyyy")</td>
+                <td>
+                    <br />
+                    <br />
+                    <br />
+                </td>
+                <td>امضاء و اثر انگشت متقاضی</td>
+            </tr>
+        </table>
+    </div>
+</div>
+
+@{
+    <script type="text/javascript">
+        function printDiv(divName) {
+            var printContents = document.getElementById(divName).innerHTML;
+            var originalContents = document.body.innerHTML;
+
+            document.body.innerHTML = printContents;
+
+            window.print();
+
+            document.body.innerHTML = originalContents;
+        }
+    </script>
+}

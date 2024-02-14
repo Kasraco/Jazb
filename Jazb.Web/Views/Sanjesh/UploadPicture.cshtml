@@ -1,0 +1,738 @@
+﻿@model Jazb.Model.Sanjesh.AddPictureModel
+
+@{
+    Layout = "~/Views/Shared/_LayoutAzmoon.cshtml";
+}
+
+<link href="~/Content/bootstrap-fileupload.min.css" rel="stylesheet" />
+<div class="well">
+    <fieldset>
+        <legend>مدارک</legend>
+        <div class="alert alert-warning">
+            <strong>داوطلب گرامی</strong>
+
+            <ol>
+                <li>موارد (<span style="color:red; font-weight:bold;">*</span>) داره مهم هستند حتما باید وارد شوند وباقی قسمت ها درصورتی که مشمول آن میشوید باید وارد کنید</li>
+                <li>داوطلب گرامی بارگذاری مدارک <span style="color:red;">فقط یکبار</span> انجام می شود </li>
+                <li>فقط درصورت دریافت <span style="color:red;">کد رهگیری</span> مدارک شما ثبت میشوند</li>
+                <li>درصورتی که مدارک شما <span style="color:red;">ناقص</span> میباشند از بارگذاری آنها خود داری فرمایید ، مدارک را کامل کرده و سپس اقدام به بارگذاری مدارک کنید</li>
+                <li>
+                    فایل عکس داوطلب باید با فرمت
+                    <abbr>JPG</abbr>
+                    باشد.
+                </li>
+                <li>تمامی تصاویر باید با رزولوشن 100  اسکن شده باشند</li>
+                <li>حجم تصاویر باید زیر 300 کیلوبایت باشند</li>
+                <li>تصویر داوطلب باید دارای زمینه روشن باشد. تصاویر دارای زمینه تیره قابل قبول نمی باشند. </li>
+                <li>تصویر داوطلب باید واضح و شفاف بوده و روی آن اثر مهر و یا نوشته نباشد. </li>
+                <li>تصویر باید تنها شامل چهره داوطلب باشد. داوطلب مجاز به ارسال تصویر کپی شناسنامه یا گواهینامه رانندگی به جای تصویر خود نمی باشد. </li>
+                <li>تصویر نباید دارای حاشیه های زائد خالی باشد.</li>
+                <li>تصاویر ارسالی باید در وضعیت صحیح و بدون چرخش 90 یا 180 درجه باشد.</li>
+            </ol>
+        </div>
+        </fieldset>
+    </div>
+
+        @using (Html.BeginForm(MVC.Sanjesh.ActionNames.ViewDataBeforeSave, MVC.Sanjesh.Name, FormMethod.Post, new { Id = "wizForm", enctype = "multipart/form-data", @class = "form-horizontal" }))
+        {
+
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary(true, "لطفا اطلاعات را کامل و به صورت صحیح وارد کنید", new { @class = "alert alert-danger" })
+            @Html.HiddenFor(model => model.DavNO);
+            @Html.HiddenFor(model => model.Fname);
+            @Html.HiddenFor(model => model.ID);
+            @Html.HiddenFor(model => model.Lname);
+            @Html.HiddenFor(model => model.Melicode);
+            @Html.HiddenFor(model => model.PNO);
+
+            <div class="well">
+                <fieldset>
+                    <legend>اطلاعات کاربر </legend>
+                    <div class="row">
+                        <div class="col col-md-6">
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.Fname, new { @class = "control-label col-md-5" })
+                                <div class="col-md-7">
+                                    <div class="form-control">@Model.Fname</div>
+
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.Lname, new { @class = "control-label col-md-5" })
+                                <div class="col-md-7">
+                                    <div class="form-control">@Model.Lname</div>
+
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.Melicode, new { @class = "control-label col-md-5" })
+                                <div class="col-md-7">
+                                    <div class="form-control">@Model.Melicode</div>
+
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.DavNO, new { @class = "control-label col-md-5" })
+                                <div class="col-md-7">
+                                    <div class="form-control">@Model.DavNO</div>
+
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.PNO, new { @class = "control-label col-md-5" })
+                                <div class="col-md-7">
+                                    <div class="form-control">@Model.PNO</div>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col col-md-6">
+
+                            <strong style="color:red; font-size:16pt; line-height:2em;">
+                                باسلام و احترام
+                                <br />
+                                داوطلب گرامی لطفا اطلاعات داوطلبی  را که در سمت راست مشاهده میکنید بررسی کنید ودرصورتی که اطلاعات مربوط به شما بود مدارک خواسته شده ذیل را وارد و از قسمت پایین صفحه روی دکمه <span style="color:green;">ذخیره</span> کلیک کنید
+
+                            </strong>
+                        </div>
+                    </div>
+
+
+                </fieldset>
+            </div>
+
+            <div class="well">
+                <fieldset>
+                    <legend>تصاویر </legend>
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col col-md-4">
+                                <label>تصویر داوطلب (<span style="color:red; font-weight:bold;">*</span>)</label>
+                                <div class="fileupload fileupload-new" data-provides="fileupload">
+                                    <div class="fileupload-preview thumbnail" style="width: 240px; height: 100%; min-height: 128px;"></div>
+
+                                    <div>
+                                        <span class="btn btn-default btn-file">
+                                            <span class="fileupload-new">انتخاب فایل</span>
+                                            <span class="fileupload-exists">تغییر</span>
+                                            <input type="file" id="personel_picture" name="personel_picture" class="file-input" data-val-required="لطفا تصویر داوطلب را وارد کنید" />
+                                        </span>
+                                        <a href="#" class="btn btn-danger fileupload-exists" data-dismiss="fileupload">حذف</a>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="col col-md-4">
+                                <label>کارنامه اولیه سنجش(<span style="color:red; font-weight:bold;">*</span>)</label>
+                                <div class="fileupload fileupload-new" data-provides="fileupload">
+                                    <div class="fileupload-preview thumbnail" style="width: 240px; height: 100%; min-height: 128px;"></div>
+
+                                    <div>
+                                        <span class="btn btn-default btn-file">
+                                            <span class="fileupload-new">انتخاب فایل</span>
+                                            <span class="fileupload-exists">تغییر</span>
+                                            <input type="file" id="personel_Sanjesh" name="personel_Sanjesh" class="file-input" data-val-required="لطفا کارنامه اولیه سنجش را وارد کنید" />
+                                        </span>
+                                        <a href="#" class="btn btn-danger fileupload-exists" data-dismiss="fileupload">حذف</a>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="col col-md-4">
+                                <label>گواهی وضعیت طرح</label>
+                                <div class="fileupload fileupload-new" data-provides="fileupload">
+                                    <div class="fileupload-preview thumbnail" style="width: 240px; height: 100%; min-height: 128px;"></div>
+
+                                    <div>
+                                        <span class="btn btn-default btn-file">
+                                            <span class="fileupload-new">انتخاب فایل</span>
+                                            <span class="fileupload-exists">تغییر</span>
+                                            <input type="file" id="personel_GVT" name="personel_GVT" class="file-input" data-val-required="لطفا تصویر گواهی وضعیت طرح را وارد کنید" />
+
+                                        </span>
+                                        <a href="#" class="btn btn-danger fileupload-exists" data-dismiss="fileupload">حذف</a>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+            @*--------------------------------------------------------*@
+            <div class="well">
+
+                <fieldset>
+                    <legend>تصاویر شناسنامه</legend>
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col col-md-4">
+                                <label>صفحه اول شناسنامه(<span style="color:red; font-weight:bold;">*</span>)</label>
+                                <div class="fileupload fileupload-new" data-provides="fileupload">
+                                    <div class="fileupload-preview thumbnail" style="width: 240px; height: 100%; min-height: 128px;"></div>
+
+                                    <div>
+                                        <span class="btn btn-default btn-file">
+                                            <span class="fileupload-new">انتخاب فایل</span>
+                                            <span class="fileupload-exists">تغییر</span>
+                                            <input type="file" id="personel_Shsh1" name="personel_Shsh1" class="file-input" data-val-required="لطفا صفحه اول شناسنامه را وارد کنید" />
+                                        </span>
+                                        <a href="#" class="btn btn-danger fileupload-exists" data-dismiss="fileupload">حذف</a>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="col col-md-4">
+                                <label>صفحه دوم شناسنامه(<span style="color:red; font-weight:bold;">*</span>)</label>
+                                <div class="fileupload fileupload-new" data-provides="fileupload">
+                                    <div class="fileupload-preview thumbnail" style="width: 240px; height: 100%; min-height: 128px;"></div>
+
+                                    <div>
+                                        <span class="btn btn-default btn-file">
+                                            <span class="fileupload-new">انتخاب فایل</span>
+                                            <span class="fileupload-exists">تغییر</span>
+                                            <input type="file" id="personel_Shsh2" name="personel_Shsh2" class="file-input" data-val-required="لطفا تصویر صفحه دوم شناسنامه را وارد کنید" />
+                                        </span>
+                                        <a href="#" class="btn btn-danger fileupload-exists" data-dismiss="fileupload">حذف</a>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="col col-md-4">
+                                <label>صفحه سوم شناسنامه(<span style="color:red; font-weight:bold;">*</span>)</label>
+                                <div class="fileupload fileupload-new" data-provides="fileupload">
+                                    <div class="fileupload-preview thumbnail" style="width: 240px; height: 100%; min-height: 128px;"></div>
+
+                                    <div>
+                                        <span class="btn btn-default btn-file">
+                                            <span class="fileupload-new">انتخاب فایل</span>
+                                            <span class="fileupload-exists">تغییر</span>
+                                            <input type="file" id="personel_Shsh3" name="personel_Shsh3" class="file-input" data-val-required="لطفا تصویر صفحه سوم شناسنامه را وارد کنید" />
+                                        </span>
+                                        <a href="#" class="btn btn-danger fileupload-exists" data-dismiss="fileupload">حذف</a>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+            @*--------------------------------------------------------*@
+            <div class="well">
+                <fieldset>
+                    <legend>تصاویر مربوط به کارت ملی</legend>
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col col-md-4">
+                                <label>تصویر روی کارت ملی(<span style="color:red; font-weight:bold;">*</span>)</label>
+                                <div class="fileupload fileupload-new" data-provides="fileupload">
+                                    <div class="fileupload-preview thumbnail" style="width: 240px; height: 100%; min-height: 128px;"></div>
+
+                                    <div>
+                                        <span class="btn btn-default btn-file">
+                                            <span class="fileupload-new">انتخاب فایل</span>
+                                            <span class="fileupload-exists">تغییر</span>
+                                            <input type="file" id="personel_melicode_On" name="personel_melicode_On" class="file-input" data-val-required="لطفا تصویر روی کارت ملی را وارد کنید" />
+                                        </span>
+                                        <a href="#" class="btn btn-danger fileupload-exists" data-dismiss="fileupload">حذف</a>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="col col-md-4">
+                                <label>تصویر پشت کارت ملی(<span style="color:red; font-weight:bold;">*</span>)</label>
+                                <div class="fileupload fileupload-new" data-provides="fileupload">
+                                    <div class="fileupload-preview thumbnail" style="width: 240px; height: 100%; min-height: 128px;"></div>
+
+                                    <div>
+                                        <span class="btn btn-default btn-file">
+                                            <span class="fileupload-new">انتخاب فایل</span>
+                                            <span class="fileupload-exists">تغییر</span>
+                                            <input type="file" id="personel_melicode_Back" name="personel_melicode_Back" class="file-input" data-val-required="لطفا تصویر پشت کارت ملی را وارد کنید" />
+                                        </span>
+                                        <a href="#" class="btn btn-danger fileupload-exists" data-dismiss="fileupload">حذف</a>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+            @*--------------------------------------------------------*@
+            <div class="well">
+                <fieldset>
+                    <legend>تصاویر مدارک دانشگاهی</legend>
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col col-md-3">
+                                <label>تصویر مدرک کاردانی</label>
+                                <div class="fileupload fileupload-new" data-provides="fileupload">
+                                    <div class="fileupload-preview thumbnail" style="width: 240px; height: 100%; min-height: 128px;"></div>
+
+                                    <div>
+                                        <span class="btn btn-default btn-file">
+                                            <span class="fileupload-new">انتخاب فایل</span>
+                                            <span class="fileupload-exists">تغییر</span>
+                                            <input type="file" id="personel_Kardani" name="personel_Kardani" class="file-input" data-val-required="لطفا تصویر مدرک کاردانی را وارد کنید" />
+                                        </span>
+                                        <a href="#" class="btn btn-danger fileupload-exists" data-dismiss="fileupload">حذف</a>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <div class="col col-md-3">
+                                <label>تصویر مدرک کارشناسی</label>
+                                <div class="fileupload fileupload-new" data-provides="fileupload">
+                                    <div class="fileupload-preview thumbnail" style="width: 240px; height: 100%; min-height: 128px;"></div>
+
+                                    <div>
+                                        <span class="btn btn-default btn-file">
+                                            <span class="fileupload-new">انتخاب فایل</span>
+                                            <span class="fileupload-exists">تغییر</span>
+                                            <input type="file" id="personel_Karshenasi" name="personel_Karshenasi" class="file-input" data-val-required="لطفا تصویر مدرک کارشناسی را وارد کنید" />
+                                        </span>
+                                        <a href="#" class="btn btn-danger fileupload-exists" data-dismiss="fileupload">حذف</a>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="col col-md-3">
+                                <label>تصویر مدرک کارشناسی ارشد</label>
+                                <div class="fileupload fileupload-new" data-provides="fileupload">
+                                    <div class="fileupload-preview thumbnail" style="width: 240px; height: 100%; min-height: 128px;"></div>
+
+                                    <div>
+                                        <span class="btn btn-default btn-file">
+                                            <span class="fileupload-new">انتخاب فایل</span>
+                                            <span class="fileupload-exists">تغییر</span>
+                                            <input type="file" id="personel_KarshenasiArshad" name="personel_KarshenasiArshad" class="file-input" data-val-required="لطفا تصویر مدرک کارشناسی ارشد را وارد کنید" />
+                                        </span>
+                                        <a href="#" class="btn btn-danger fileupload-exists" data-dismiss="fileupload">حذف</a>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <div class="col col-md-3">
+                                <label>تصویر مدرک دکتری</label>
+                                <div class="fileupload fileupload-new" data-provides="fileupload">
+                                    <div class="fileupload-preview thumbnail" style="width: 240px; height: 100%; min-height: 128px;"></div>
+
+                                    <div>
+                                        <span class="btn btn-default btn-file">
+                                            <span class="fileupload-new">انتخاب فایل</span>
+                                            <span class="fileupload-exists">تغییر</span>
+                                            <input type="file" id="personel_Doctor" name="personel_Doctor" class="file-input" data-val-required="لطفا تصویر مدرک دکتری را وارد کنید" />
+                                        </span>
+                                        <a href="#" class="btn btn-danger fileupload-exists" data-dismiss="fileupload">حذف</a>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+            @*--------------------------------------------------------*@
+            <div class="well">
+                <fieldset>
+                    <legend>تصاویر مربوط به گواهی ایثارگری / معلولیت</legend>
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col col-md-4">
+                                <label>تصویر اول گواهی ایثارگری / معلولیت</label>
+                                <div class="fileupload fileupload-new" data-provides="fileupload">
+                                    <div class="fileupload-preview thumbnail" style="width: 240px; height: 100%; min-height: 128px;"></div>
+
+                                    <div>
+                                        <span class="btn btn-default btn-file">
+                                            <span class="fileupload-new">انتخاب فایل</span>
+                                            <span class="fileupload-exists">تغییر</span>
+                                            <input type="file" id="personel_Isargari1" name="personel_Isargari1" class="file-input" data-val-required="لطفا تصویر اول گواهی ایثارگری را وارد کنید" />
+                                        </span>
+                                        <a href="#" class="btn btn-danger fileupload-exists" data-dismiss="fileupload">حذف</a>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="col col-md-4">
+                                <label>تصویر دوم گواهی ایثارگیری/ معلولیت</label>
+                                <div class="fileupload fileupload-new" data-provides="fileupload">
+                                    <div class="fileupload-preview thumbnail" style="width: 240px; height: 100%; min-height: 128px;"></div>
+
+                                    <div>
+                                        <span class="btn btn-default btn-file">
+                                            <span class="fileupload-new">انتخاب فایل</span>
+                                            <span class="fileupload-exists">تغییر</span>
+                                            <input type="file" id="personel_Isargari2" name="personel_Isargari2" class="file-input" data-val-required="لطفا تصویر دوم گواهی ایثارگیری را وارد کنید" />
+                                        </span>
+                                        <a href="#" class="btn btn-danger fileupload-exists" data-dismiss="fileupload">حذف</a>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="col col-md-4">
+                                <label>تصویر سوم گواهی ایثارگیری/ معلولیت</label>
+                                <div class="fileupload fileupload-new" data-provides="fileupload">
+                                    <div class="fileupload-preview thumbnail" style="width: 240px; height: 100%; min-height: 128px;"></div>
+
+                                    <div>
+                                        <span class="btn btn-default btn-file">
+                                            <span class="fileupload-new">انتخاب فایل</span>
+                                            <span class="fileupload-exists">تغییر</span>
+                                            <input type="file" id="personel_Isargari3" name="personel_Isargari3" class="file-input" data-val-required="لطفا تصویر سوم گواهی ایثارگیری را وارد کنید" />
+                                        </span>
+                                        <a href="#" class="btn btn-danger fileupload-exists" data-dismiss="fileupload">حذف</a>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+            @*--------------------------------------------------------*@
+            <div class="well">
+                <fieldset>
+                    <legend>تصاویر گواهی وضعیت خدمت نظام وظیفه /کارت پایان خدمت</legend>
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col col-md-4">
+                                <label>تصویر اول وضعیت نظام وظیفه</label>
+                                <div class="fileupload fileupload-new" data-provides="fileupload">
+                                    <div class="fileupload-preview thumbnail" style="width: 240px; height: 100%; min-height: 128px;"></div>
+
+                                    <div>
+                                        <span class="btn btn-default btn-file">
+                                            <span class="fileupload-new">انتخاب فایل</span>
+                                            <span class="fileupload-exists">تغییر</span>
+                                            <input type="file" id="personel_Nezamvazifeh1" name="personel_Nezamvazifeh1" class="file-input" data-val-required="لطفا تصویر اول وضعیت نظام وظیفه را وارد کنید" />
+                                        </span>
+                                        <a href="#" class="btn btn-danger fileupload-exists" data-dismiss="fileupload">حذف</a>
+                                    </div>
+
+                                </div>
+                            </div>
+
+
+
+                            <div class="col col-md-4">
+                                <label>تصویر دوم وضعیت نظام وظیفه</label>
+                                <div class="fileupload fileupload-new" data-provides="fileupload">
+                                    <div class="fileupload-preview thumbnail" style="width: 240px; height: 100%; min-height: 128px;"></div>
+
+                                    <div>
+                                        <span class="btn btn-default btn-file">
+                                            <span class="fileupload-new">انتخاب فایل</span>
+                                            <span class="fileupload-exists">تغییر</span>
+                                            <input type="file" id="personel_Nezamvazifeh2" name="personel_Nezamvazifeh2" class="file-input" data-val-required="لطفا تصویر دوم وضعیت نظام وظیف را وارد کنید" />
+                                        </span>
+                                        <a href="#" class="btn btn-danger fileupload-exists" data-dismiss="fileupload">حذف</a>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </fieldset>
+            </div>
+            @*--------------------------------------------------------*@
+            <div class="well">
+                <fieldset>
+                    <legend>گواهینامه پایه دوم /ب2 برای رشته شغلی فوریتهای پزشکی</legend>
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col col-md-4">
+                                <label>تصویر روی گواهینامه </label>
+                                <div class="fileupload fileupload-new" data-provides="fileupload">
+                                    <div class="fileupload-preview thumbnail" style="width: 240px; height: 100%; min-height: 128px;"></div>
+
+                                    <div>
+                                        <span class="btn btn-default btn-file">
+                                            <span class="fileupload-new">انتخاب فایل</span>
+                                            <span class="fileupload-exists">تغییر</span>
+                                            <input type="file" id="personel_Gavahinameh_on" name="personel_Gavahinameh_on" class="file-input" data-val-required="لطفا تصویر روی گواهینامه را وارد کنید" />
+                                        </span>
+                                        <a href="#" class="btn btn-danger fileupload-exists" data-dismiss="fileupload">حذف</a>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="col col-md-4">
+                                <label>تصویر پشت گواهینامه</label>
+                                <div class="fileupload fileupload-new" data-provides="fileupload">
+                                    <div class="fileupload-preview thumbnail" style="width: 240px; height: 100%; min-height: 128px;"></div>
+
+                                    <div>
+                                        <span class="btn btn-default btn-file">
+                                            <span class="fileupload-new">انتخاب فایل</span>
+                                            <span class="fileupload-exists">تغییر</span>
+                                            <input type="file" id="personel_Gavahinameh_back" name="personel_Gavahinameh_back" class="file-input" data-val-required="لطفا تصویر پشت گواهینامه را وارد کنید" />
+                                        </span>
+                                        <a href="#" class="btn btn-danger fileupload-exists" data-dismiss="fileupload">حذف</a>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+            @*--------------------------------------------------------*@
+            <div class="well">
+                <fieldset>
+                    <legend>تصاویر مدارک بومی بودن</legend>
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col col-md-3">
+                                <label> تصویر مدرک اول</label>
+                                <div class="fileupload fileupload-new" data-provides="fileupload">
+                                    <div class="fileupload-preview thumbnail" style="width: 240px; height: 100%; min-height: 128px;"></div>
+
+                                    <div>
+                                        <span class="btn btn-default btn-file">
+                                            <span class="fileupload-new">انتخاب فایل</span>
+                                            <span class="fileupload-exists">تغییر</span>
+                                            <input type="file" id="personel_Bomi1" name="personel_Bomi1" class="file-input" data-val-required="لطفا تصویر مدرک اول بومی بود را وارد کنید" />
+                                        </span>
+                                        <a href="#" class="btn btn-danger fileupload-exists" data-dismiss="fileupload">حذف</a>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="col col-md-3">
+                                <label>تصویر مدرک دوم</label>
+                                <div class="fileupload fileupload-new" data-provides="fileupload">
+                                    <div class="fileupload-preview thumbnail" style="width: 240px; height: 100%; min-height: 128px;"></div>
+
+                                    <div>
+                                        <span class="btn btn-default btn-file">
+                                            <span class="fileupload-new">انتخاب فایل</span>
+                                            <span class="fileupload-exists">تغییر</span>
+                                            <input type="file" id="personel_Bomi2" name="personel_Bomi2" class="file-input" data-val-required="لطفا تصویر مدرک دوم بومی را وارد کنید" />
+                                        </span>
+                                        <a href="#" class="btn btn-danger fileupload-exists" data-dismiss="fileupload">حذف</a>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="col col-md-3">
+                                <label>تصویر مدرک سوم</label>
+                                <div class="fileupload fileupload-new" data-provides="fileupload">
+                                    <div class="fileupload-preview thumbnail" style="width: 240px; height: 100%; min-height: 128px;"></div>
+
+                                    <div>
+                                        <span class="btn btn-default btn-file">
+                                            <span class="fileupload-new">انتخاب فایل</span>
+                                            <span class="fileupload-exists">تغییر</span>
+                                            <input type="file" id="personel_Bomi3" name="personel_Bomi3" class="file-input" data-val-required="لطفا تصویر مدرک سوم بومی را وارد کنید" />
+                                        </span>
+                                        <a href="#" class="btn btn-danger fileupload-exists" data-dismiss="fileupload">حذف</a>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <div class="col col-md-3">
+                                <label>تصویر مدرک چهارم</label>
+                                <div class="fileupload fileupload-new" data-provides="fileupload">
+                                    <div class="fileupload-preview thumbnail" style="width: 240px; height: 100%; min-height: 128px;"></div>
+
+                                    <div>
+                                        <span class="btn btn-default btn-file">
+                                            <span class="fileupload-new">انتخاب فایل</span>
+                                            <span class="fileupload-exists">تغییر</span>
+                                            <input type="file" id="personel_Bomi4" name="personel_Bomi4" class="file-input" data-val-required="لطفا تصویر مدرک چهارم بومی را وارد کنید" />
+                                        </span>
+                                        <a href="#" class="btn btn-danger fileupload-exists" data-dismiss="fileupload">حذف</a>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+            @*--------------------------------------------------------*@
+            <div class="well">
+                <fieldset>
+                    <legend>تصاویر مدارک مربوط به افزایش سقف سنی طبق مفاد دفترچه</legend>
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col col-md-3">
+                                <label>تصویر مدرک اول</label>
+                                <div class="fileupload fileupload-new" data-provides="fileupload">
+                                    <div class="fileupload-preview thumbnail" style="width: 240px; height: 100%; min-height: 128px;"></div>
+
+                                    <div>
+                                        <span class="btn btn-default btn-file">
+                                            <span class="fileupload-new">انتخاب فایل</span>
+                                            <span class="fileupload-exists">تغییر</span>
+                                            <input type="file" id="personel_SaghfSeni1" name="personel_SaghfSeni1" class="file-input" data-val-required="لطفا تصویر اول مربوط به افزایش سقف سنی را وارد کنید" />
+                                        </span>
+                                        <a href="#" class="btn btn-danger fileupload-exists" data-dismiss="fileupload">حذف</a>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="col col-md-3">
+                                <label>تصویر مدرک دوم </label>
+                                <div class="fileupload fileupload-new" data-provides="fileupload">
+                                    <div class="fileupload-preview thumbnail" style="width: 240px; height: 100%; min-height: 128px;"></div>
+
+                                    <div>
+                                        <span class="btn btn-default btn-file">
+                                            <span class="fileupload-new">انتخاب فایل</span>
+                                            <span class="fileupload-exists">تغییر</span>
+                                            <input type="file" id="personel_SaghfSeni2" name="personel_SaghfSeni2" class="file-input" data-val-required="لطفا تصویر اول مربوط به افزایش سقف سنی را وارد کنید" />
+                                        </span>
+                                        <a href="#" class="btn btn-danger fileupload-exists" data-dismiss="fileupload">حذف</a>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="col col-md-3">
+                                <label>تصویر مدرک سوم</label>
+                                <div class="fileupload fileupload-new" data-provides="fileupload">
+                                    <div class="fileupload-preview thumbnail" style="width: 240px; height: 100%; min-height: 128px;"></div>
+
+                                    <div>
+                                        <span class="btn btn-default btn-file">
+                                            <span class="fileupload-new">انتخاب فایل</span>
+                                            <span class="fileupload-exists">تغییر</span>
+                                            <input type="file" id="personel_SaghfSeni3" name="personel_SaghfSeni3" class="file-input" data-val-required="لطفا تصویر اول مربوط به افزایش سقف سنی را وارد کنید" />
+                                        </span>
+                                        <a href="#" class="btn btn-danger fileupload-exists" data-dismiss="fileupload">حذف</a>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </div>
+                </fieldset>
+            </div>
+            @*--------------------------------------------------------*@
+            <div class="well">
+                <fieldset>
+                    <legend>تصویر رسید فرم کرونا</legend>
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col col-md-4">
+                                <label>تصویر رسید فرم کرونا(<span style="color:red; font-weight:bold;">*</span>)</label>
+                                <div class="fileupload fileupload-new" data-provides="fileupload">
+                                    <div class="fileupload-preview thumbnail" style="width: 240px; height: 100%; min-height: 128px;"></div>
+
+                                    <div>
+                                        <span class="btn btn-default btn-file">
+                                            <span class="fileupload-new">انتخاب فایل</span>
+                                            <span class="fileupload-exists">تغییر</span>
+                                            <input type="file" id="personel_CoronaForm" name="personel_CoronaForm" class="file-input" data-val-required="لطفا تصویر رسید فرم کرونا را وارد کنید" />
+                                        </span>
+                                        <a href="#" class="btn btn-danger fileupload-exists" data-dismiss="fileupload">حذف</a>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+            @*--------------------------------------------------------*@
+            <div class="well">
+                <fieldset>
+                    <legend>سایر مدارک</legend>
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col col-md-4">
+                                <label>تصویر مدرک اول</label>
+                                <div class="fileupload fileupload-new" data-provides="fileupload">
+                                    <div class="fileupload-preview thumbnail" style="width: 240px; height: 100%; min-height: 128px;"></div>
+
+                                    <div>
+                                        <span class="btn btn-default btn-file">
+                                            <span class="fileupload-new">انتخاب فایل</span>
+                                            <span class="fileupload-exists">تغییر</span>
+                                            <input type="file" id="personel_OtheDoc1" name="personel_OtheDoc1" class="file-input" data-val-required="لطفا تصویر اول سایر مدارک را وارد کنید" />
+                                        </span>
+                                        <a href="#" class="btn btn-danger fileupload-exists" data-dismiss="fileupload">حذف</a>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="col col-md-4">
+                                <label>تصویر مدرک دوم</label>
+                                <div class="fileupload fileupload-new" data-provides="fileupload">
+                                    <div class="fileupload-preview thumbnail" style="width: 240px; height: 100%; min-height: 128px;"></div>
+
+                                    <div>
+                                        <span class="btn btn-default btn-file">
+                                            <span class="fileupload-new">انتخاب فایل</span>
+                                            <span class="fileupload-exists">تغییر</span>
+                                            <input type="file" id="personel_OtheDoc2" name="personel_OtheDoc2" class="file-input" data-val-required="لطفا تصویر دوم سایر مدارک را وارد کنید" />
+                                        </span>
+                                        <a href="#" class="btn btn-danger fileupload-exists" data-dismiss="fileupload">حذف</a>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="col col-md-4">
+                                <label>تصویر مدرک سوم</label>
+                                <div class="fileupload fileupload-new" data-provides="fileupload">
+                                    <div class="fileupload-preview thumbnail" style="width: 240px; height: 100%; min-height: 128px;"></div>
+
+                                    <div>
+                                        <span class="btn btn-default btn-file">
+                                            <span class="fileupload-new">انتخاب فایل</span>
+                                            <span class="fileupload-exists">تغییر</span>
+                                            <input type="file" id="personel_OtheDoc3" name="personel_OtheDoc3" class="file-input" data-val-required="لطفا تصویر سوم سایر مدارک را وارد کنید" />
+                                        </span>
+                                        <a href="#" class="btn btn-danger fileupload-exists" data-dismiss="fileupload">حذف</a>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+
+            <div class="center">
+                <input type="button" value="ذخیره" title="ذخیره" id="btn_BefSave" class="btn btn-success " />
+                <input type="submit" value="ذخیره" title="ذخیره" id="btn_Save" class="btn btn-success " style="display:none;" />
+            </div>
+        }
+
+
+        <script src="~/Scripts/bootstrap-fileupload/bootstrap-fileupload.min.js"></script>
+
+        <script type="text/javascript">
+
+
+
+            jQuery(document).ready(function () {
+
+
+                $('#btn_BefSave').click(function (e) {
+                    $("#wizForm").submit();
+                });
+            });
+
+
+
+
+
+        </script>
+
+
+

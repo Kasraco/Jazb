@@ -1,0 +1,27 @@
+﻿<div class="navbar">
+    <div class="navbar-inner">
+        <a class="brand" href="#">مدیریت وضعیت نظام وظیفه</a>
+        <ul class="nav">
+            <li>
+                @Ajax.ActionLink("وضعیت نظام وظیفه جدید", MVC.Admin.ConscriptStatus.ActionNames.Add, MVC.Admin.ConscriptStatus.Name, null,
+                                         new AjaxOptions
+                                         {
+                                             HttpMethod = "Get",
+                                             InsertionMode = InsertionMode.Replace,
+                                             UpdateTargetId = "logOnModal",
+                                             LoadingElementDuration = 0,
+                                             LoadingElementId = "loadingMessage",
+                                             OnSuccess = "LogOnForm.onSuccess"
+                                         }, new { tabindex = "-1" })
+            </li>
+
+            <li class="pull-left">
+
+                @Ajax.ActionLink("بازگشت", MVC.Admin.ConscriptStatus.ActionNames.Index, MVC.Admin.ConscriptStatus.Name, new AjaxOptions { HttpMethod = "GET", InsertionMode = InsertionMode.Replace, UpdateTargetId = "main-content", OnSuccess = "loadAjaxComponents", OnComplete = "hideLoading", OnBegin = "showLoading" })
+
+
+            </li>
+        </ul>
+    </div>
+</div>
+

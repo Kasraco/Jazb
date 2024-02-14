@@ -1,0 +1,38 @@
+﻿@model List<Jazb.DomainClasses.Entities.AzmoonDegree>
+@using Jazb.Web
+    <table class="table table-bordered table-striped  ">
+        <thead>
+            <tr>
+                <th>کد</th>
+                <th>عنوان</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var t in Model)
+            {
+                <tr>
+                    <td>@t.Code.ToString()</td>
+                    <td>@t.Title</td>
+                    <td>
+                        @Ajax.ActionLink(" ", MVC.Admin.AzmoonSetting.ActionNames.UpAzmoonDegree, MVC.Admin.AzmoonSetting.Name, new { Id = t.Id, AzmoonId=t.Azmoon.AzmoonId }, new AjaxOptions { HttpMethod = "POST", InsertionMode = InsertionMode.Replace, UpdateTargetId = "AzmoonDegreeList", OnSuccess = "loadAjaxComponents", OnComplete = "hideLoading", OnBegin = "showLoading"}, new { @class = "fa fa-caret-square-o-up fa-2x", style = "color:gray;" })
+
+                        @Ajax.ActionLink(" ", MVC.Admin.AzmoonSetting.ActionNames.DownAzmoonDegree, MVC.Admin.AzmoonSetting.Name, new { Id = t.Id, AzmoonId = t.Azmoon.AzmoonId }, new AjaxOptions { HttpMethod = "POST", InsertionMode = InsertionMode.Replace, UpdateTargetId = "AzmoonDegreeList", OnSuccess = "loadAjaxComponents", OnComplete = "hideLoading", OnBegin = "showLoading" }, new { @class = "fa fa-caret-square-o-down fa-2x", style = "color:gray;" })
+
+
+
+
+                        @Ajax.ActionLink(" ", MVC.Admin.AzmoonSetting.ActionNames.DeleteAzmoonDegree, MVC.Admin.AzmoonSetting.Name, new { Id=t.Id}, new AjaxOptions { HttpMethod = "DELETE", InsertionMode = InsertionMode.Replace, UpdateTargetId = "AzmoonDegreeList", OnSuccess = "loadAjaxComponents", OnComplete = "hideLoading", OnBegin = "showLoading", Confirm = "آیا برای حذف اطمینان دارید؟" }, new { @class = " fa fa-minus-square fa-2x ", style="color:red;"})
+
+
+
+                  
+                       
+
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+@Html.Raw(TempData["Message"])

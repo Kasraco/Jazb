@@ -1,0 +1,40 @@
+﻿@model Jazb.Model.ResultModel.ResultSearchNational
+
+
+
+<br />
+<hr />
+
+@using (Html.BeginForm("SearchResult", "Result", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(x => x.AzmoonId)
+    <div class="row">
+        <div class="col col-md-offset-4 col-md-4">
+            <div class="panel panel-success">
+                <div class="panel-heading">
+                    <h3 class="panel-title">جستجو بر اساس کد ملی</h3>
+                </div>
+                <div class="panel-body">                 
+                    <div class="control-group">
+                        <label class="control-label" for="NationalId">کد ملی</label>
+                        <div class="controls">
+                            @Html.TextBox("NationalId", null, new { autocomplete = "off", @placeholder = "کد ملی", @class = "form-control", tabindex = 1 })
+                        </div>
+                    </div>
+
+                    <br />
+                    <br />
+                    <br />
+                </div>
+
+
+                <div class="panel-footer">
+                    <button type="submit" class="btn btn-default">جستجو</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+}

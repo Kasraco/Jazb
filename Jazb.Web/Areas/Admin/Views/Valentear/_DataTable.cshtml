@@ -1,0 +1,103 @@
+﻿@model IEnumerable<Jazb.Model.ValentearModel.ValentearModel>
+@{
+    int currentPage = ViewBag.PAGE + 1;
+    int count = ViewBag.COUNT;
+    int max = ViewBag.TotalRecords / count;
+    int firstPage = ((currentPage - 2) <= 0) ? 0 : currentPage - 3;
+    int lastPage = ((currentPage + 2) >= max) ? max : currentPage + 3;
+}
+
+ @*@Ajax.ActionLink("ایجاد شماره صندلی", MVC.Admin.Valentear.ActionNames.CreateChairNumber, MVC.Admin.Valentear.Name, new AjaxOptions { HttpMethod = "GET", InsertionMode = InsertionMode.Replace, UpdateTargetId = "main-content", OnSuccess = "loadAjaxComponents", OnComplete = "hideLoading", OnBegin = "showLoading" }, new { @class="btn btn-info"})*@
+
+<div id="user-table">
+
+     @Html.Partial(MVC.Admin.Valentear.Views._FilterBar)
+    <table class="table Jazb-table">
+        <thead>
+            <tr>
+                <td>شماره صندلی</td>
+                <td>نام داوطلب</td>
+                <td>کد ملی</td>
+                <td>شماره شناسنامه</td>
+                <td>نام پدر</td>
+                <td>شماره همراه</td>
+                <td>شهر</td>
+                <td>رشته</td>
+                <td>عملیات</td>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var valentear in Model)
+            {
+                <tr>
+                    <td>
+                        @valentear.ChairCode
+                    </td>
+                    <td>
+                        @valentear.FirstName  @valentear.LastName
+                    </td>
+                    <td>
+                        @Html.ConvertToPersianString(valentear.NationalID)
+                    </td>
+
+                    <td>@Html.ConvertToPersianString(valentear.BirthCertificateNo)
+                    </td>
+                    <td>
+                        @valentear.FatherName
+                    </td>
+                    <td>
+                        @Html.ConvertToPersianString(valentear.Mobile)
+                    </td>
+                    <td>
+                        @valentear.PlaceTitle
+                    </td>
+                    <td>@valentear.JobTitle</td>
+                    <td>
+                         @Ajax.ActionLink("تغییر", MVC.Admin.Valentear.ActionNames.Edit, MVC.Admin.Valentear.Name, new {AzmoonId=valentear.AzmoonId ,NationalId=valentear.NationalID }, new AjaxOptions { HttpMethod = "GET", InsertionMode = InsertionMode.Replace, UpdateTargetId = "main-content", OnSuccess = "loadAjaxComponents", OnComplete = "hideLoading", OnBegin = "showLoading" }, new { @class = "btn btn-success" })                     
+
+                        @if ((valentear.Accept == null) || (valentear.Accept == 0))
+                        {
+                            @Ajax.ActionLink(" ", MVC.Admin.Valentear.ActionNames.StatusAcceptValentear, MVC.Admin.Valentear.Name, new { ValentearId =valentear.Id, AcceptStatus = 1 }, new AjaxOptions { HttpMethod = "Post", InsertionMode = InsertionMode.Replace, OnBegin = "showLoading", UpdateTargetId = "user-table", OnSuccess = "loadAjaxComponents", OnComplete = "hideLoading" }, new { @class = "btn btn-success icon icon-remove" })
+
+                        }
+                        else
+                        {
+                            
+                            @Ajax.ActionLink(" ", MVC.Admin.Valentear.ActionNames.StatusAcceptValentear, MVC.Admin.Valentear.Name, new { ValentearId =valentear.Id, AcceptStatus = 1 }, new AjaxOptions { HttpMethod = "Post", InsertionMode = InsertionMode.Replace, OnBegin = "showLoading", UpdateTargetId = "user-table", OnSuccess = "loadAjaxComponents", OnComplete = "hideLoading" }, new { @class = "btn btn-success icon icon-ok" })
+                            
+                        }
+                        @Ajax.ActionLink("چاپ", MVC.Admin.Valentear.ActionNames.PrintDataByMelicode, MVC.Admin.Valentear.Name, new { natinalId = valentear.NationalID }, new AjaxOptions { HttpMethod = "Post", InsertionMode = InsertionMode.Replace, OnBegin = "showLoading", UpdateTargetId = "user-table", OnSuccess = "loadAjaxComponents", OnComplete = "hideLoading" }, new { @class = "btn btn-primary" })
+                  
+                      
+
+                       
+                    
+
+                    </td>
+                </tr>
+
+            }
+        </tbody>
+    </table>
+
+    <div class="pagination pagination-centered">
+        <ul>
+            <li>@Ajax.ActionLink("ابتدا", MVC.Admin.Valentear.ActionNames.DataTable, MVC.Admin.Valentear.Name, new { page = 0, term = ViewBag.TERM, count = ViewBag.COUNT, searchBy = ViewBag.SEARCHBY }, new AjaxOptions { HttpMethod = "Post", InsertionMode = InsertionMode.Replace, OnBegin = "showLoading", UpdateTargetId = "user-table", OnSuccess = "loadAjaxComponents", OnComplete = "hideLoading" }, null)</li>
+            @for (int i = firstPage; i <= lastPage; i++)
+            {
+                if (i + 1 == currentPage)
+                {
+                <li class="active"><a href="#">@Html.ConvertToPersianString(i + 1)</a></li>
+                }
+                else
+                {
+                <li>@Ajax.ActionLink(Html.ConvertToPersianString(i + 1).ToString(), MVC.Admin.Valentear.ActionNames.DataTable, MVC.Admin.Valentear.Name, new { page = i, term = ViewBag.TERM, count = ViewBag.COUNT, searchBy = ViewBag.SEARCHBY }, new AjaxOptions { HttpMethod = "Post", InsertionMode = InsertionMode.Replace, OnBegin = "showLoading", UpdateTargetId = "user-table", OnSuccess = "loadAjaxComponents", OnComplete = "hideLoading" }, null)
+                </li>
+                }
+            }
+            <li>@Ajax.ActionLink("انتها", MVC.Admin.Valentear.ActionNames.DataTable, MVC.Admin.Valentear.Name, new { page = max, term = ViewBag.TERM, count = ViewBag.COUNT, searchBy = ViewBag.SEARCHBY }, new AjaxOptions { HttpMethod = "Post", InsertionMode = InsertionMode.Replace, OnBegin = "showLoading", UpdateTargetId = "user-table", OnSuccess = "loadAjaxComponents", OnComplete = "hideLoading" }, null)</li>
+        </ul>
+    </div>
+
+    
+</div>

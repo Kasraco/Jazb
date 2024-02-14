@@ -1,0 +1,158 @@
+﻿@model Jazb.Model.ValentearModel.RegisterModel
+@using Jazb.Web.Helpers;
+@using MvcCheckBoxList.Model;
+
+
+<style type="text/css">
+    .styled_checkbox {
+        cursor: pointer;
+        border-radius: 5px;
+        margin: 3px;
+        padding: 0px 5px;
+    }
+
+    .styled_list {
+        padding: 3px 10px 3px 5px;
+        line-height: 25px;
+    }
+
+    .col-md-2,
+    .control-label {
+        text-align: right;
+    }
+</style>
+<div class="container-fluid" id="div-valentear-detail">
+    @using (Ajax.BeginForm(null, null, new AjaxOptions { UpdateTargetId = "main-content", InsertionMode = InsertionMode.Replace, HttpMethod = "POST", OnBegin = "showLoading", OnComplete = "hideLoading", OnSuccess = "loadAjaxComponents" }, new { @class = "form-horizontal", id = "wizForm" }))
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true, "لطفا اطلاعات را کامل و به صورت صحیح وارد کنید", new { @class = "alert alert-danger" })
+
+        @Html.HiddenFor(m => m.Valentear.Id)
+        @Html.HiddenFor(m => m.Valentear.AzmoonId)
+        @Html.HiddenFor(m => m.Valentear.ChairCode)
+
+      
+        <div class="well">
+            <fieldset>
+                <legend>اطلاعات ایثارگری</legend>
+                <div class="row-fluid">
+                    <div class="span12">
+                        <div class="row-fluid">
+                            <div class="span1">@Html.Label("جانباز", new { @class = "control-label" })</div>
+                            <div class="span4">
+                                <div class="control-group">
+                                    @Html.LabelFor(model => model.Valentear.WoundedPercent, new { @class = "control-label span5" })
+                                    <div class="span5">
+                                        @Html.TextBoxFor(model => model.Valentear.WoundedPercent, new { @class = "span12 " })
+
+                                        @Html.ValidationMessageFor(model => model.Valentear.WoundedPercent, null, new { @class = "has-error help-block" })
+                                    </div>
+                                    <div class="span2">درصد</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row-fluid">
+                            <div class="span12">
+                                <div class="row-fluid">
+                                    <div class="span1">@Html.Label("رزمنده", new { @class = "control-label" })</div>
+                                    <div class="span6 control-label">(دارای حداقل 6 ماه حضور داوطلبانه در جبهه) مدت حضور در جبهه : </div>
+                                </div>
+                                <div class="row-fluid">
+                                    <div class="span1 offset1">
+                                        @Html.LabelFor(model => model.Valentear.FightInWarDay, new { @class = "control-label" })
+                                        @Html.TextBoxFor(model => model.Valentear.FightInWarDay, new { @class = "span12" })
+                                    </div>
+                                    <div class="span1">
+                                        @Html.LabelFor(model => model.Valentear.FightInWarMonth, new { @class = "control-label" })
+                                        @Html.TextBoxFor(model => model.Valentear.FightInWarMonth, new { @class = "span12" })
+                                    </div>
+                                    <div class="span1">
+                                        @Html.LabelFor(model => model.Valentear.FightInWarYear, new { @class = "control-label" })
+                                        @Html.TextBoxFor(model => model.Valentear.FightInWarYear, new { @class = "span12" })
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+                        </div>
+
+
+                        <div class="row-fluid">
+                            <div class="span12">
+                                <div class="row-fluid">
+                                    <div class="span1">@Html.Label("آزاده", new { @class = "control-label" })</div>
+                                    <div class="span5 control-label">مدت اسارت : </div>
+                                </div>
+                                <div class="row-fluid">
+
+                                    <div class="span1 offset1 ">
+                                        @Html.LabelFor(model => model.Valentear.CaptivationDay, new { @class = "control-label" })
+                                        @Html.TextBoxFor(model => model.Valentear.CaptivationDay, new { @class = "span12" })
+                                    </div>
+                                    <div class="span1">
+                                        @Html.LabelFor(model => model.Valentear.CaptivationMonth, new { @class = "control-label" })
+                                        @Html.TextBoxFor(model => model.Valentear.CaptivationMonth, new { @class = "span12" })
+                                    </div>
+                                    <div class="span1">
+                                        @Html.LabelFor(model => model.Valentear.CaptivationYear, new { @class = "control-label" })
+                                        @Html.TextBoxFor(model => model.Valentear.CaptivationYear, new { @class = "span12" })
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <div class="row-fluid">
+                            <div class="span8">
+
+                                <div class="control-group" style="direction: ltr; float: right;">
+                                    <div class="control-label">وضعیت ایثارگری</div>
+                                    @{
+        var htmlListInfo = new HtmlListInfo(HtmlTag.vertical_columns, 1, new { @class = "styled_list" }, TextLayout.RightToLeft);
+                                    }
+                                    @Html.CheckBoxListFor(model => model.PostedDevotionType.DevotionTypes,
+                                                      model => model.DevotionTypes,
+                                                      entity => entity.Grade,
+                                                      entity => entity.DevotionTypeTitle,
+                                                      model => model.SelectedDevotionTypes,
+                                                      htmlListInfo)
+
+                                </div>
+
+                            </div>
+                            <div class="span4">
+
+                                <div class="control-group" style="direction: ltr; float: right;">
+                                    <div class="control-label">سایر موارد</div>
+
+                                    @Html.CheckBoxListFor(model => model.PostedQoutaType.QoutaTypes,
+                                                      model => model.QoutaTypes,
+                                                      entity => entity.Grade,
+                                                      entity => entity.QoutaTypeTitle,
+                                                      model => model.SelectedQoutaTypes,
+                                                      htmlListInfo)
+
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+            </fieldset>
+        </div>
+      
+          
+        <div class="center">
+
+            @*<a id="btn_BefSave" data-ajax="true" data-ajax-begin="showLoading" data-ajax-complete="hideLoading" data-ajax-method="POST" data-ajax-mode="replace" data-ajax-success="loadAjaxComponents" data-ajax-update="#main-content"  class="btn btn-success " >ذخیره</a>*@
+
+            @* <input type="button" value="ذخیره" title="ذخیره" id="btn_BefSave" class="btn btn-success " />*@
+            <input type="submit" value="ذخیره" title="ذخیره" id="btn_Save" class="btn btn-success " />
+        </div>
+
+    }
+</div>

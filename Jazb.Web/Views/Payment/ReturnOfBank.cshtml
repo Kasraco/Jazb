@@ -1,0 +1,56 @@
+﻿@model Jazb.Model.Payment.AcceptPaymentModel
+@using System.Globalization
+
+<style>
+    body {
+        padding-top: 75px;
+    }
+</style>
+<div class="row">
+    <div class="col col-md-offset-1 col-md-10" style="border:2px solid black;">
+        <br />
+        <h2>طلاعات کارت ثبت نام</h2>
+
+        <div class="alert alert-info">
+            داوطلب گرامی !
+            لطغا از اطلاعات این صفحه پرینت گرفته واز آن نگهداری کنید
+        </div>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th class="text-center" colspan="3">وضعیت پرداخت</th>
+                </tr>
+                <tr>
+                    <th class="text-center" colspan="3">@Model.Message</th>
+                </tr>
+                <tr>
+                    <th class="text-center">کد ثبت نام</th>
+                    <th class ="text-center">شماره سفارش</th>
+                    <th class="text-center">کد رهگیری</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="text-center"><strong>@Model.SaleReferenceId</strong></td>
+                    <td class="text-center"><strong>@Model.PaymentId</strong></td>
+                    <td class="text-center">@Model.RefrenceNumber</td>
+                </tr>
+            </tbody>
+        </table>
+            <div class="center text-center">
+                @if (Session["KRBKEYVIDBACKOFBANK"] == "0")
+                {
+                    @Html.ActionLink("ثبت نام آزمون", MVC.Valentear.ActionNames.Register, MVC.Valentear.Name, new { AID = Model.AzmoonId }, new { @class = "btn btn-success" })
+
+                }
+                else
+                {
+                    @Html.ActionLink("دریافت کارت ورود به جلسه", MVC.Valentear.ActionNames.PrintCard, MVC.Valentear.Name,null, new { @class = "btn btn-success" })
+
+                }                  
+
+            </div>
+            <br />
+        
+    </div>
+</div>

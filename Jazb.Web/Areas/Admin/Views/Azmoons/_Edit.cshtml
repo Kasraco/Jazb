@@ -1,0 +1,201 @@
+﻿@model Jazb.Model.AdminModel.AzmoonEditModel
+
+<div class="container-fluid" id="div-user-detail">
+    @using (Ajax.BeginForm(MVC.Admin.Azmoons.ActionNames.Edit, MVC.Admin.Azmoons.Name, null, new AjaxOptions { UpdateTargetId = "add-result", InsertionMode = InsertionMode.Replace, HttpMethod = "POST", OnBegin = "showLoading", OnComplete = "hideLoading", OnSuccess = "LogOnForm.onEndSuccess" }, new { enctype = "multipart/form-data", @class = "form-horizontal", id = "edit-Azmoon-form" }))
+    {
+        @Html.AntiForgeryToken()
+        @Html.HiddenFor(x => x.AzmoonId)
+        <div class="control-group">
+            <label class="control-label" for="Name">نام آزمون</label>
+            <div class="controls">
+                @Html.TextBoxFor(x => x.Name, new { placeholder = "نام آزمون", style = "width:700px ;" })
+            </div>
+            @Html.ValidationMessageFor(x => x.Name)
+        </div>
+
+        <div class="control-group">
+            <label class="control-label" for="Title">عنوان آزمون</label>
+            <div class="controls">
+                @Html.TextBoxFor(x => x.Title, new { placeholder = "عنوان آزمون", style = "width:700px ;" })
+            </div>
+            @Html.ValidationMessageFor(x => x.Title)
+        </div>
+
+
+
+
+
+
+        <div class="row-fluid">
+            <div class="span6">
+                <div class="alert alert-success">
+                    <div class="control-group">
+                        <label class="control-label" for="AzPaymentType">آیا آزمون پرداخت الکترونیک دارد؟</label>
+                        <div class="controls">
+                            @Html.EditorFor(a => Model.AzPaymentType, MVC.Admin.Shared.Views.EditorTemplates.Enum, "AzPaymentType")
+                        </div>
+                        @Html.ValidationMessageFor(x => x.AzPaymentType)
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label" for="AmountValue">مبلغ آزمون</label>
+                        <div class="controls">
+                            @Html.TextBoxFor(x => x.AmountValue, new { placeholder = "مبلغ آزمون" })
+                        </div>
+                        @Html.ValidationMessageFor(x => x.AmountValue)
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label" for="StartDate">تاریخ شروع</label>
+                        <div class="controls">
+                            @Html.TextBoxFor(x => x.StartDate, new { placeholder = "تاریخ شروع", @class = "date-pickers", style = "direction: ltr" })
+                        </div>
+                        @Html.ValidationMessageFor(x => x.StartDate)
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label" for="EndDate">تاریخ پایان</label>
+                        <div class="controls">
+                            @Html.TextBoxFor(x => x.EndDate, new { placeholder = "تاریخ پایان", @class = "date-pickers", style = "direction: ltr" })
+                        </div>
+                        @Html.ValidationMessageFor(x => x.EndDate)
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label" for="PicturAzmoon">بنر آزمون</label>
+                        <div class="controls">
+                            <input type="file" data-val="true" class="col-md-12" style="width: 100%;" name="PicturAzmoon2" />
+                        </div>
+                        @Html.ValidationMessageFor(x => x.PicturAzmoon)
+
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label" for="AghiFileData">آگهی آزمون</label>
+                        <div class="controls">
+                            <input type="file" data-val="true" class="col-md-12" style="width: 100%;" name="AghiFileData2" />
+                        </div>
+                        @Html.ValidationMessageFor(x => x.AghiFileData)
+                    </div>
+                </div>
+            </div>
+            <div class="span6">
+                <div class="alert alert-info">
+                    <h4 style="padding-bottom:5px;">اطلاعات کارت ورود به جلسه</h4>
+                    <div class="control-group">
+                        <label class="control-label" for="InputCardTitle">عنوان کارت ورود به جلسه</label>
+                        <div class="controls">
+                            @Html.TextBoxFor(x => x.InputCardTitle, new { placeholder = "عنوان کارت ورود به جلسه" })
+                        </div>
+                        <span class="help-block">کارت ورود به جلسه آزمون مورخ {0}</span>
+                        @Html.ValidationMessageFor(x => x.InputCardTitle)
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label" for="DateExecuteAzmoon">تاریخ برگزاری آزمون</label>
+                        <div class="controls">
+                            @Html.TextBoxFor(x => x.DateExecuteAzmoon, new { placeholder = "تاریخ برگزاری آزمون", @class = "date-pickers", style = "direction: ltr" })
+                        </div>
+                        @Html.ValidationMessageFor(x => x.DateExecuteAzmoon)
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label" for="DateExecuteAzmoon">زمان برگزاری آزمون</label>
+                        <div class="controls">
+                            @Html.TextBoxFor(x => x.TimeExecuteAzmoon, new { placeholder = "زمان برگزاری آزمون", @class = "form-control", style = "direction: ltr" })
+                        </div>
+                        <span class="help-block">
+                            9 صبح روز چهارشنبه مورخ {0}
+                        </span>
+                        @Html.ValidationMessageFor(x => x.TimeExecuteAzmoon)
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label" for="LocationExecuteAzmoon">محل برگزاری</label>
+                        <div class="controls">
+                            @Html.TextBoxFor(x => x.LocationExecuteAzmoon, new { placeholder = "محل برگزاری" })
+                        </div>
+                        @Html.ValidationMessageFor(x => x.LocationExecuteAzmoon)
+                    </div>
+
+                    <span class="help-block"> در خروجی بجای این علامت {0} تاریخ برگزاری آزمون که در بالا تنظیم شده قرار می گیرد</span>
+                </div>
+
+
+
+            </div>
+        </div>
+
+
+        <div class="control-group">
+            <label class="control-label" for="Discription">توضیحات</label>
+            @Html.TextAreaFor(x => x.Discription, new { placeholder = "توضیحات", row = 4, @class = "form-control", style = "width:700px ; margin-bottom:5px;" })
+
+            <div class="alert alert-info">
+                <span class="help-block"> مثال:</span>
+                @ViewBag.CompanyName برای تامین نیروی انسانی مورد نیاز خود به استناد دستورعمل های مربوطه موضوع تبصره ی ماده ی 22 آیین نامه اداری استخدامی کارکنان غیر هیأت علمی دانشگاه های علوم پزشکی و همچنین مجوزهای شماره ی 5546/209/د تاریخ 8/10/95 و شماره 5454/209/د تاریخ 5/10/95 معاون محترم توسعه ی مدیریت و منابع وزارت متبوع در نظر دارد تعدادی از افراد واجد شرایط را از طریق آزمون، مصاحبه ی تخصصی وگزینش به صورت شرکتی با توجه به شرایط مشروحه ی در آگهی آزمون به کارگیری نماید
+            </div>
+            @Html.ValidationMessageFor(x => x.Discription)
+        </div>
+
+
+        <div class="control-group">
+            <label class="control-label" for="Major">متن امضای آزمون</label>
+            @Html.TextAreaFor(x => x.SignTextValentear, new { placeholder = "رشته تحصیلی", row = 4, @class = "form-control", style = "width:700px; margin-bottom:5px;" })
+
+            <div class="alert alert-info">
+                <span class="help-block"> مثال:</span>
+                اینجانب &lt;div class=&quot;red&quot;&gt;{0} {1} &lt;/div&gt; متن آگهی مربوطه را با دقت وبه طور کامل مطالعه وسپس تقاضای فوق را تکمیل نموده ام ومسئولیت صحت کلیه مندرجات آن را به عهده می گیرم .درصورت اثبات خلاف اظهارات اینجانب در هرمقطع زمانی (قبل و بعد از اشتغال ) هر گونه حقی را برای جذب درآن دستگاه از خود سلب می نمایم
+            </div>
+            @Html.ValidationMessageFor(x => x.SignTextValentear)
+        </div>
+
+        <div class="progress progress-striped">
+            <div class="progress-bar progress-bar-success">0%</div>
+        </div>
+                <div id="add-result">
+                    @Html.Raw(TempData["Message"])
+                </div>
+                <input type="submit" class="btn btn-success" name="btn-submit" value="افزودن کاربر" />
+    }
+</div>
+
+<script src="~/Scripts/jquery.form.js"></script>
+<script type="text/javascript">
+
+
+    run(function () {
+        //$('.date-picker').datepicker({ changeMonth: true, changeYear: true });
+        //$('select').chosen();
+        $.validator.unobtrusive.parse('#edit-Azmoon-form');
+
+        var bar = $('.progress-bar');
+
+        var percent = $('.progress-bar');
+
+        var status = $('#add-result');
+
+        $('form').ajaxForm({
+            beforeSend: function () {
+
+                status.empty();
+                var percentVal = '0%';
+                bar.width(percentVal)
+                percent.html(percentVal);
+            },
+            uploadProgress: function (event, position, total, percentComplete) {
+                var percentVal = percentComplete + '%';
+                bar.width(percentVal)
+                percent.html(percentVal);
+            },
+            success: function () {
+                var percentVal = '100%';
+                bar.width(percentVal)
+                percent.html(percentVal);
+            },
+            complete: function (xhr) {
+                status.html(xhr.responseText);
+            }
+        });
+    });
+
+
+    //(function () {
+
+
+    //})();
+
+</script>
+

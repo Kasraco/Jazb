@@ -1,0 +1,174 @@
+﻿@model IList<Jazb.DomainClasses.Entities.Azmoon>
+@{
+    var index = 0;
+}
+
+
+<div class="panel panel-primary">
+    <div class="panel-heading">
+        <h3 class="panel-title">ارسال مدارک  قبول شدگان آزمون استخدامی پیمانی</h3>
+    </div>
+    <div class="panel-body">
+        <div class="row">
+            <div class="col-md-12">
+                <strong>مهلت ارسال مدارک  قبول شدگان آزمون استخدامی پیمانی به پابان رسید</strong>
+
+                @*@Html.ActionLink("لینک ارسال مدارک قبول شدگان",MVC.Sanjesh.ActionNames.Index,MVC.Sanjesh.Name)
+                
+                <br />
+                @Html.ActionLink("دریافت اطلاعیه بررسی مدارک دانشگاه", MVC.Home.ActionNames.Barrasimadarek_sanjesh_99, MVC.Home.Name, null)*@
+               
+            </div>
+        </div>
+    </div>
+</div>
+
+@foreach (var azmoon in Model)
+{
+    index = index + 1;
+    if ((index % 2 != 0))
+    {
+        if ((azmoon.EveryOneSee == true) || ((azmoon.EveryOneSee == false) && (User.Identity.IsAuthenticated == true)))
+        {
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h3 class="panel-title">@azmoon.Title</h3>
+                </div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-md-12">
+
+                            <h3 style="color:red;">
+                                <strong>@azmoon.Name</strong>
+                                <small>
+                                    @azmoon.Discription.ToString()
+                                </small>
+                            </h3>
+                            <ul>
+                                <li><h4>@Html.ActionLink("دریافت آگهی  آزمون", MVC.Home.ActionNames.DownloadAgahi, MVC.Home.Name, new { AID = @azmoon.AzmoonId }, null).If(azmoon.ShowDownloadAgahi)</h4></li>
+                                @*<li><h4>@Html.ActionLink("خرید کارت آزمون", MVC.Payment.ActionNames.Index, MVC.Payment.Name, new { AID = @azmoon.AzmoonId }, null).If(azmoon.ShowRegisters)</h4></li>*@
+                                <li><h4>@Html.ActionLink("ثبت نام آزمون", MVC.Valentear.ActionNames.Register, MVC.Valentear.Name, new { AID = @azmoon.AzmoonId }, null).If(azmoon.ShowRegisters)</h4></li>
+                                <li><h4>@Html.ActionLink("ویرایش ثبت نام", MVC.Valentear.ActionNames.EditRegister, MVC.Valentear.Name, new { AID = @azmoon.AzmoonId }, null).If(azmoon.ShowCanEditResult)</h4></li>
+                                <li><h4>@Html.ActionLink("دریافت کارت ورود به جلسه", MVC.Valentear.ActionNames.ViewCard, MVC.Valentear.Name, new { AID = @azmoon.AzmoonId }, null).If(azmoon.ShowPrintCard)</h4></li>
+                                <li><h4>@Html.ActionLink("اعلام نتایج", MVC.Result.ActionNames.Index, MVC.Result.Name, new { AID = @azmoon.AzmoonId }, null).If(azmoon.ShowCanPrintResult)</h4></li>
+                            </ul>
+
+
+                            @Html.Action(MVC.articles.ActionNames.AzmoonlistArticle, MVC.articles.Name, new { Aid = azmoon.AzmoonId })
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    }
+    else
+    {
+        if ((azmoon.EveryOneSee == true) || ((azmoon.EveryOneSee == false) && (User.Identity.IsAuthenticated == true)))
+        {
+            <div class="panel panel-info">
+                <div class="panel-heading">
+                    <h3 class="panel-title">@azmoon.Title</h3>
+                </div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="alert alert-warning">
+
+                                <h3 style="color:red;">
+                                    <strong>@azmoon.Name</strong>
+                                    <small>
+                                        @azmoon.Discription.ToString()
+                                    </small>
+                                </h3>
+                                <ul>
+
+                                    <li><h4>@Html.ActionLink("دریافت آگهی  آزمون", MVC.Home.ActionNames.DownloadAgahi, MVC.Home.Name, new { AID = @azmoon.AzmoonId }, null).If(azmoon.ShowDownloadAgahi)</h4></li>
+                                    @*<li><h4>@Html.ActionLink("خرید کارت آزمون", MVC.Payment.ActionNames.Index, MVC.Payment.Name, new { AID = @azmoon.AzmoonId }, null).If(azmoon.ShowRegisters)</h4></li>*@
+                                    <li><h4>@Html.ActionLink("ثبت نام آزمون", MVC.Valentear.ActionNames.Register, MVC.Valentear.Name, new { AID = @azmoon.AzmoonId }, null).If(azmoon.ShowRegisters)</h4></li>
+                                    <li><h4>@Html.ActionLink("ویرایش ثبت نام", MVC.Valentear.ActionNames.EditRegister, MVC.Valentear.Name, new { AID = @azmoon.AzmoonId }, null).If(azmoon.ShowCanEditResult)</h4></li>
+                                    <li><h4>@Html.ActionLink("دریافت کارت ورود به جلسه", MVC.Valentear.ActionNames.ViewCard, MVC.Valentear.Name, new { AID = @azmoon.AzmoonId }, null).If(azmoon.ShowPrintCard)</h4></li>
+                                    <li><h4>@Html.ActionLink("اعلام نتایج", MVC.Result.ActionNames.Index, MVC.Result.Name, new { AID = @azmoon.AzmoonId }, null).If(azmoon.ShowCanPrintResult)</h4></li>
+                                </ul>
+
+
+                                @Html.Action(MVC.articles.ActionNames.AzmoonlistArticle, MVC.articles.Name, new { Aid = azmoon.AzmoonId })
+
+
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    }
+}
+
+@*<div class="panel panel-primary">
+        <div class="panel-heading">
+            <h3 class="panel-title">اطلاعیه </h3>
+        </div>
+        <div class="panel-body">
+            <div class="alert alert-warning">
+                <h4>اعلام نتایج رازی و ابوذر</h4>
+                <p>
+                    اسامی پذیرفته شدگان فراخوان مشاغل پرستاری10/06/95 دانشگاه علوم پزشکی وخدمات بهداشتی  بصورت شرکتی جهت خدمت در <strong>مرکز آموزشی درمانی ابوذر</strong> واتاق عمل ) ، <strong>رازی</strong> ،(پرستار، هوشبری ،اتاق عمل و)
+                </p>
+                <p>
+                    @Html.ActionLink("دریافت نتایج", MVC.Home.ActionNames.DownloadResult_raziVaAboozar, MVC.Home.Name)
+                </p>
+
+            </div>
+        </div>
+    </div>
+
+
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h3 class="panel-title">اطلاعیه </h3>
+        </div>
+        <div class="panel-body">
+            <div class="alert alert-warning">
+                <h4>اعلام نتایج</h4>
+                <p>
+                    اسامی پذیرفته شدگان فراخوان مشاغل پرستاری10/06/95 دانشگاه علوم پزشکی وخدمات بهداشتی درمانی  بصورت شرکتی
+                </p>
+                <p>
+                    @Html.ActionLink("دریافت نتایج", MVC.Home.ActionNames.DownloadResult_Sherkati950601, MVC.Home.Name)
+                </p>
+
+            </div>
+        </div>
+    </div>
+*@
+
+<div class="panel panel-primary">
+    <div class="panel-heading">
+        <h3 class="panel-title">خوش آمدید</h3>
+    </div>
+    <div class="panel-body">
+        <div class="alert alert-warning">
+            <h2>
+                تنها مرجع رسمی انتشار و اطلاعیه‌های مربوط به استخدام در @ViewBag.CompanyName، این وبسایت می باشد؛ در صورت وجود برنامه جدید برای استخدام، امکان تکمیل فرم‌های مربوطه صرفاً از طریق همین وبسایت فراهم خواهد بود. لطفاً از پرکردن هرگونه فرم استخدام به نام  @ViewBag.CompanyName در دیگر سایت‌ها خودداری کنید.
+            </h2>
+        </div>
+    </div>
+</div>
+
+@*<div class="panel panel-primary">
+        <div class="panel-heading">
+            <h3 class="panel-title">پرسش و پاسخ</h3>
+        </div>
+        <div class="panel-body">
+            <div class="alert alert-warning">
+                <h2>فرصت اعتراض به آزمون استخدامی  تا ساعت 15 امروز مورخ 1395/08/18 می باشد.. لازم به یادآوری است که به اعتراض های مطرح شده بعد از این تاریخ ترتیب اثر داده نخواهد شد  <small><b>@Html.ActionLink("آیا نسبت به آزمون استخدامی اعتراض دارید؟", "Contact", "Home")</b> </small></h2>
+            </div>
+        </div>
+    </div>*@
+
+
+
+
+
+
+

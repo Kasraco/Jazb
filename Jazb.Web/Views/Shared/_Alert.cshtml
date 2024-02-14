@@ -1,0 +1,22 @@
+﻿@model Jazb.Web.Alert
+@{
+    string className = "alert-info";
+    switch (Model.Mode)
+    {
+        case Jazb.Web.AlertMode.Success:
+            className = "alert-success";
+            break;
+        case Jazb.Web.AlertMode.Info:
+            className = "alert-info";
+            break;
+        case Jazb.Web.AlertMode.Error:
+            className = "alert-error";
+            break;
+        default:
+            break;
+    }
+}
+<div class="@("alert" + " " + className)">
+    <button type="button" class="close" data-dismiss="alert">×</button>
+    @Model.Message
+</div>

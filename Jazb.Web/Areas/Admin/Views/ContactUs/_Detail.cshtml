@@ -1,0 +1,47 @@
+﻿<div id="pnlupdateFAQ">
+@model Jazb.DomainClasses.Entities.FAQ
+
+    @Html.Raw(ViewBag.PossibleBody)
+
+    <div class="container-fluid" id="div-user-detail">
+        @using (Ajax.BeginForm(MVC.Admin.ContactUs.ActionNames.SaveDate, MVC.Admin.ContactUs.Name, new AjaxOptions { UpdateTargetId = "edit-result", InsertionMode = InsertionMode.Replace, HttpMethod = "POST", OnBegin = "showLoading", OnComplete = "hideLoading" }, new { @class = "form-horizontal", id = "add-user-form" }))
+        {
+            @Html.AntiForgeryToken()
+            @Html.HiddenFor(x => x.Id);
+        <h2>@Model.Id</h2>
+            <div class="control-group">
+                <label class="control-label" for="BodyAnswer">پاسخ</label>
+                <div class="controls">
+                    @Html.TextAreaFor(x => x.BodyAnswer, new { row = 10, style = "width:600px;" })
+                </div>
+                @Html.ValidationMessageFor(x => x.BodyAnswer)
+            </div>
+     
+        
+            <div id="edit-result"></div>
+            <input type="submit" class="btn btn-success" name="btn-submit" value="ارسال پاسخ" />
+        }
+    </div>
+
+    <div class="navbar navbar-default navbar-fixed-bottom" id="dashboard">
+        <div class="navbar-inner">
+            <div class="container-fluid">
+                <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </a>
+                <div class="nav-collapse collapse">
+                    <ul class="nav nav-pills pull-left">
+                            @Ajax.ActionLink(" ", MVC.Admin.ContactUs.ActionNames.PreviuseFaqs, MVC.Admin.ContactUs.Name, new { AzmoonId = Model.AzmoonId, id = Model.Id }, new AjaxOptions { HttpMethod = "GET", InsertionMode = InsertionMode.Replace, UpdateTargetId = "pnlupdateFAQ", OnSuccess = "loadAjaxComponents", OnComplete = "hideLoading", OnBegin = "showLoading" }, new { @class = "fa fa-arrow-circle-left fa-3x" })
+
+                    </ul>
+                    <ul class="nav nav-pills pull-right">
+                            @Ajax.ActionLink(" ", MVC.Admin.ContactUs.ActionNames.NextFaqs, MVC.Admin.ContactUs.Name, new { AzmoonId = Model.AzmoonId, id = Model.Id }, new AjaxOptions { HttpMethod = "GET", InsertionMode = InsertionMode.Replace, UpdateTargetId = "pnlupdateFAQ", OnSuccess = "loadAjaxComponents", OnComplete = "hideLoading", OnBegin = "showLoading" }, new { @class = "fa fa-arrow-circle-right fa-3x" })
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

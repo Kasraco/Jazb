@@ -1,0 +1,111 @@
+﻿@model Jazb.Model.Payment.VewPayment
+@using System.Globalization
+
+<style>
+    body {
+        padding-top: 75px;
+    }
+</style>
+<div class="row">
+    <div class="col col-md-offset-1 col-md-10" style="border:2px solid black;">
+        <br />
+        @using (Html.BeginForm(MVC.Payment.ActionNames.ShowDataPayment, MVC.Payment.Name,null, FormMethod.Post,new { @class= "form-horizontal" }))
+        {
+            @Html.AntiForgeryToken()
+            @Html.HiddenFor(x => x.AmountValue)
+            @Html.HiddenFor(x => x.AzmoonId)
+            @Html.HiddenFor(x => x.AzmoonTitle)
+
+            <div class="alert alert-warning">
+                <h3>داوطلب گرامی!</h3>
+                <ul>
+                    <li>داوطلب گرامی، قبل از خرید به عنوان <strong>آزمون</strong> و عنوان <strong>کارت(سريال ثبت نام)</strong> کاملا توجه کنید</li>
+                    <li>داوطلب گرامی، لازم است قبل از اقدام جهت خريد کارت(سريال ثبت نام) و پرداخت وجه، <strong>آگهی آزمون</strong> را مطالعه کنيد و پس از اطمينان به لازم داشتن کارت(سريال ثبت نام)، نسبت به خريد اقدام کنيد</li>
+                    <li>داوطلب گرامی، در صورت عدم توجه به موارد فوق الذکر، مسئوليتي بر عهده دانشگاه علوم پزشکی نخواهد بود</li>
+                </ul>
+            </div>
+
+            <table class="table  table-bordered">
+                <thead>
+                    <tr>
+                        <th class="text-center">عنوان</th>
+                        <th class="text-center">تعداد</th>
+                        <th class="text-center">قیمت (ریال) </th>
+                        <th class="text-center">جمع کل (ریال) </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="text-center">@string.Format("{0}  -  {1}", Model.AzmoonTitle, "!!! قابل استرداد نیست")</td>
+                        <td class="text-center">1 یک</td>
+                        <td class="text-center">@string.Format("{0:C}", Model.AmountValue)</td>
+                        <td class="text-center">@string.Format("{0:C}", Model.AmountValue)</td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="well">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.FirstName, new { @class = "control-label col-md-2" })
+                    <div class="col-md-5">
+                        @Html.TextBoxFor(model => model.FirstName, new { @class = "form-control" })
+                    </div>
+                    <div class="col-md-5">
+                        @Html.ValidationMessageFor(model => model.FirstName, null, new { @class = "has-error help-block" })
+                    </div>
+                </div>
+
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.LastName, new { @class = "control-label col-md-2" })
+                    <div class="col-md-5">
+                        @Html.TextBoxFor(model => model.LastName, new { @class = "form-control" })
+                    </div>
+                    <div class="col-md-5">
+                        @Html.ValidationMessageFor(model => model.LastName, null, new { @class = "has-error help-block" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Mobile, new { @class = "control-label col-md-2" })
+                    <div class="col-md-5">
+                        @Html.TextBoxFor(model => model.Mobile, new { @class = "form-control" })
+                    </div>
+                    <div class="col-md-5">
+                        @Html.ValidationMessageFor(model => model.Mobile, null, new { @class = "has-error help-block" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.EmailAddress, new { @class = "control-label col-md-2" })
+                    <div class="col-md-5">
+                        @Html.TextBoxFor(model => model.EmailAddress, new { @class = "form-control" })
+                    </div>
+                    <div class="col-md-5">
+                        @Html.ValidationMessageFor(model => model.EmailAddress, null, new { @class = "has-error help-block" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <span class="control-label col-md-2" style="vertical-align:middle;">درگاه پرداخت</span>
+                    <div class="col-md-5">
+                        <img src="~/Images/saman.png" width="100" height="70" />
+                    </div>
+                    <div class="col-md-5">
+                    </div>
+                </div>
+
+                <div style="color:red;">
+                    @Html.Raw(ViewBag.message)
+                </div>
+                <div class="alert alert-block">
+                    درگاههای پرداخت فوق پذیرنده تمامی کارت های بانکی عضو شبکه شتاب (مانند بانک های صادرات، تجارت، سپه، ملی ، ملت و ...) می باشند
+                </div>
+            </div>
+            <div class="center text-center">
+                <input type="submit" value="تایید اطلاعات و ذخیره" class="btn btn-danger">
+            </div>
+            <br />
+        }
+    </div>
+</div>
+

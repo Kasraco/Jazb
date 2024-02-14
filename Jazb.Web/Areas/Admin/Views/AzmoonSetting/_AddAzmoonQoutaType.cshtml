@@ -1,0 +1,19 @@
+﻿@model Jazb.Model.AdminModel.ManageAzmoon.AzmoonQoutaTypeModel
+
+@using (Ajax.BeginForm(MVC.Admin.AzmoonSetting.ActionNames.AddAzmoonQoutaType, MVC.Admin.AzmoonSetting.Name, null, new AjaxOptions { UpdateTargetId = "AzmoonQoutaTypeList", InsertionMode = InsertionMode.Replace, HttpMethod = "POST", OnBegin = "showLoading", OnComplete = "hideLoading" }, new { @class = "navbar-form ", id = "add-AzmoonQoutaType-form" }))
+            {
+    @Html.HiddenFor(x => x.AzmoonId)
+    @Html.LabelFor(x => x.QoutaTypeId, new { @class = "span2" })
+    @Html.DropDownListFor(model => model.QoutaTypeId, ViewBag.PossibleQoutaTypes as IEnumerable<SelectListItem>, "--- انتخاب ---", new { @class = "selectpicker  span7" })
+
+
+    <button type="submit" class="btn">ذخیره</button>
+}
+
+
+
+
+
+
+
+

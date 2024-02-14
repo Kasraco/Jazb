@@ -1,0 +1,14 @@
+﻿@model Jazb.Model.AdminModel.ManageAzmoon.AzmoonDegreeModel
+
+
+    @using (Ajax.BeginForm(MVC.Admin.AzmoonSetting.ActionNames.AddAzmoonDegree, MVC.Admin.AzmoonSetting.Name, null, new AjaxOptions { UpdateTargetId = "AzmoonDegreeList", InsertionMode = InsertionMode.Replace, HttpMethod = "POST", OnBegin = "showLoading", OnComplete = "hideLoading" }, new { @class = "form-inline", id = "add-AzmoonDegree-form" }))
+    {
+        @Html.HiddenFor(x => x.AzmoonId)
+       
+            @Html.LabelFor(x=>x.DegreeId,new  { @class= "control-label span2" })
+            @Html.DropDownListFor(model => model.DegreeId, ViewBag.PossibleDegrees as IEnumerable<SelectListItem>, "--- انتخاب ---", new { @class = "selectpicker  span8" })
+
+
+        <button type="submit" class="btn">ذخیره</button>
+    }
+

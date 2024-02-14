@@ -1,0 +1,27 @@
+﻿<div class="navbar">
+    <div class="navbar-inner">
+        <a class="brand" href="#">مدیریت ادیان</a>
+        <ul class="nav">
+            <li>
+                @Ajax.ActionLink("مذهب جدید", MVC.Admin.Faith.ActionNames.Add, MVC.Admin.Faith.Name, null,
+                                         new AjaxOptions
+                                         {
+                                             HttpMethod = "Get",
+                                             InsertionMode = InsertionMode.Replace,
+                                             UpdateTargetId = "logOnModal",
+                                             LoadingElementDuration = 0,
+                                             LoadingElementId = "loadingMessage",
+                                             OnSuccess = "LogOnForm.onSuccess"
+                                         }, new { tabindex = "-1" })
+            </li>
+
+            <li class="pull-left">
+
+                @Ajax.ActionLink("بازگشت", MVC.Admin.Faith.ActionNames.Index, MVC.Admin.Faith.Name, new AjaxOptions { HttpMethod = "GET", InsertionMode = InsertionMode.Replace, UpdateTargetId = "main-content", OnSuccess = "loadAjaxComponents", OnComplete = "hideLoading", OnBegin = "showLoading" })
+
+
+            </li>
+        </ul>
+    </div>
+</div>
+

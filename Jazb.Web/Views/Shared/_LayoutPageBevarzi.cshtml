@@ -1,0 +1,147 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+
+       @Html.Action(MVC.MetaTag.ActionNames.Index, MVC.MetaTag.Name, new { title = ViewBag.Title, keywords = ViewBag.Keywords, description = ViewBag.Description })
+    <link rel="canonical" href="@Request.Url.AbsoluteUri" />
+    <meta http-equiv="Content-Language" content="fa" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    @RenderSection("metatags", false)
+
+    <meta charset="utf-8" />
+    <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    @Styles.Render("~/Content/css")
+      
+    @Scripts.Render("~/bundles/modernizr")
+       
+ 
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+         <script src="~/Scripts/html5shiv.js"></script> 
+         <script src="~/Scripts/respond.min.js"></script>
+    <![endif]-->
+       @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryui")
+      @Scripts.Render("~/bundles/jqueryval")
+    @RenderSection("scripts", required: false)
+   
+    <style type="text/css">
+        body
+        {
+            padding-top: 70px;
+        }
+
+        .section-preview
+        {
+            padding: 4em 0 4em;
+        }
+
+        .preview
+        {
+            margin-bottom: 4em;
+            background-color: #eaf1f1;
+            border: 1px solid rgba(0,0,0,0.1);
+            border-radius: 6px;
+        }
+
+            .preview .image
+            {
+                padding: 5px;
+            }
+
+                .preview .image img
+                {
+                    border: 1px solid rgba(0,0,0,0.1);
+                }
+
+            .preview .options
+            {
+                padding: 0 2em 2em;
+                text-align: center;
+            }
+
+                .preview .options p
+                {
+                    margin-bottom: 2em;
+                }
+
+     
+        .lead
+        {
+            margin-bottom: 2em;
+        }
+    </style>
+
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            @Html.Partial("_LoginPartial")
+            @RenderSection("header", required: false)
+        </header>
+    </div>
+    <div class="container">
+        @RenderSection("featured", required: false)
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h3 class="panel-title">تذکر ویژه</h3>
+                            </div>
+                            <div class="panel-body">
+
+                                <ul class="defaultList">
+                                    <li>@Html.ActionLink("صفحه اصلی", "Index", "Home", null)</li>
+                                    <li><a href="~/Reports/PDF/Document_Behvarzi_Exap.pdf">دانلود آگهی</a></li>
+                                    <li>@Html.ActionLink("لیست استان ها", "SearchProvince", "Village", null, new { target = "_blank" }) </li>
+                                    <li>@Html.ActionLink("لیست شهرستان ها", "SearchCity", "Village", null, new { target = "_blank" })</li>
+                                    <li>@Html.ActionLink("لیست روستا ها", "Index", "Village", null, new { target = "_blank" })</li>
+                                    <li>@Html.ActionLink("لیست خانه بهداشت ها", "SearchHgiene", "Village", null, new { target = "_blank" })</li>
+                                    <li>@Html.ActionLink("لیست دانشگاه ها", "SearchUniversity", "Village", null, new { target = "_blank" })</li>
+
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h3 class="panel-title">قبلا ثبت نام نموده ام</h3>
+                            </div>
+                            <div class="panel-body">
+
+                                <ul class="defaultList">
+                                    <li><a href="@Url.Action("index","Home")">چاپ و مشاهده</a></li>
+                                    <li><a href="@Url.Action("index","Home")">ویرایش اطلاعات</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-9">
+                @RenderBody()
+                @RenderSection("ContentPanel", required: false)
+
+            </div>
+        </div>
+    </div>
+    <!-- page-content-wrapper -->
+    <footer class="panel-footer">
+        <div class="container">
+            <p>&copy; @DateTime.Now.Year - تمام حقوق مادی ومعنوی این سایت متعلق به @Html.Action(MVC.MetaTag.ActionNames.GetCompanyName, MVC.MetaTag.Name) می باشد.</p>
+
+        </div>
+    </footer>
+
+   
+</body>
+</html>

@@ -1,0 +1,45 @@
+﻿@model Jazb.Model.AdminModel.EditValentear.EditVlentearPageVeiwMode
+@{
+    ViewBag.Title = "ویرایش ثبت نام";
+    Layout = "~/Views/Shared/_LayoutAzmoon.cshtml";
+
+    var HtmlClassPicture = "";
+    var DontShowClass = "";
+    var IsBehvarz = "";
+}
+
+
+<div class="panel panel-primary">
+    <div class="panel-heading">
+        <h3 class="panel-title">ویرایش ثبت نام آزمون استخدامی @Html.Action(MVC.MetaTag.ActionNames.GetCompanyName,MVC.MetaTag.Name) </h3>
+    </div>
+    <div class="panel-body">
+        <div class="well">
+
+            <div class="page-header">
+                <h3>ویرایش ثبت نام</h3>
+            </div>
+            @using (Html.BeginForm(null, null, FormMethod.Post, new { Id = "wizForm", enctype = "multipart/form-data", @class = "form-horizontal" }))
+            {
+
+                @Html.AntiForgeryToken()
+                @Html.HiddenFor(x => x.AzmoonId);
+               
+
+                        <div class="form-group">
+                           <label class="control-label col-md-2">کد رهگیری ثبت نام: </label>
+                            <div class="col-md-5">
+                                @Html.TextBoxFor(model => model.Melicode, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.Melicode, null, new { @class = "has-error help-block" })
+                            </div>
+                        </div>
+
+                        <input type="submit" value="ویرایش" title="ویرایش" id="btn_Save" class="btn btn-success " />
+
+            }
+
+        </div>
+    </div>
+</div>
+
+

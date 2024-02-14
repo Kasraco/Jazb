@@ -1,0 +1,96 @@
+﻿@model PagedList.IPagedList<Jazb.DomainClasses.Entities.FAQ>
+@using PagedList.Mvc; 
+@using Jazb.Web.Helpers
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<style>
+    body{
+        padding-top:75px;
+    }
+</style>
+
+@section ContentPanel{
+
+<div id="ContentGrid">
+<nav class="navbar navbar-default" role="navigation">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="#">جستجو</a>
+  </div>
+
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse navbar-ex1-collapse">
+    <ul class="nav navbar-nav">      
+     
+    </ul>
+    <form class="navbar-form navbar-left" role="search">
+      <div class="form-group">
+         @Html.TextBox("pageSize", null, new {autocomplete="off", @placeholder="Record Count",@class="form-control col-lg-2", tabindex = 0,  onchange="$('form').submit()"})
+      </div>
+         <div class="form-group">
+             جهت جستجوی پاسخ سئوال های خد کد ملی را وارد کنید
+         </div>
+      <div class="form-group">
+        @Html.TextBox("searchString", null, new {autocomplete="off", @placeholder="کد ملی", @class="form-control", tabindex = 1,  onchange="$('form').submit()"})
+      </div>
+      <button type="submit" class="btn btn-default">Search</button>
+    </form>
+    
+  </div><!-- /.navbar-collapse -->
+</nav>
+
+
+<table class="table table-striped table-hover table-bordered ">
+    <tr>        
+        
+        <th  class="text-right">            
+			@Html.ActionLink("سئوال", "Index", new { sortOrder=ViewBag.BodySortParm, currentFilter=ViewBag.CurrentFilter })
+        </th>
+        <th  class="text-right">            
+			@Html.ActionLink("جواب سئوال", "Index", new { sortOrder=ViewBag.BodyAnswerSortParm, currentFilter=ViewBag.CurrentFilter })
+        </th>        
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>     
+        <td  class="text-right">
+			@item.Body
+        </td>
+        <td  class="text-right">
+			@item.BodyAnswer
+        </td>
+        <td>
+             @Html.ActionLink(" ", "Details", new { id=item.Id }, new { @class="glyphicon glyphicon-edit btn-sm",rel="tooltip", title="Detail"})
+        </td>
+        
+</tr>
+}
+
+</table>
+
+<br />
+Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+
+@Html.PagedListPager(Model, page => Url.Action("Index", new {   sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter,  page, pageSize = ViewBag.pageSize}),PagedListRenderOptions.EnableUnobtrusiveAjaxReplacing("#ContentGrid"))
+
+</div>
+}
+
+
+@section scripts
+{
+    <script type="text/javascript">
+        $('[rel=tooltip]').tooltip();
+    </script>
+}
+
